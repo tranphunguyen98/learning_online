@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learning_online/features/login/pages/login_page.dart';
 
 import 'features/register/pages/register_page.dart';
 
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: RegisterPage(),
+      home: LoginPage(),
     );
   }
 }
