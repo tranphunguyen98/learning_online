@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:learning_online/features/forgot_password/pages/forgot_password_page.dart';
 import 'package:learning_online/features/login/pages/login_page.dart';
+import 'package:learning_online/features/message/message_page.dart';
+import 'package:learning_online/features/teacher_detail/pages/teacher_detail_page.dart';
 import 'package:learning_online/features/teacher_list/pages/teacher_list_page.dart';
 
 import 'features/register/pages/register_page.dart';
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: TeacherListPage(),
+      home: MessagePage(),
     );
   }
 }
