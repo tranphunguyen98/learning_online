@@ -10,6 +10,7 @@ class WidgetRoundedTextFieldWithTitle extends StatelessWidget {
   final String? Function(String? value)? validator;
   final TextEditingController? controller;
   final bool obscureText;
+  final TextInputType? textInputType;
   const WidgetRoundedTextFieldWithTitle({
     Key? key,
     required this.title,
@@ -19,6 +20,7 @@ class WidgetRoundedTextFieldWithTitle extends StatelessWidget {
     this.validator,
     this.controller,
     this.obscureText = false,
+    this.textInputType,
   }) : super(key: key);
 
   @override
@@ -37,6 +39,7 @@ class WidgetRoundedTextFieldWithTitle extends StatelessWidget {
           validator: validator,
           controller: controller,
           obscureText: obscureText,
+          textInputType: textInputType,
         ),
       ],
     );

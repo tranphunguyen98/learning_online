@@ -4,6 +4,7 @@ import 'package:learning_online/features/login/pages/login_page.dart';
 import 'package:learning_online/features/register/pages/register_page.dart';
 
 import '../features/home/pages/home_page.dart';
+import '../features/profile/pages/profile_page.dart';
 import '../features/setting/pages/setting_page.dart';
 import '../features/teacher_detail/pages/teacher_detail_page.dart';
 import '../features/teacher_list/pages/teacher_list_page.dart';
@@ -21,6 +22,7 @@ class AppRouter {
   static const String kTeacherList = '/teacherList';
   static const String kTeacherDetail = '/teacherDetail';
   static const String kArgumentTask = '/argumentTask';
+  static const String kUserProfile = '/userProfile';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -45,6 +47,8 @@ class AppRouter {
       case kTeacherDetail:
         return MaterialPageRoute(
             builder: (_) => TeacherDetailPage(teacherModel: settings.arguments as TeacherModel));
+      case kUserProfile:
+        return MaterialPageRoute(builder: (_) => ProfilePage());
     }
     return MaterialPageRoute(
       builder: (_) => Scaffold(

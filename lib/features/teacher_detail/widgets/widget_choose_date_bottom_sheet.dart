@@ -16,7 +16,28 @@ class WidgetChooseDateBottomSheet extends StatelessWidget {
           7,
           (index) => Padding(
             padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
-            child: WidgetRoundedButton(text: '2021-10-24'),
+            child: WidgetRoundedButton(
+              text: '2021-10-${24 + index}',
+              onPressed: () {
+                Navigator.pop(context);
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text('Đặt lịch học thành công'),
+                      content: Text('Chúc mừng bạn đã đặt lịch học thành công'),
+                      actions: [
+                        OutlinedButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text('OK'))
+                      ],
+                    );
+                  },
+                );
+              },
+            ),
           ),
         ),
       ],

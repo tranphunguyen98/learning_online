@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learning_online/core/styles.dart';
 import 'package:learning_online/features/home/pages/home_page.dart';
+import 'package:learning_online/features/setting/pages/setting_page.dart';
 import 'package:learning_online/features/teacher_list/pages/teacher_list_page.dart';
 
 class RootPage extends StatefulWidget {
@@ -34,6 +35,9 @@ class _RootPageState extends State<RootPage> {
           } else if (selectedIndex == 3) {
             currentPage = TeacherListPage();
             title = 'Danh sách tutor';
+          } else if (selectedIndex == 4) {
+            currentPage = SettingPage();
+            title = 'Cài đặt';
           }
         },
         items: [

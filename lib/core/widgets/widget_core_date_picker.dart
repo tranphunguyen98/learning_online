@@ -2,26 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:learning_online/core/core.dart';
 
-class WidgetCoreDatePicker extends StatefulWidget {
+class WidgetCoreDatePicker extends StatelessWidget {
   final String date;
   final Function(String selectedDate)? onDateSelected;
-  const WidgetCoreDatePicker(
-      {Key? key, required this.date, this.onDateSelected})
-      : super(key: key);
-
-  @override
-  _WidgetCoreDatePickerState createState() => _WidgetCoreDatePickerState();
-}
-
-class _WidgetCoreDatePickerState extends State<WidgetCoreDatePicker> {
-  DateFormat _dateFormat = DateFormat('dd-MM-yyyy');
-  late DateTime _selectedDate;
-  String get _strSelectedDate => _dateFormat.format(_selectedDate);
-  @override
-  void initState() {
-    _selectedDate = DateTime.parse(widget.date);
-    super.initState();
-  }
+  const WidgetCoreDatePicker({Key? key, required this.date, this.onDateSelected}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +22,7 @@ class _WidgetCoreDatePickerState extends State<WidgetCoreDatePicker> {
       child: Align(
         alignment: Alignment.centerLeft,
         child: Text(
-          _strSelectedDate,
+          date,
           style: kFontRegularDefault_14,
         ),
       ),
