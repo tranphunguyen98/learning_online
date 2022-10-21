@@ -5,10 +5,10 @@ import 'package:learning_online/core/widgets/widget_radio_row_group.dart';
 import 'package:learning_online/core/widgets/widget_search_text_field.dart';
 import 'package:learning_online/features/teacher_list/widgets/widget_teacher_item.dart';
 import 'package:learning_online/model/teacher.dart';
+import 'package:learning_online/utils/router.dart';
 
 import '../../home/widgets/widget_home_teacher_item.dart';
 import '../logic.dart';
-
 
 class TeacherListPage extends StatelessWidget {
   final List<String> categoryList = [
@@ -31,7 +31,12 @@ class TeacherListPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Stack(
             children: [
-              WidgetSearchTextField(hint: 'Tìm Tutor'),
+              WidgetSearchTextField(
+                hint: 'Tìm Tutor',
+                onChanged: (value) {
+                  controller.changeKeyword(value);
+                },
+              ),
               Positioned.fill(
                 top: 0,
                 right: 8,
@@ -105,9 +110,15 @@ class TeacherListPage extends StatelessWidget {
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: logic.displayedTeachers.length,
-                    itemBuilder: (context, index) => WidgetHomeTeacherItem(
-                      key: UniqueKey(),
-                      teacherModel: logic.displayedTeachers[index],
+                    itemBuilder: (context, index) => GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, AppRouter.kTeacherDetail,
+                            arguments: logic.displayedTeachers[index]);
+                      },
+                      child: WidgetHomeTeacherItem(
+                        key: UniqueKey(),
+                        teacherModel: logic.displayedTeachers[index],
+                      ),
                     ),
                     separatorBuilder: (context, index) => SizedBox(height: 16),
                   ),

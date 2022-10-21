@@ -4,8 +4,8 @@ import 'package:learning_online/core/core.dart';
 class WidgetSearchTextField extends StatelessWidget {
   final String? hint;
   final String? validator;
-  const WidgetSearchTextField({Key? key, this.hint, this.validator})
-      : super(key: key);
+  final Function(String value)? onChanged;
+  const WidgetSearchTextField({Key? key, this.hint, this.validator, this.onChanged}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +22,7 @@ class WidgetSearchTextField extends StatelessWidget {
             ),
           ),
           TextFormField(
+            onChanged: onChanged,
             decoration: InputDecoration(
               hintText: hint,
               hintStyle: kFontRegularDefault_14.copyWith(color: Colors.grey),

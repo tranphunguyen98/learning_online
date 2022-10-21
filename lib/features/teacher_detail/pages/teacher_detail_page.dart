@@ -13,8 +13,8 @@ import 'package:learning_online/features/teacher_detail/widgets/widget_schedule.
 import 'package:learning_online/model/teacher.dart';
 
 class TeacherDetailPage extends StatelessWidget {
-  final TeacherModel teacherModel = TeacherModel.mock;
-  TeacherDetailPage({Key? key}) : super(key: key);
+  final TeacherModel teacherModel;
+  TeacherDetailPage({Key? key, required this.teacherModel}) : super(key: key);
 
   late BuildContext _context;
   @override
