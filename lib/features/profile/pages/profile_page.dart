@@ -9,6 +9,7 @@ import 'package:learning_online/core/widgets/widget_rounded_button.dart';
 import 'package:learning_online/core/widgets/widget_rounded_text_field_with_title.dart';
 import 'package:learning_online/model/user.dart';
 
+
 class ProfilePage extends StatelessWidget {
   final UserModel _userModel = UserModel.mock;
   ProfilePage({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: widgetCoreAppBar(title: 'Hồ sơ'),
+      appBar: widgetCoreAppBar(title: 'Hồ sơ', context: context),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
@@ -45,11 +46,9 @@ class ProfilePage extends StatelessWidget {
                     radius: 8,
                   ),
                   SizedBox(height: 8),
-                  WidgetDropdownWithTitle(
-                      title: 'Quốc gia', hint: 'Chọn quốc gia', data: kNations),
+                  WidgetDropdownWithTitle(title: 'Quốc gia', hint: 'Chọn quốc gia', data: kNations),
                   SizedBox(height: 8),
-                  WidgetDropdownWithTitle(
-                      title: 'Trình độ', hint: 'Chọn trình độ', data: kLevels),
+                  WidgetDropdownWithTitle(title: 'Trình độ', hint: 'Chọn trình độ', data: kLevels),
                   SizedBox(height: 8),
                   WidgetDropdownWithTitle(
                     title: 'Muốn học',

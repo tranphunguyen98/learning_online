@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:learning_online/features/forgot_password/pages/forgot_password_page.dart';
 import 'package:learning_online/features/login/pages/login_page.dart';
 import 'package:learning_online/features/register/pages/register_page.dart';
+
+import '../features/setting/pages/setting_page.dart';
 
 class AppRouter {
   static const String kHome = '/home';
@@ -26,12 +29,12 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => LoginPage());
       case kRegister:
         return MaterialPageRoute(builder: (_) => RegisterPage());
-    // case kForgotPassword:
-    //   return MaterialPageRoute(builder: (_) => ForgotPasswordScreen());
+    case kForgotPassword:
+      return MaterialPageRoute(builder: (_) => ForgotPasswordPage());
     // case kChangePassword:
     //   return MaterialPageRoute(builder: (_) => ChangePasswordScreen());
-    // case kSetting:
-    //   return MaterialPageRoute(builder: (_) => SettingScreen());
+    case kSetting:
+      return MaterialPageRoute(builder: (_) => SettingPage());
     }
     return MaterialPageRoute(
       builder: (_) => Scaffold(

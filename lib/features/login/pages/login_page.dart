@@ -8,6 +8,7 @@ import 'package:learning_online/core/widgets/widget_rounded_text_field_with_titl
 import 'package:learning_online/core/widgets/widget_row_social.dart';
 import 'package:learning_online/utils/router.dart';
 
+
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
   final _formKey = GlobalKey<FormState>();
@@ -16,7 +17,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kWhiteColor,
-      appBar: widgetCoreAppBar(title: 'Đăng nhập'),
+      appBar: widgetCoreAppBar(title: 'Đăng nhập', context: context),
       body: Padding(
         padding: const EdgeInsets.all(32.0),
         child: SingleChildScrollView(
