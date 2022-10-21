@@ -9,6 +9,7 @@ import 'package:learning_online/model/teacher.dart';
 import '../../home/widgets/widget_home_teacher_item.dart';
 import '../logic.dart';
 
+
 class TeacherListPage extends StatelessWidget {
   final List<String> categoryList = [
     'All',
@@ -71,7 +72,12 @@ class TeacherListPage extends StatelessWidget {
           height: 36,
           margin: const EdgeInsets.symmetric(horizontal: 16),
           width: double.infinity,
-          child: WidgetRadioRowGroup(data: categoryList),
+          child: WidgetRadioRowGroup(
+            data: categoryList,
+            onValueChanged: (value) {
+              controller.changeSpecialize(value != 'All' ? value : '');
+            },
+          ),
         ),
         Expanded(child: _buildListOfTeacher()),
       ],
@@ -82,6 +88,14 @@ class TeacherListPage extends StatelessWidget {
     return GetBuilder<TeacherListController>(
         init: controller,
         builder: (logic) {
+          if (logic.displayedTeachers.isEmpty) {
+            return Center(
+              child: Text(
+                'Không có giáo viên nào',
+                style: kFontSemiboldBlack_16,
+              ),
+            );
+          }
           return Padding(
             padding: const EdgeInsets.all(16.0),
             child: SingleChildScrollView(

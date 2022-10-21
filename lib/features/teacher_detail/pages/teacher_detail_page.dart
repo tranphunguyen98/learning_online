@@ -9,6 +9,7 @@ import 'package:learning_online/core/widgets/widget_video_player.dart';
 import 'package:learning_online/features/teacher_detail/widgets/report_dialog.dart';
 import 'package:learning_online/features/teacher_detail/widgets/review_tutor_list.dart';
 import 'package:learning_online/features/teacher_detail/widgets/widget_choose_date_bottom_sheet.dart';
+import 'package:learning_online/features/teacher_detail/widgets/widget_schedule.dart';
 import 'package:learning_online/model/teacher.dart';
 
 class TeacherDetailPage extends StatelessWidget {
@@ -54,12 +55,14 @@ class TeacherDetailPage extends StatelessWidget {
                   style: kFontRegularDefault_14,
                 ),
                 SizedBox(height: 8),
-                _widgetTitleChipsColumn('Ngôn ngữ', [teacherModel.language]),
+                _widgetTitleChipsColumn('Ngôn ngữ', teacherModel.languages),
                 _widgetTitleTextColumn('Học vấn', teacherModel.education),
                 _widgetTitleTextColumn('Kinh nghiêm', teacherModel.experience),
                 _widgetTitleTextColumn('Sở thích', teacherModel.hobby),
                 _widgetTitleTextColumn('Nghề nghiệp', teacherModel.career),
                 _widgetTitleChipsColumn('Chuyên môn', teacherModel.fields),
+                SizedBox(height: 16),
+                // WidgetSchedule(),
                 SizedBox(height: 16),
                 _widgetViewReview(),
               ],

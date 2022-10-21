@@ -1,21 +1,21 @@
-import 'package:get/get.dart';
+import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
-import 'package:get/get.dart';
 import '../../model/teacher.dart';
 
 enum ETeacherFilter { Default, Favorite, Rating }
 
 class TeacherListController extends GetxController {
   ETeacherFilter teacherFilter = ETeacherFilter.Favorite;
+  String specialize = '';
 
   List<TeacherModel> _teachers = [
     TeacherModel.mock,
     TeacherModel.mock1,
-    TeacherModel.mock,
+    TeacherModel.mock2,
     TeacherModel.mock1,
     TeacherModel.mock,
     TeacherModel.mock1,
-    TeacherModel.mock,
+    TeacherModel.mock2,
     TeacherModel.mock1,
   ];
 
@@ -27,6 +27,11 @@ class TeacherListController extends GetxController {
 
   void changeFilter(ETeacherFilter filter) {
     teacherFilter = filter;
+    updateTeacher();
+  }
+
+  void changeSpecialize(String specialize) {
+    this.specialize = specialize;
     updateTeacher();
   }
 
@@ -56,6 +61,14 @@ class TeacherListController extends GetxController {
         displayedTeachers = result;
         break;
     }
+
+    if (specialize.isNotEmpty) {
+      List<TeacherModel> result = [];
+      result.addAll(displayedTeachers);
+      result.removeWhere((element) => !element.fields.contains(specialize));
+      displayedTeachers = result;
+    }
+
     update();
   }
 }

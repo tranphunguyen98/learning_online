@@ -5,8 +5,7 @@ import 'package:learning_online/core/widgets/widget_rating_bar_indicator.dart';
 import 'package:learning_online/model/teacher.dart';
 
 class WidgetHomeTeacherItem extends StatelessWidget {
-  const WidgetHomeTeacherItem({Key? key, required this.teacherModel})
-      : super(key: key);
+  const WidgetHomeTeacherItem({Key? key, required this.teacherModel}) : super(key: key);
 
   final TeacherModel teacherModel;
 
@@ -54,19 +53,18 @@ class WidgetHomeTeacherItem extends StatelessWidget {
                         height: 32,
                         width: double.infinity,
                         child: ListView.separated(
-                          itemCount: teacherModel.fields.length,
+                          itemCount: teacherModel.languages.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
                             return Chip(
                               backgroundColor: kBlueColor.withOpacity(0.2),
                               label: Text(
-                                teacherModel.fields[index],
+                                teacherModel.languages[index],
                                 style: kFontRegularBlue_12,
                               ),
                             );
                           },
-                          separatorBuilder: (context, index) =>
-                              SizedBox(width: 4),
+                          separatorBuilder: (context, index) => SizedBox(width: 4),
                         ),
                       ),
                     ],
