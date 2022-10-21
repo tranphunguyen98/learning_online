@@ -7,6 +7,7 @@ import 'package:learning_online/features/profile/pages/profile_page.dart';
 import 'package:learning_online/features/setting/pages/setting_page.dart';
 import 'package:learning_online/features/teacher_detail/pages/teacher_detail_page.dart';
 import 'package:learning_online/features/teacher_list/pages/teacher_list_page.dart';
+import 'package:learning_online/utils/router.dart';
 
 import 'features/register/pages/register_page.dart';
 
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      onGenerateRoute: AppRouter.generateRoute,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -32,7 +34,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: LoginPage(),
     );
   }
 }

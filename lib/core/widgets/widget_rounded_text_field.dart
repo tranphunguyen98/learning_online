@@ -1,40 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:learning_online/core/core.dart';
 
+
 class WidgetRoundedTextField extends StatelessWidget {
   final String? hint;
-  final String? validator;
+  final String? Function(String? value)? validator;
   final double? radius;
   final int? minLines;
-  const WidgetRoundedTextField(
-      {Key? key, this.hint, this.validator, this.radius, this.minLines})
-      : super(key: key);
+  final TextEditingController? controller;
+  final bool obscureText;
+
+  const WidgetRoundedTextField({
+    Key? key,
+    this.hint,
+    this.validator,
+    this.radius,
+    this.minLines,
+    this.controller,
+    this.obscureText = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: minLines != null ? 48.0 * minLines! : 48,
-      child: TextFormField(
-        style: kFontRegularDefault_14,
-        minLines: minLines,
-        maxLines: minLines,
-        decoration: InputDecoration(
-          hintText: hint,
-          contentPadding: EdgeInsets.symmetric(
-            horizontal: radius != null ? 16 : 24,
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(radius ?? 24),
-            ),
-            borderSide: BorderSide(
-              color: Colors.blueGrey,
-              width: 0.25,
-            ),
-          ),
-          disabledBorder: InputBorder.none,
+    return Stack(
+      children: [
+        Container(
+          height: minLines != null ? 48.0 * minLines! : 48,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(radius ?? 24),
+              ),
+              border: Border.all(
+                color: Colors.blueGrey,
+                width: 0.25,
+              )),
         ),
-      ),
+        TextFormField(
+          style: kFontRegularDefault_14,
+          minLines: obscureText ? 1 : minLines,
+          maxLines: obscureText ? 1 : minLines,
+          controller: controller,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          validator: validator,
+          obscureText: obscureText,
+          decoration: InputDecoration(
+            hintText: hint,
+            contentPadding: EdgeInsets.symmetric(horizontal: radius != null ? 16 : 24, vertical: 8),
+            enabledBorder: InputBorder.none,
+            disabledBorder: InputBorder.none,
+            border: InputBorder.none,
+          ),
+        ),
+      ],
     );
   }
 }

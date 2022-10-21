@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/get_utils/get_utils.dart';
 import 'package:learning_online/core/core.dart';
 import 'package:learning_online/core/widgets/widget_core_app_bar.dart';
 import 'package:learning_online/core/widgets/widget_logo_text.dart';
 import 'package:learning_online/core/widgets/widget_rounded_button.dart';
 import 'package:learning_online/core/widgets/widget_rounded_text_field_with_title.dart';
 import 'package:learning_online/core/widgets/widget_row_social.dart';
+import 'package:learning_online/utils/router.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  LoginPage({Key? key}) : super(key: key);
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -16,49 +19,85 @@ class LoginPage extends StatelessWidget {
       appBar: widgetCoreAppBar(title: 'Đăng nhập'),
       body: Padding(
         padding: const EdgeInsets.all(32.0),
-        child: Column(
-          children: [
-            WidgetLogoText(),
-            SizedBox(height: 32),
-            WidgetRoundedTextFieldWithTitle(
-              title: 'Địa chỉ E-mail',
-              hint: 'example@gmail.com',
-              isRequired: true,
-            ),
-            SizedBox(height: 32),
-            WidgetRoundedTextFieldWithTitle(
-              title: 'Mật khẩu',
-              isRequired: true,
-              hint: '********',
-            ),
-            SizedBox(height: 32),
-            Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                'Quên mật khẩu',
-                style: kFontRegularPrimary_14,
-              ),
-            ),
-            SizedBox(height: 16),
-            WidgetRoundedButton(text: 'Log in'),
-            SizedBox(height: 16),
-            WidgetRowWithSocial(title: 'Hoặc đăng nhập với'),
-            SizedBox(height: 32),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
               children: [
-                Text(
-                  'Chưa có tài khoản?',
-                  style: kFontRegularDefault_14,
+                WidgetLogoText(),
+                SizedBox(height: 32),
+                WidgetRoundedTextFieldWithTitle(
+                  title: 'Địa chỉ E-mail',
+                  hint: 'example@gmail.com',
+                  isRequired: true,
+                  validator: (value) {
+                    if (value?.isEmpty ?? true) {
+                      return 'Vui lòng nhập email';
+                    } else if (!GetUtils.isEmail(value!)) {
+                      return 'Vui lòng nhập đúng định dạng email';
+                    }
+                    return null;
+                  },
                 ),
-                SizedBox(width: 4),
-                Text(
-                  'Đăng ký',
-                  style: kFontRegularBlue_14,
+                SizedBox(height: 32),
+                WidgetRoundedTextFieldWithTitle(
+                  title: 'Mật khẩu',
+                  isRequired: true,
+                  hint: '********',
+                  obscureText: true,
+                  validator: (value) {
+                    if (value?.isEmpty ?? true) {
+                      return 'Vui lòng nhập mật khẩu';
+                    } else if (value!.length < 6) {
+                      return 'Vui lòng nhập mật khẩu lớn hơn 6 ký tư';
+                    }
+                  },
                 ),
+                SizedBox(height: 32),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pushNamed(AppRouter.kForgotPassword);
+                    },
+                    child: Text(
+                      'Quên mật khẩu',
+                      style: kFontRegularPrimary_14,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 16),
+                WidgetRoundedButton(
+                  text: 'Đăng nhập',
+                  onPressed: () {
+                    _formKey.currentState?.validate();
+                  },
+                ),
+                SizedBox(height: 16),
+                WidgetRowWithSocial(title: 'Hoặc đăng nhập với'),
+                SizedBox(height: 32),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Chưa có tài khoản?',
+                      style: kFontRegularDefault_14,
+                    ),
+                    SizedBox(width: 4),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushNamed(AppRouter.kRegister);
+                      },
+                      child: Text(
+                        'Đăng ký',
+                        style: kFontRegularBlue_14,
+                      ),
+                    ),
+                  ],
+                )
               ],
-            )
-          ],
+            ),
+          ),
         ),
       ),
     );
