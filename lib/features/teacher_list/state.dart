@@ -1,5 +1,5 @@
-class HomeState {
-  HomeState() {
+class TeacherListState {
+  TeacherListState() {
     ///Initialize variables
   }
 }

@@ -7,22 +7,23 @@ import 'package:learning_online/model/teacher.dart';
 
 import '../logic.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   final logic = Get.put(HomeLogic());
   final state = Get.find<HomeLogic>().state;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            WidgetHeaderHome(),
-            _buildListOfTeacher(),
-          ],
-        ),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          WidgetHeaderHome(),
+          _buildListOfTeacher(),
+        ],
       ),
     );
   }
@@ -71,8 +72,7 @@ class HomePage extends StatelessWidget {
             physics: NeverScrollableScrollPhysics(),
             itemCount: 6,
             itemBuilder: (context, index) => WidgetHomeTeacherItem(
-              teacherModel:
-                  index % 2 == 0 ? TeacherModel.mock : TeacherModel.mock1,
+              teacherModel: index % 2 == 0 ? TeacherModel.mock : TeacherModel.mock1,
             ),
             separatorBuilder: (context, index) => SizedBox(height: 16),
           ),

@@ -71,7 +71,9 @@ class LoginPage extends StatelessWidget {
                 WidgetRoundedButton(
                   text: 'Đăng nhập',
                   onPressed: () {
-                    _formKey.currentState?.validate();
+                    if (_formKey.currentState?.validate() ?? false) {
+                      Navigator.of(context).pushNamed(AppRouter.kHome);
+                    }
                   },
                 ),
                 SizedBox(height: 16),

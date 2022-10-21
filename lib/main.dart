@@ -10,6 +10,7 @@ import 'package:learning_online/features/teacher_list/pages/teacher_list_page.da
 import 'package:learning_online/utils/router.dart';
 
 import 'features/register/pages/register_page.dart';
+import 'features/root_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: LoginPage(),
+      home: RootPage(),
     );
   }
 }

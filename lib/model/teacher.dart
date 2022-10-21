@@ -57,7 +57,7 @@ class TeacherModel {
   );
   static const TeacherModel mock1 = TeacherModel(
     id: 1,
-    star: 5,
+    star: 4,
     fields: [
       'English',
       'Vietnamese',

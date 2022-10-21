@@ -6,6 +6,7 @@ import 'package:learning_online/core/widgets/widget_search_text_field.dart';
 import 'package:learning_online/features/teacher_list/widgets/widget_teacher_item.dart';
 import 'package:learning_online/model/teacher.dart';
 
+import '../../home/widgets/widget_home_teacher_item.dart';
 import '../logic.dart';
 
 class TeacherListPage extends StatelessWidget {
@@ -19,56 +20,87 @@ class TeacherListPage extends StatelessWidget {
     'English for Adults4',
   ];
 
-  final logic = Get.put(HomeLogic());
-  final state = Get.find<HomeLogic>().state;
+  final controller = Get.put(TeacherListController());
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: Text('Danh sách Tutor', style: kFontSemiboldBlack_16),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: WidgetSearchTextField(hint: 'Tìm Tutor'),
-            ),
-            SizedBox(height: 16),
-            Container(
-              height: 36,
-              margin: const EdgeInsets.symmetric(horizontal: 16),
-              width: double.infinity,
-              child: WidgetRadioRowGroup(data: categoryList),
-            ),
-            _buildListOfTeacher(),
-          ],
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Stack(
+            children: [
+              WidgetSearchTextField(hint: 'Tìm Tutor'),
+              Positioned.fill(
+                top: 0,
+                right: 8,
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: PopupMenuButton<ETeacherFilter>(
+                    icon: Icon(
+                      Icons.filter_alt,
+                      color: kGrayColor,
+                    ),
+                    onSelected: (value) {
+                      controller.changeFilter(value);
+                    },
+                    itemBuilder: (BuildContext context) {
+                      return [
+                        PopupMenuItem(
+                          value: ETeacherFilter.Default,
+                          child: Text('Sắp xếp theo thứ tự mặc định'),
+                        ),
+                        PopupMenuItem(
+                          value: ETeacherFilter.Favorite,
+                          child: Text('Sắp xếp theo ưa thích'),
+                        ),
+                        PopupMenuItem(
+                          value: ETeacherFilter.Rating,
+                          child: Text('Sắp xếp theo theo sao giảm dần'),
+                        ),
+                      ];
+                    },
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
-      ),
+        SizedBox(height: 16),
+        Container(
+          height: 36,
+          margin: const EdgeInsets.symmetric(horizontal: 16),
+          width: double.infinity,
+          child: WidgetRadioRowGroup(data: categoryList),
+        ),
+        Expanded(child: _buildListOfTeacher()),
+      ],
     );
   }
 
   Widget _buildListOfTeacher() {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        children: [
-          ListView.separated(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: 6,
-            itemBuilder: (context, index) => WidgetTeacherItem(
-              teacherModel:
-                  index % 2 == 0 ? TeacherModel.mock : TeacherModel.mock1,
+    return GetBuilder<TeacherListController>(
+        init: controller,
+        builder: (logic) {
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  ListView.separated(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: logic.displayedTeachers.length,
+                    itemBuilder: (context, index) => WidgetHomeTeacherItem(
+                      key: UniqueKey(),
+                      teacherModel: logic.displayedTeachers[index],
+                    ),
+                    separatorBuilder: (context, index) => SizedBox(height: 16),
+                  ),
+                ],
+              ),
             ),
-            separatorBuilder: (context, index) => SizedBox(height: 16),
-          ),
-        ],
-      ),
-    );
+          );
+        });
   }
 }
