@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learning_online/features/forgot_password/pages/forgot_password_page.dart';
+import 'package:learning_online/features/home/pages/home_page.dart';
 import 'package:learning_online/features/login/pages/login_page.dart';
 import 'package:learning_online/features/message/message_page.dart';
 import 'package:learning_online/features/profile/pages/profile_page.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: ProfilePage(),
+      home: HomePage(),
     );
   }
 }
