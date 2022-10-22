@@ -21,6 +21,7 @@ final kFontSemibold = TextStyle(
 final kFontRegularDefault = kFontRegular.copyWith(color: kBlackColor);
 final kFontRegularDefault_10 = kFontRegular.copyWith(fontSize: 10);
 final kFontRegularDefault_12 = kFontRegular.copyWith(fontSize: 12);
+final kFontRegularDefault_13 = kFontRegular.copyWith(fontSize: 13);
 final kFontRegularDefault_14 = kFontRegular.copyWith(fontSize: 14);
 final kFontRegularDefault_16 = kFontRegular.copyWith(fontSize: 16);
 
@@ -108,6 +109,7 @@ final kFontSemiboldWhite_18 = kFontSemiboldWhite.copyWith(fontSize: 18);
 final kFontSemiboldBlack = kFontSemibold.copyWith(color: kBlackColor);
 final kFontSemiboldBlack_14 = kFontSemiboldBlack.copyWith(fontSize: 14);
 final kFontSemiboldBlack_16 = kFontSemiboldBlack.copyWith(fontSize: 16);
+final kFontSemiboldBlack_18 = kFontSemiboldBlack.copyWith(fontSize: 18);
 final kFontSemiboldBlack_22 = kFontSemiboldBlack.copyWith(fontSize: 22);
 //
 // final kFontSemiboldGray = kFontSemibold.copyWith(color: kColorGray1_50);
