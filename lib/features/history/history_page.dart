@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learning_online/core/core.dart';
+import 'package:learning_online/features/history/widget/schedule_item.dart';
 import 'package:learning_online/features/schedule/widget/history_schedule_item.dart';
 
 import '../../core/widgets/widget_core_app_bar.dart';

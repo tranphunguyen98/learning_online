@@ -83,17 +83,7 @@ class HistoryScheduleItem extends StatelessWidget {
               ],
             ),
           ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: OutlinedButton(
-              style: OutlinedButton.styleFrom(
-                side: BorderSide(color: kBlueColor),
-                backgroundColor: Colors.white.withOpacity(0.2),
-              ),
-              onPressed: () {},
-              child: Text('Vào buổi học'),
-            ),
-          ),
+          SizedBox(height: 8),
         ],
       ),
     );

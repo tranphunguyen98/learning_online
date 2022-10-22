@@ -60,13 +60,16 @@ class ScheduleItem extends StatelessWidget {
           ),
           Align(
             alignment: Alignment.bottomRight,
-            child: OutlinedButton(
-              style: OutlinedButton.styleFrom(
-                side: BorderSide(color: kBlueColor),
-                backgroundColor: Colors.white.withOpacity(0.2),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 2.0, bottom: 4),
+              child: OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  side: BorderSide(color: kBlueColor),
+                  backgroundColor: Colors.white.withOpacity(0.2),
+                ),
+                onPressed: () {},
+                child: Text('Vào buổi học'),
               ),
-              onPressed: () {},
-              child: Text('Vào buổi học'),
             ),
           ),
         ],

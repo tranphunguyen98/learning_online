@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:learning_online/core/colors.dart';
 import 'package:learning_online/core/core.dart';
 
+import '../../../utils/router.dart';
+
 class WidgetHeaderHome extends StatelessWidget {
   const WidgetHeaderHome({Key? key}) : super(key: key);
 
@@ -32,7 +34,9 @@ class WidgetHeaderHome extends StatelessWidget {
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                   primary: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24))),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, AppRouter.kJitsi);
+              },
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
