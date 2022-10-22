@@ -39,11 +39,11 @@ class _SettingPageState extends State<SettingPage> {
               },
             ),
             SizedBox(height: 16),
-            WidgetSettingButton(
-              text: 'Lịch sử đặt lịch',
-              leading: Icons.menu,
-            ),
-            SizedBox(height: 16),
+            // WidgetSettingButton(
+            //   text: 'Dánh sach',
+            //   leading: Icons.menu,
+            // ),
+            // SizedBox(height: 16),
             WidgetSettingButton(
               onPressed: () {
                 Navigator.pushNamed(context, AppRouter.kHistory);
