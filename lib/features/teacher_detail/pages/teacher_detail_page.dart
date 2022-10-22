@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:learning_online/core/core.dart';
 import 'package:learning_online/core/widgets/widget_chip.dart';
 import 'package:learning_online/core/widgets/widget_favorite.dart';
@@ -12,11 +13,20 @@ import 'package:learning_online/features/teacher_detail/widgets/widget_choose_da
 import 'package:learning_online/features/teacher_detail/widgets/widget_schedule.dart';
 import 'package:learning_online/model/teacher.dart';
 
-class TeacherDetailPage extends StatelessWidget {
+import '../../../utils/router.dart';
+import '../../teacher_list/logic.dart';
+
+class TeacherDetailPage extends StatefulWidget {
   final TeacherModel teacherModel;
   TeacherDetailPage({Key? key, required this.teacherModel}) : super(key: key);
 
+  @override
+  _TeacherDetailPageState createState() => _TeacherDetailPageState();
+}
+
+class _TeacherDetailPageState extends State<TeacherDetailPage> {
   late BuildContext _context;
+
   @override
   Widget build(BuildContext context) {
     _context = context;
@@ -51,18 +61,16 @@ class TeacherDetailPage extends StatelessWidget {
                 _widgetRowFunction(),
                 SizedBox(height: 24),
                 Text(
-                  teacherModel.description,
+                  widget.teacherModel.description,
                   style: kFontRegularDefault_14,
                 ),
                 SizedBox(height: 8),
-                _widgetTitleChipsColumn('Ngôn ngữ', teacherModel.languages),
-                _widgetTitleTextColumn('Học vấn', teacherModel.education),
-                _widgetTitleTextColumn('Kinh nghiêm', teacherModel.experience),
-                _widgetTitleTextColumn('Sở thích', teacherModel.hobby),
-                _widgetTitleTextColumn('Nghề nghiệp', teacherModel.career),
-                _widgetTitleChipsColumn('Chuyên môn', teacherModel.fields),
-                SizedBox(height: 16),
-                // WidgetSchedule(),
+                _widgetTitleChipsColumn('Ngôn ngữ', widget.teacherModel.languages),
+                _widgetTitleTextColumn('Học vấn', widget.teacherModel.education),
+                _widgetTitleTextColumn('Kinh nghiêm', widget.teacherModel.experience),
+                _widgetTitleTextColumn('Sở thích', widget.teacherModel.hobby),
+                _widgetTitleTextColumn('Nghề nghiệp', widget.teacherModel.career),
+                _widgetTitleChipsColumn('Chuyên môn', widget.teacherModel.fields),
                 SizedBox(height: 16),
                 _widgetViewReview(),
               ],
@@ -142,6 +150,9 @@ class TeacherDetailPage extends StatelessWidget {
         WidgetIconTextColumn(
           iconData: Icons.message,
           text: 'Nhắn tin',
+          onTap: () {
+            Navigator.pushNamed(context, AppRouter.kMessage);
+          },
         ),
         Spacer(),
         WidgetIconTextColumn(
@@ -158,7 +169,7 @@ class TeacherDetailPage extends StatelessWidget {
     return Row(
       children: [
         CircleAvatar(
-          backgroundImage: NetworkImage(teacherModel.imageUrl),
+          backgroundImage: NetworkImage(widget.teacherModel.imageUrl),
           radius: 42,
         ),
         SizedBox(width: 8),
@@ -166,7 +177,7 @@ class TeacherDetailPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              teacherModel.name,
+              widget.teacherModel.name,
               style: kFontRegularDefault_16,
             ),
             SizedBox(height: 8),
@@ -175,7 +186,7 @@ class TeacherDetailPage extends StatelessWidget {
               style: kFontRegularDefault_14,
             ),
             Text(
-              teacherModel.nation,
+              widget.teacherModel.nation,
               style: kFontRegularDefault_14,
             ),
           ],
@@ -185,9 +196,14 @@ class TeacherDetailPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            WidgetRatingBarIndicator(star: teacherModel.star),
+            WidgetRatingBarIndicator(star: widget.teacherModel.star),
             SizedBox(height: 8),
-            WidgetFavorite(isFavorite: teacherModel.isFavorite),
+            WidgetFavorite(
+              isFavorite: widget.teacherModel.isFavorite,
+              onFavoriteChanged: (isFavorite) {
+                Get.find<TeacherListController>().updateFavorite(isFavorite, widget.teacherModel.id);
+              },
+            ),
           ],
         ),
       ],
@@ -198,7 +214,7 @@ class TeacherDetailPage extends StatelessWidget {
     showDialog<void>(
       context: _context,
       builder: (BuildContext dialogContext) {
-        return ReportDialog(teacherName: teacherModel.name);
+        return ReportDialog(teacherName: widget.teacherModel.name);
       },
     );
   }

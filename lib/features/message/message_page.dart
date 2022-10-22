@@ -8,8 +8,7 @@ import 'package:learning_online/model/teacher.dart';
 
 class MessagePage extends StatelessWidget {
   final TeacherModel teacherModel = TeacherModel.mock;
-  final List<MessageModel> messages =
-      List.generate(3, (index) => MessageModel.mock);
+  final List<MessageModel> messages = List.generate(3, (index) => MessageModel.mock);
   MessagePage({
     Key? key,
   }) : super(key: key);
@@ -26,15 +25,29 @@ class MessagePage extends StatelessWidget {
               child: ListView.builder(
                 reverse: true,
                 itemCount: messages.length,
-                itemBuilder: (context, index) =>
-                    WidgetMessageItem(messageModel: messages[index]),
+                itemBuilder: (context, index) => WidgetMessageItem(messageModel: messages[index]),
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: WidgetRoundedTextField(
-              hint: 'Nhắn tin ...',
+            padding: const EdgeInsets.only(top: 16.0, bottom: 16, left: 16, right: 8),
+            child: Row(
+              children: [
+                Expanded(
+                  child: WidgetRoundedTextField(
+                    hint: 'Nhắn tin ...',
+                  ),
+                ),
+                SizedBox(width: 4),
+                IconButton(
+                  padding: EdgeInsets.all(4),
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.send,
+                    color: kRedColor,
+                  ),
+                ),
+              ],
             ),
           )
         ],

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 class TeacherModel {
   final int id;
   final double star;
@@ -29,8 +31,8 @@ class TeacherModel {
     required this.languages,
   });
 
-  static const TeacherModel mock = TeacherModel(
-    id: 1,
+  static TeacherModel mock = TeacherModel(
+    id: Random().nextInt(10000),
     star: 5,
     fields: [
       'English for Adults1',
@@ -52,8 +54,8 @@ class TeacherModel {
     nation: 'Philippines',
     languages: ['English', 'French', 'Vietnamese'],
   );
-  static const TeacherModel mock1 = TeacherModel(
-    id: 1,
+  static TeacherModel mock1 = TeacherModel(
+    id: Random().nextInt(10000),
     star: 4,
     fields: [
       'English for Kids',
@@ -77,8 +79,8 @@ class TeacherModel {
     languages: ['English'],
   );
 
-  static const TeacherModel mock2 = TeacherModel(
-    id: 1,
+  static TeacherModel mock2 = TeacherModel(
+    id: Random().nextInt(10000),
     star: 3,
     fields: [
       'English for Adults1',
@@ -100,4 +102,36 @@ class TeacherModel {
     nation: 'Philippines',
     languages: ['English', 'French'],
   );
+
+  TeacherModel copyWith({
+    int? id,
+    double? star,
+    List<String>? fields,
+    String? name,
+    String? nation,
+    String? education,
+    String? experience,
+    String? hobby,
+    String? career,
+    String? description,
+    String? imageUrl,
+    List<String>? languages,
+    bool? isFavorite,
+  }) {
+    return TeacherModel(
+      id: id ?? this.id,
+      star: star ?? this.star,
+      fields: fields ?? this.fields,
+      name: name ?? this.name,
+      nation: nation ?? this.nation,
+      education: education ?? this.education,
+      experience: experience ?? this.experience,
+      hobby: hobby ?? this.hobby,
+      career: career ?? this.career,
+      description: description ?? this.description,
+      imageUrl: imageUrl ?? this.imageUrl,
+      languages: languages ?? this.languages,
+      isFavorite: isFavorite ?? this.isFavorite,
+    );
+  }
 }

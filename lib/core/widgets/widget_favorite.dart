@@ -4,7 +4,9 @@ import '../core.dart';
 
 class WidgetFavorite extends StatefulWidget {
   final bool isFavorite;
-  const WidgetFavorite({Key? key, required this.isFavorite}) : super(key: key);
+  final Function(bool value)? onFavoriteChanged;
+
+  const WidgetFavorite({Key? key, required this.isFavorite, this.onFavoriteChanged}) : super(key: key);
 
   @override
   _WidgetFavoriteState createState() => _WidgetFavoriteState();
@@ -12,6 +14,7 @@ class WidgetFavorite extends StatefulWidget {
 
 class _WidgetFavoriteState extends State<WidgetFavorite> {
   late bool isFavorite;
+
   @override
   void initState() {
     isFavorite = widget.isFavorite;
@@ -39,6 +42,7 @@ class _WidgetFavoriteState extends State<WidgetFavorite> {
   void _onClickFavoriteButton() {
     setState(() {
       isFavorite = !isFavorite;
+      widget.onFavoriteChanged?.call(isFavorite);
     });
   }
 }

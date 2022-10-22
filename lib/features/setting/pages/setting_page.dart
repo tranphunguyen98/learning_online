@@ -19,11 +19,9 @@ class _SettingPageState extends State<SettingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: widgetCoreAppBar(title: 'Cài đặt', hasBackIcon: false, context: context),
-      backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: SingleChildScrollView(
         child: Column(
           children: [
             _widgetHeader(),
@@ -31,6 +29,14 @@ class _SettingPageState extends State<SettingPage> {
             WidgetSettingButton(
               text: 'Xem đánh giá bản thân',
               leading: Icons.person_outline,
+            ),
+            SizedBox(height: 16),
+            WidgetSettingButton(
+              text: 'Danh sách giáo viên ưa thích',
+              leading: Icons.favorite_border,
+              onPressed: () {
+                Navigator.pushNamed(context, AppRouter.kTeacherFavorite);
+              },
             ),
             SizedBox(height: 16),
             WidgetSettingButton(

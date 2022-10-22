@@ -36,7 +36,13 @@ class ReportDialog extends StatelessWidget {
               height: 64,
               width: double.infinity,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text('Báo cáo thành công'),
+                    duration: Duration(milliseconds: 1000),
+                  ));
+                },
                 child: Text(
                   'Báo cáo Tutor',
                   style: kFontSemiboldPrimary_16,

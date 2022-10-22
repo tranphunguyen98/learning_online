@@ -34,6 +34,7 @@ final kFontRegularWhite_12_80 = kFontRegularWhite.copyWith(
 );
 final kFontRegularWhite_14 = kFontRegularWhite.copyWith(fontSize: 14);
 final kFontRegularWhite_16 = kFontRegularWhite.copyWith(fontSize: 16);
+final kFontRegularWhite_18 = kFontRegularWhite.copyWith(fontSize: 18);
 final kFontRegularWhite_14_80 = kFontRegularWhite.copyWith(
   fontSize: 14,
   color: kWhiteColor.withOpacity(0.8),

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:learning_online/core/core.dart';
 import 'package:learning_online/core/widgets/widget_favorite.dart';
 import 'package:learning_online/core/widgets/widget_rating_bar_indicator.dart';
 import 'package:learning_online/model/teacher.dart';
+
+import '../../teacher_list/logic.dart';
 
 class WidgetHomeTeacherItem extends StatelessWidget {
   const WidgetHomeTeacherItem({Key? key, required this.teacherModel}) : super(key: key);
@@ -45,7 +48,12 @@ class WidgetHomeTeacherItem extends StatelessWidget {
                               WidgetRatingBarIndicator(star: teacherModel.star),
                             ],
                           ),
-                          WidgetFavorite(isFavorite: teacherModel.isFavorite),
+                          WidgetFavorite(
+                            isFavorite: teacherModel.isFavorite,
+                            onFavoriteChanged: (isFavorite) {
+                              Get.find<TeacherListController>().updateFavorite(isFavorite, teacherModel.id);
+                            },
+                          ),
                         ],
                       ),
                       SizedBox(height: 8),

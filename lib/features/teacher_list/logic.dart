@@ -2,6 +2,7 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 import '../../model/teacher.dart';
 
+
 enum ETeacherFilter { Default, Favorite, Rating }
 
 class TeacherListController extends GetxController {
@@ -22,8 +23,18 @@ class TeacherListController extends GetxController {
 
   late List<TeacherModel> displayedTeachers;
 
+  List<TeacherModel> get favoriteTeachers => _teachers.where((element) => element.isFavorite).toList() ?? [];
+
   TeacherListController() {
     displayedTeachers = _teachers;
+  }
+
+  void updateFavorite(bool isFavorite, int id) {
+    final favoriteIndex = _teachers.indexWhere((element) => element.id == id);
+    if (favoriteIndex >= 0) {
+      _teachers[favoriteIndex] = _teachers[favoriteIndex].copyWith(isFavorite: isFavorite);
+      update();
+    }
   }
 
   void changeFilter(ETeacherFilter filter) {
