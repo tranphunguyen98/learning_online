@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learning_online/features/forgot_password/pages/forgot_password_page.dart';
+import 'package:learning_online/features/history/history_page.dart';
 import 'package:learning_online/features/login/pages/login_page.dart';
 import 'package:learning_online/features/register/pages/register_page.dart';
 import 'package:learning_online/features/schedule/schedule_page.dart';
@@ -28,6 +29,7 @@ class AppRouter {
   static const String kUserProfile = '/userProfile';
   static const String kMessage = '/message';
   static const String kSchedule = '/schedule';
+  static const String kHistory = '/history';
 
   static const String kArgumentTask = '/argumentTask';
 
@@ -57,6 +59,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => MessagePage());
       case kSchedule:
         return MaterialPageRoute(builder: (_) => SchedulePage());
+      case kHistory:
+        return MaterialPageRoute(builder: (_) => HistoryPage());
     // case kChangePassword:
     //   return MaterialPageRoute(builder: (_) => ChangePasswordScreen());
     // case kSetting:

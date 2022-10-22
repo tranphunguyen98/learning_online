@@ -45,6 +45,9 @@ class _SettingPageState extends State<SettingPage> {
             ),
             SizedBox(height: 16),
             WidgetSettingButton(
+              onPressed: () {
+                Navigator.pushNamed(context, AppRouter.kHistory);
+              },
               text: 'Lịch sử học',
               leading: Icons.history,
             ),

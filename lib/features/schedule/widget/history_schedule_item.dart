@@ -3,8 +3,8 @@ import 'package:learning_online/core/core.dart';
 import 'package:learning_online/features/schedule/widget/expansion_area.dart';
 import 'package:learning_online/features/schedule/widget/widget_schedule_tutor.dart';
 
-class ScheduleItem extends StatelessWidget {
-  const ScheduleItem({Key? key}) : super(key: key);
+class HistoryScheduleItem extends StatelessWidget {
+  const HistoryScheduleItem({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,36 +24,63 @@ class ScheduleItem extends StatelessWidget {
           ),
           SizedBox(height: 6),
           Text(
-            '2 buồi học liên tục',
+            '10 giờ trước',
             style: kFontRegularDefault_12,
           ),
           SizedBox(height: 16),
           WidgetScheduleTutor(),
           Card(
             elevation: 0,
-            child: Padding(
+            child: Container(
+              width: double.infinity,
               padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16),
               child: Column(
-                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Thời gian học: 10:00 - 11:00',
                     style: kFontRegularDefault_14.copyWith(fontWeight: FontWeight.w500),
                   ),
-                  SizedBox(height: 8),
-                  ListView.separated(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    padding: const EdgeInsets.only(),
-                    itemBuilder: (_, index) => _widgetRowTime(),
-                    separatorBuilder: (_, index) => SizedBox(height: 8),
-                    itemCount: 2,
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.smart_display_outlined, size: 16,),
+                        SizedBox(width: 6),
+                        Text('Bản ghi')
+                      ],
+                    ),
                   ),
-                  SizedBox(height: 8),
-                  ExpansionArea(),
                 ],
               ),
+            ),
+          ),
+          Card(
+            elevation: 0,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0, left: 12, right: 12, bottom: 12),
+                  child: HistoryExpansionArea(title: 'Yêu cầu cho buổi học'),
+                ),
+                Container(height: 1, color: kLightGrayColor,),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0, left: 12, right: 12, bottom: 12),
+                  child: HistoryExpansionArea(title: 'Đánh giá từ gia sư',),
+                ),
+                Container(height: 1, color: kLightGrayColor,),
+                Padding(
+                  padding: const EdgeInsets.only(top: 12.0, left: 12, right: 12, bottom: 12),
+                  child: Row(children: [
+                    Text('Đánh giá', style: kFontRegularBlue_12,),
+                    Spacer(),
+                    Text('Báo cáo', style: kFontRegularBlue_12,),
+                  ],),
+                ),
+              ],
             ),
           ),
           Align(

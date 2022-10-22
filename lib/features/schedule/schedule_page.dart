@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learning_online/core/core.dart';
-import 'package:learning_online/features/schedule/widget/schedule_item.dart';
+import 'package:learning_online/features/schedule/widget/history_schedule_item.dart';
 
 class SchedulePage extends StatelessWidget {
   const SchedulePage({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class SchedulePage extends StatelessWidget {
             SizedBox(height: 8),
             Expanded(
               child: ListView.separated(
-                itemBuilder: (_, i) => ScheduleItem(),
+                itemBuilder: (_, i) => HistoryScheduleItem(),
                 separatorBuilder: (_, i) => SizedBox(height: 16),
                 itemCount: 3,
               ),

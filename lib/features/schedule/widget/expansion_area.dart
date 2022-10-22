@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:learning_online/core/core.dart';
 
-class ExpansionArea extends StatefulWidget {
-  const ExpansionArea({
-    Key? key,
+class HistoryExpansionArea extends StatefulWidget {
+  final String title;
+  const HistoryExpansionArea({
+    Key? key, required this.title,
   }) : super(key: key);
 
   @override
-  _ExpansionAreaState createState() => _ExpansionAreaState();
+  _HistoryExpansionAreaState createState() => _HistoryExpansionAreaState();
 }
 
-class _ExpansionAreaState extends State<ExpansionArea> with TickerProviderStateMixin {
+class _HistoryExpansionAreaState extends State<HistoryExpansionArea> with TickerProviderStateMixin {
   bool _isExpanded = false;
   late AnimationController _animationController;
   late Animation<double> _iconTurns;
@@ -36,24 +37,18 @@ class _ExpansionAreaState extends State<ExpansionArea> with TickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(2)),
-        border: Border.all(color: Colors.grey.withOpacity(0.6), width: 0.5),
-        color: Colors.grey.withOpacity(0.1),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _widgetCollapseExpand(),
-          ClipRect(
-            child: Align(
-              heightFactor: _heightFactor.value,
-              child: content(),
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _widgetCollapseExpand(),
+        ClipRect(
+          child: Align(
+            alignment: Alignment.bottomLeft,
+            heightFactor: _heightFactor.value,
+            child: content(),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -62,30 +57,21 @@ class _ExpansionAreaState extends State<ExpansionArea> with TickerProviderStateM
       behavior: HitTestBehavior.translucent,
       onTap: _onTapCollapseExpand,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 8),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Expanded(
+              child: Text(
+                widget.title,
+                style: kFontRegularDefault_12,
+              ),
+            ),
             RotationTransition(
               turns: _iconTurns,
               child: Icon(
                 Icons.keyboard_arrow_right,
                 size: 16,
-              ),
-            ),
-            SizedBox(width: 4),
-            Text(
-              'Yêu cầu cho buổi học',
-              style: kFontRegularDefault_12,
-            ),
-            Spacer(),
-            GestureDetector(
-              onTap: () {
-                print('nguyentp ==> ');
-              },
-              child: Text(
-                'Chỉnh sửa yêu cầu',
-                style: kFontRegularBlue_12,
               ),
             ),
           ],
@@ -97,23 +83,7 @@ class _ExpansionAreaState extends State<ExpansionArea> with TickerProviderStateM
   Widget content() {
     return AnimatedContainer(
       duration: Duration(milliseconds: 250),
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-            color: Colors.white,
-            border: Border(top: BorderSide(color: Colors.grey.withOpacity(0.3)))),
-        padding: const EdgeInsets.only(),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Yêu cầu 1'),
-              Text('Yêu cầu 2'),
-            ],
-          ),
-        ),
-      ),
+      child: Text('Nội dung ${widget.title} \nNội dung ${widget.title}' ),
     );
   }
 
