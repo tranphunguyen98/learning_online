@@ -16,7 +16,7 @@ class WidgetSearchTextField extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               color: Colors.grey.shade100,
-              borderRadius: BorderRadius.all(
+              borderRadius: const BorderRadius.all(
                 Radius.circular(12),
               ),
             ),
@@ -29,7 +29,7 @@ class WidgetSearchTextField extends StatelessWidget {
               // contentPadding: EdgeInsets.symmetric(
               //   horizontal: 24,
               // ),
-              prefixIcon: Icon(
+              prefixIcon: const Icon(
                 Icons.search,
                 size: 16,
                 color: Colors.grey,

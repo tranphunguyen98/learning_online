@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:learning_online/core/colors.dart';
 import 'package:learning_online/core/core.dart';
 
 class JitsiPage extends StatefulWidget {
@@ -50,12 +49,12 @@ class _JitsiPageState extends State<JitsiPage> {
                       '01:12',
                       style: kFontRegularWhite_12_80,
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
+                        children: const [
                           Icon(
                             Icons.chat_bubble_outline,
                             color: Colors.white,

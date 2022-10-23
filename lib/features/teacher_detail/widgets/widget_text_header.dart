@@ -8,7 +8,7 @@ class WidgetTextHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       width: double.infinity,
       color: Colors.grey.withOpacity(0.1),
       alignment: Alignment.center,

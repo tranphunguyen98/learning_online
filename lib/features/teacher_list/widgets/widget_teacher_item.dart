@@ -25,7 +25,7 @@ class WidgetTeacherItem extends StatelessWidget {
                     teacherModel.imageUrl,
                   ),
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Expanded(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -37,21 +37,21 @@ class WidgetTeacherItem extends StatelessWidget {
                             teacherModel.name,
                             style: kFontRegularDefault_16,
                           ),
-                          Spacer(),
+                          const Spacer(),
                           Text(
                             '${teacherModel.star}',
                             style: kFontRegularRed_16,
                           ),
-                          SizedBox(width: 2),
-                          Icon(
+                          const SizedBox(width: 2),
+                          const Icon(
                             Icons.star,
                             color: Colors.amber,
                             size: 20,
                           ),
                         ],
                       ),
-                      SizedBox(height: 8),
-                      Container(
+                      const SizedBox(height: 8),
+                      SizedBox(
                         height: 32,
                         width: double.infinity,
                         child: ListView.separated(
@@ -61,7 +61,7 @@ class WidgetTeacherItem extends StatelessWidget {
                             return WidgetChip(text: teacherModel.fields[index]);
                           },
                           separatorBuilder: (context, index) =>
-                              SizedBox(width: 4),
+                              const SizedBox(width: 4),
                         ),
                       ),
                     ],
@@ -69,7 +69,7 @@ class WidgetTeacherItem extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             Text(
               teacherModel.description,
               style: kFontRegularDefault_14,

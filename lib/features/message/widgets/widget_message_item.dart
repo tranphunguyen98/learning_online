@@ -11,7 +11,7 @@ class WidgetMessageItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Spacer(),
+        const Spacer(),
         Chip(
           backgroundColor: kPrimaryColor,
           label: Text(

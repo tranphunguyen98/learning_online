@@ -18,7 +18,7 @@ class _ExpansionAreaState extends State<ExpansionArea> with TickerProviderStateM
 
   @override
   void initState() {
-    _animationController = AnimationController(duration: Duration(milliseconds: 250), vsync: this);
+    _animationController = AnimationController(duration: const Duration(milliseconds: 250), vsync: this);
     _animationController.value = 1;
     _iconTurns = Tween<double>(begin: 0.0, end: 0.25).animate(_animationController);
     _heightFactor = Tween<double>(begin: 0.0, end: 1.0).animate(_animationController);
@@ -38,7 +38,7 @@ class _ExpansionAreaState extends State<ExpansionArea> with TickerProviderStateM
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(2)),
+        borderRadius: const BorderRadius.all(Radius.circular(2)),
         border: Border.all(color: Colors.grey.withOpacity(0.6), width: 0.5),
         color: Colors.grey.withOpacity(0.1),
       ),
@@ -68,17 +68,17 @@ class _ExpansionAreaState extends State<ExpansionArea> with TickerProviderStateM
           children: [
             RotationTransition(
               turns: _iconTurns,
-              child: Icon(
+              child: const Icon(
                 Icons.keyboard_arrow_right,
                 size: 16,
               ),
             ),
-            SizedBox(width: 4),
+            const SizedBox(width: 4),
             Text(
               'Yêu cầu cho buổi học',
               style: kFontRegularDefault_12,
             ),
-            Spacer(),
+            const Spacer(),
             GestureDetector(
               onTap: () {
                 print('nguyentp ==> ');
@@ -96,7 +96,7 @@ class _ExpansionAreaState extends State<ExpansionArea> with TickerProviderStateM
 
   Widget content() {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 250),
+      duration: const Duration(milliseconds: 250),
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
@@ -107,7 +107,7 @@ class _ExpansionAreaState extends State<ExpansionArea> with TickerProviderStateM
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: const [
               Text('Yêu cầu 1'),
               Text('Yêu cầu 2'),
             ],

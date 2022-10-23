@@ -13,7 +13,7 @@ class WidgetRowWithSocial extends StatelessWidget {
     return Column(
       children: [
         Text(title, style: kFontRegularDefault_14),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -27,7 +27,7 @@ class WidgetRowWithSocial extends StatelessWidget {
                 height: 36,
               ),
             ),
-            SizedBox(width: 16),
+            const SizedBox(width: 16),
             GestureDetector(
               onTap: () {
                 Navigator.pushNamed(context, AppRouter.kHome);

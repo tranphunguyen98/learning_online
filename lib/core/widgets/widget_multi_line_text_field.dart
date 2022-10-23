@@ -16,7 +16,7 @@ class WidgetMultiLineTextField extends StatelessWidget {
       borderRadius: BorderRadius.all(
         Radius.circular(radius ?? 8),
       ),
-      borderSide: BorderSide(
+      borderSide: const BorderSide(
         color: Colors.blueGrey,
         width: 0.25,
       ),

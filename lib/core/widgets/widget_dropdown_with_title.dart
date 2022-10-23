@@ -19,7 +19,7 @@ class WidgetDropdownWithTitle extends StatelessWidget {
           title,
           style: kFontRegularDefault_14,
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         WidgetCoreDropdown(
           data: data,
           hint: hint,

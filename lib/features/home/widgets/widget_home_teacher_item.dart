@@ -28,7 +28,7 @@ class WidgetHomeTeacherItem extends StatelessWidget {
                     teacherModel.imageUrl,
                   ),
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Expanded(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -44,7 +44,7 @@ class WidgetHomeTeacherItem extends StatelessWidget {
                                 teacherModel.name,
                                 style: kFontRegularDefault_16,
                               ),
-                              SizedBox(height: 4),
+                              const SizedBox(height: 4),
                               WidgetRatingBarIndicator(star: teacherModel.star),
                             ],
                           ),
@@ -56,8 +56,8 @@ class WidgetHomeTeacherItem extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 8),
-                      Container(
+                      const SizedBox(height: 8),
+                      SizedBox(
                         height: 32,
                         width: double.infinity,
                         child: ListView.separated(
@@ -72,7 +72,7 @@ class WidgetHomeTeacherItem extends StatelessWidget {
                               ),
                             );
                           },
-                          separatorBuilder: (context, index) => SizedBox(width: 4),
+                          separatorBuilder: (context, index) => const SizedBox(width: 4),
                         ),
                       ),
                     ],
@@ -80,7 +80,7 @@ class WidgetHomeTeacherItem extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             Text(
               teacherModel.description,
               style: kFontRegularDefault_14,

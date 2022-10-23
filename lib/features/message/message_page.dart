@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:learning_online/core/colors.dart';
 import 'package:learning_online/core/core.dart';
 import 'package:learning_online/core/widgets/widget_rounded_text_field.dart';
 import 'package:learning_online/features/message/widgets/widget_message_item.dart';
@@ -33,16 +32,16 @@ class MessagePage extends StatelessWidget {
             padding: const EdgeInsets.only(top: 16.0, bottom: 16, left: 16, right: 8),
             child: Row(
               children: [
-                Expanded(
+                const Expanded(
                   child: WidgetRoundedTextField(
                     hint: 'Nhắn tin ...',
                   ),
                 ),
-                SizedBox(width: 4),
+                const SizedBox(width: 4),
                 IconButton(
-                  padding: EdgeInsets.all(4),
+                  padding: const EdgeInsets.all(4),
                   onPressed: () {},
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.send,
                     color: kRedColor,
                   ),
@@ -58,7 +57,7 @@ class MessagePage extends StatelessWidget {
   AppBar _widgetAppBar() {
     return AppBar(
       backgroundColor: Colors.white,
-      leading: Icon(
+      leading: const Icon(
         Icons.arrow_back_ios_rounded,
         size: 16,
         color: kBlackColor,
@@ -69,7 +68,7 @@ class MessagePage extends StatelessWidget {
             backgroundImage: NetworkImage(teacherModel.imageUrl),
             radius: 16,
           ),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

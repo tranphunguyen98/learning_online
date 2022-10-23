@@ -20,20 +20,20 @@ class CourseListPage extends StatelessWidget {
                   child: Text('English For Traveling', style: kFontMediumBlack_18,),
                 ),
                 Row(
-                  children: [
+                  children: const [
                     Expanded(child: CourseItem()),
                     Expanded(child: CourseItem()),
                   ],
                 ),
                 Row(
-                  children: [
+                  children: const [
                     Expanded(child: CourseItem()),
                     Expanded(child: CourseItem()),
                   ],
                 ),
               ],
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -42,13 +42,13 @@ class CourseListPage extends StatelessWidget {
                   child: Text('English For Traveling', style: kFontMediumBlack_18,),
                 ),
                 Row(
-                  children: [
+                  children: const [
                     Expanded(child: CourseItem()),
                     Expanded(child: CourseItem()),
                   ],
                 ),
                 Row(
-                  children: [
+                  children: const [
                     Expanded(child: CourseItem()),
                     Expanded(child: CourseItem()),
                   ],

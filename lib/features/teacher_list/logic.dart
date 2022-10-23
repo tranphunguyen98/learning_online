@@ -10,7 +10,7 @@ class TeacherListController extends GetxController {
   String specialize = '';
   String keyword = '';
 
-  List<TeacherModel> _teachers = [
+  final List<TeacherModel> _teachers = [
     TeacherModel.mock,
     TeacherModel.mock1,
     TeacherModel.mock2,

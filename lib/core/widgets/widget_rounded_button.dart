@@ -56,7 +56,7 @@ class WidgetRoundedButton extends StatelessWidget {
                 size: 24,
                 color: kBlackColor,
               ),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
             ],
             Text(
               text,
@@ -64,7 +64,7 @@ class WidgetRoundedButton extends StatelessWidget {
                   kFontMediumWhite_14.copyWith(color: textColor ?? kWhiteColor),
             ),
             if (trailing != null) ...[
-              Spacer(),
+              const Spacer(),
               Icon(
                 trailing,
                 size: 14,

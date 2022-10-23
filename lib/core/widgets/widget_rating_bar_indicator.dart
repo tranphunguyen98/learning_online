@@ -11,7 +11,7 @@ class WidgetRatingBarIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return RatingBarIndicator(
       rating: star,
-      itemBuilder: (context, index) => Icon(
+      itemBuilder: (context, index) => const Icon(
         Icons.star,
         color: Colors.amber,
       ),

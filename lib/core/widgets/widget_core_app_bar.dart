@@ -12,7 +12,7 @@ AppBar widgetCoreAppBar({String? title, bool hasBackIcon = true, required BuildC
       onTap: () {
         Navigator.of(context).pop();
       },
-      child: Icon(
+      child: const Icon(
         Icons.arrow_back_ios_rounded,
         color: kBlackColor,
       ),

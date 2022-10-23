@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          WidgetHeaderHome(),
+          const WidgetHeaderHome(),
           _buildListOfTeacher(),
         ],
       ),
@@ -43,8 +43,8 @@ class _HomePageState extends State<HomePage> {
                     'Gia sư được đề xuất',
                     style: kFontRegularDefault_14,
                   ),
-                  SizedBox(height: 2),
-                  SizedBox(
+                  const SizedBox(height: 2),
+                  const SizedBox(
                     width: 136,
                     child: Divider(
                       thickness: 1,
@@ -54,27 +54,27 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-              Spacer(),
+              const Spacer(),
               Text(
                 'Tất cả',
                 style: kFontRegularPrimary_14,
               ),
-              SizedBox(width: 2),
-              Icon(
+              const SizedBox(width: 2),
+              const Icon(
                 Icons.chevron_right,
                 color: kPrimaryColor,
               ),
             ],
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           ListView.separated(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: 6,
             itemBuilder: (context, index) => WidgetHomeTeacherItem(
               teacherModel: index % 2 == 0 ? TeacherModel.mock : TeacherModel.mock1,
             ),
-            separatorBuilder: (context, index) => SizedBox(height: 16),
+            separatorBuilder: (context, index) => const SizedBox(height: 16),
           ),
         ],
       ),

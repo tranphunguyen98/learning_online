@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 import 'package:learning_online/core/core.dart';
 import 'package:learning_online/core/widgets/widget_radio_row_group.dart';
 import 'package:learning_online/core/widgets/widget_search_text_field.dart';
-import 'package:learning_online/features/teacher_list/widgets/widget_teacher_item.dart';
-import 'package:learning_online/model/teacher.dart';
 import 'package:learning_online/utils/router.dart';
 
 import '../../home/widgets/widget_home_teacher_item.dart';
@@ -43,7 +41,7 @@ class TeacherListPage extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: PopupMenuButton<ETeacherFilter>(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.filter_alt,
                       color: kGrayColor,
                     ),
@@ -52,15 +50,15 @@ class TeacherListPage extends StatelessWidget {
                     },
                     itemBuilder: (BuildContext context) {
                       return [
-                        PopupMenuItem(
+                        const PopupMenuItem(
                           value: ETeacherFilter.Default,
                           child: Text('Sắp xếp theo thứ tự mặc định'),
                         ),
-                        PopupMenuItem(
+                        const PopupMenuItem(
                           value: ETeacherFilter.Favorite,
                           child: Text('Sắp xếp theo ưa thích'),
                         ),
-                        PopupMenuItem(
+                        const PopupMenuItem(
                           value: ETeacherFilter.Rating,
                           child: Text('Sắp xếp theo theo sao giảm dần'),
                         ),
@@ -72,7 +70,7 @@ class TeacherListPage extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         Container(
           height: 36,
           margin: const EdgeInsets.symmetric(horizontal: 16),
@@ -108,7 +106,7 @@ class TeacherListPage extends StatelessWidget {
                 children: [
                   ListView.separated(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: logic.displayedTeachers.length,
                     itemBuilder: (context, index) => GestureDetector(
                       onTap: () {
@@ -120,7 +118,7 @@ class TeacherListPage extends StatelessWidget {
                         teacherModel: logic.displayedTeachers[index],
                       ),
                     ),
-                    separatorBuilder: (context, index) => SizedBox(height: 16),
+                    separatorBuilder: (context, index) => const SizedBox(height: 16),
                   ),
                 ],
               ),

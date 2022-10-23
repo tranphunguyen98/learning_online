@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:learning_online/core/core.dart';
-import 'package:learning_online/core/widgets/widget_core_app_bar.dart';
 import 'package:learning_online/core/widgets/widget_rounded_button.dart';
 import 'package:learning_online/features/setting/widgets/widget_setting_button.dart';
 import 'package:learning_online/model/user.dart';
@@ -8,7 +7,7 @@ import 'package:learning_online/model/user.dart';
 import '../../../utils/router.dart';
 
 class SettingPage extends StatefulWidget {
-  SettingPage({Key? key}) : super(key: key);
+  const SettingPage({Key? key}) : super(key: key);
 
   @override
   _SettingPageState createState() => _SettingPageState();
@@ -25,12 +24,12 @@ class _SettingPageState extends State<SettingPage> {
         child: Column(
           children: [
             _widgetHeader(),
-            SizedBox(height: 32),
-            WidgetSettingButton(
+            const SizedBox(height: 32),
+            const WidgetSettingButton(
               text: 'Xem đánh giá bản thân',
               leading: Icons.person_outline,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             WidgetSettingButton(
               text: 'Danh sách giáo viên ưa thích',
               leading: Icons.favorite_border,
@@ -38,7 +37,7 @@ class _SettingPageState extends State<SettingPage> {
                 Navigator.pushNamed(context, AppRouter.kTeacherFavorite);
               },
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             // WidgetSettingButton(
             //   text: 'Dánh sach',
             //   leading: Icons.menu,
@@ -51,23 +50,23 @@ class _SettingPageState extends State<SettingPage> {
               text: 'Lịch sử học',
               leading: Icons.history,
             ),
-            SizedBox(height: 16),
-            WidgetSettingButton(
+            const SizedBox(height: 16),
+            const WidgetSettingButton(
               text: 'Cài đặt nâng cao',
               leading: Icons.settings_outlined,
             ),
-            SizedBox(height: 64),
-            WidgetSettingButton(
+            const SizedBox(height: 64),
+            const WidgetSettingButton(
               text: 'Đi đến Website',
               leading: Icons.language,
             ),
-            SizedBox(height: 16),
-            WidgetSettingButton(
+            const SizedBox(height: 16),
+            const WidgetSettingButton(
               text: 'Facebook',
               leading: Icons.facebook_outlined,
             ),
-            SizedBox(height: 64),
-            WidgetRoundedButton(text: 'Đăng xuất'),
+            const SizedBox(height: 64),
+            const WidgetRoundedButton(text: 'Đăng xuất'),
           ],
         ),
       ),
@@ -85,7 +84,7 @@ class _SettingPageState extends State<SettingPage> {
             backgroundImage: NetworkImage(userModel.imageUrl ?? ''),
             radius: 28,
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -93,7 +92,7 @@ class _SettingPageState extends State<SettingPage> {
                 userModel.name,
                 style: kFontRegularDefault_16,
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Text(
                 userModel.email,
                 style: kFontRegularDefault_14,

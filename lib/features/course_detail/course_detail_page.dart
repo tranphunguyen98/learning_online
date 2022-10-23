@@ -32,7 +32,7 @@ class CourseDetailPage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
       child: Card(
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
         child: Column(
@@ -41,11 +41,11 @@ class CourseDetailPage extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius:
-                  BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
+                  const BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
               child: Image.network(
                   'https://camblycurriculumicons.s3.amazonaws.com/5e2b895e541a832674533c18?h=d41d8cd98f00b204e9800998ecf8427e'),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8),
               child: Column(
@@ -55,17 +55,17 @@ class CourseDetailPage extends StatelessWidget {
                     'Advanced Conversation Topics',
                     style: kFontMediumBlack_16,
                   ),
-                  SizedBox(height: 6),
+                  const SizedBox(height: 6),
                   Text(
                     'Gain confidence speaking about familiar topics',
                     style: kFontRegularDefault_12.copyWith(
                       color: kGrayColor,
                     ),
                   ),
-                  SizedBox(height: 12),
+                  const SizedBox(height: 12),
                   ElevatedButton(
                     onPressed: () {},
-                    child: Text('Khám phá'),
+                    child: const Text('Khám phá'),
                   ),
                 ],
               ),
@@ -83,9 +83,9 @@ class CourseDetailPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildTitle('Tổng quan'),
-          SizedBox(height: 6),
+          const SizedBox(height: 6),
           _buildRowTitle(Icons.question_mark, 'Tại sao bạn nên học khóa học này', Colors.red),
-          SizedBox(height: 6),
+          const SizedBox(height: 6),
           Padding(
             padding: const EdgeInsets.only(left: 20),
             child: Text(
@@ -93,9 +93,9 @@ class CourseDetailPage extends StatelessWidget {
               style: kFontRegularDefault_12,
             ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           _buildRowTitle(Icons.question_mark, 'Tại sao bạn nên học khóa học này', Colors.red),
-          SizedBox(height: 6),
+          const SizedBox(height: 6),
           Padding(
             padding: const EdgeInsets.only(left: 20),
             child: Text(
@@ -103,7 +103,7 @@ class CourseDetailPage extends StatelessWidget {
               style: kFontRegularDefault_12,
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
         ],
       ),
     );
@@ -118,8 +118,8 @@ class CourseDetailPage extends StatelessWidget {
             title,
             style: kFontSemiboldBlack_16,
           ),
-          SizedBox(width: 8),
-          Expanded(
+          const SizedBox(width: 8),
+          const Expanded(
               child: Divider(
             height: 1,
           ))
@@ -136,7 +136,7 @@ class CourseDetailPage extends StatelessWidget {
           size: 16,
           color: color,
         ),
-        SizedBox(width: 4),
+        const SizedBox(width: 4),
         Text(
           text,
           style: kFontMediumBlack_14,
@@ -151,9 +151,9 @@ class CourseDetailPage extends StatelessWidget {
       child: Column(
         children: [
           _buildTitle('Trình độ yêu cầu'),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           _buildRowTitle(Icons.person_outline, 'Beginner', Colors.blueAccent),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
         ],
       ),
     );
@@ -165,9 +165,9 @@ class CourseDetailPage extends StatelessWidget {
       child: Column(
         children: [
           _buildTitle('Thời lượng khóa học'),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           _buildRowTitle(Icons.book_outlined, '10 Chủ đề', Colors.blueAccent),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
         ],
       ),
     );
@@ -177,7 +177,7 @@ class CourseDetailPage extends StatelessWidget {
     return Column(
       children: [
         _buildTitle('Danh sách chủ đề'),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
@@ -195,17 +195,17 @@ class CourseDetailPage extends StatelessWidget {
 
   OutlinedButton _buildItemSubject() {
     return OutlinedButton(
-              onPressed: () {},
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 4.0),
-                  child: Text(
-                    '1.  Foods You Love',
-                    style: kFontSemiboldBlack_14.copyWith(fontWeight: FontWeight.w500),
-                  ),
-                ),
-              ),
-            );
+      onPressed: () {},
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 4.0),
+          child: Text(
+            '1.  Foods You Love',
+            style: kFontSemiboldBlack_14.copyWith(fontWeight: FontWeight.w500),
+          ),
+        ),
+      ),
+    );
   }
 }

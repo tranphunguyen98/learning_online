@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:learning_online/core/core.dart';
 
 class WidgetRadioRowGroup extends StatefulWidget {
@@ -26,7 +25,7 @@ class _WidgetRadioRowGroupState extends State<WidgetRadioRowGroup> {
     return ListView.separated(
       itemCount: widget.data.length,
       scrollDirection: Axis.horizontal,
-      separatorBuilder: (context, int) => SizedBox(width: 4),
+      separatorBuilder: (context, int) => const SizedBox(width: 4),
       itemBuilder: (context, index) {
         final String item = widget.data[index];
         return GestureDetector(

@@ -8,5 +8,5 @@ class MessageModel {
   });
 
   static MessageModel mock =
-      MessageModel(content: 'tin nhan', date: '10/02/2001');
+      const MessageModel(content: 'tin nhan', date: '10/02/2001');
 }

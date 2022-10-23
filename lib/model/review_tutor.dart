@@ -13,7 +13,7 @@ class ReviewTutorModel {
     required this.star,
   });
 
-  static ReviewTutorModel mock = ReviewTutorModel(
+  static ReviewTutorModel mock = const ReviewTutorModel(
     imageUrl:
         'https://cdn-img.thethao247.vn/upload/kienlv/2020/09/11/tuyen-thu-dt-viet-nam-cong-khai-ban-gai-xinh-nhu-mong1599795990.png',
     name: 'Khanh Huyen',

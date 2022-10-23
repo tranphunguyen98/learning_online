@@ -1,16 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:learning_online/features/forgot_password/pages/forgot_password_page.dart';
-import 'package:learning_online/features/home/pages/home_page.dart';
-import 'package:learning_online/features/login/pages/login_page.dart';
-import 'package:learning_online/features/message/message_page.dart';
-import 'package:learning_online/features/profile/pages/profile_page.dart';
-import 'package:learning_online/features/schedule/schedule_page.dart';
-import 'package:learning_online/features/setting/pages/setting_page.dart';
-import 'package:learning_online/features/teacher_detail/pages/teacher_detail_page.dart';
-import 'package:learning_online/features/teacher_list/pages/teacher_list_page.dart';
 import 'package:learning_online/utils/router.dart';
 
-import 'features/register/pages/register_page.dart';
 import 'features/root_page.dart';
 
 void main() {

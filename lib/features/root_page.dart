@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:learning_online/core/styles.dart';
 import 'package:learning_online/features/course_list/course_list_page.dart';
 import 'package:learning_online/features/home/pages/home_page.dart';
-import 'package:learning_online/features/message/message_page.dart';
 import 'package:learning_online/features/schedule/schedule_page.dart';
 import 'package:learning_online/features/setting/pages/setting_page.dart';
 import 'package:learning_online/features/teacher_list/logic.dart';
@@ -41,18 +38,18 @@ class _RootPageState extends State<RootPage> {
           if (selectedIndex == 0) {
             currentPage = HomePage();
           } else if (selectedIndex == 1) {
-            currentPage = CourseListPage();
+            currentPage = const CourseListPage();
           } else if (selectedIndex == 2) {
-            currentPage = SchedulePage();
+            currentPage = const SchedulePage();
           } else if (selectedIndex == 3) {
             currentPage = TeacherListPage();
             title = 'Danh sách tutor';
           } else if (selectedIndex == 4) {
-            currentPage = SettingPage();
+            currentPage = const SettingPage();
             title = 'Cài đặt';
           }
         },
-        items: [
+        items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Trang chủ'),
           BottomNavigationBarItem(icon: Icon(Icons.school), label: 'Khóa học'),
           BottomNavigationBarItem(icon: Icon(Icons.schedule), label: 'Lịch học'),

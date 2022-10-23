@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:learning_online/core/core.dart';
 
 class WidgetCoreDatePicker extends StatelessWidget {
@@ -12,9 +11,9 @@ class WidgetCoreDatePicker extends StatelessWidget {
     return Container(
       height: 48,
       width: double.infinity,
-      padding: EdgeInsets.only(left: 16),
+      padding: const EdgeInsets.only(left: 16),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(
+        borderRadius: const BorderRadius.all(
           Radius.circular(8),
         ),
         border: Border.all(color: Colors.blueGrey, width: 0.25),

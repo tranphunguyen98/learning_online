@@ -39,8 +39,9 @@ dependencies:
   intl: ^0.17.0
   video_player: ^2.2.3
   data_table_2: ^2.2.1
-  horizontal_data_table: ^4.1.2+2
+  horizontal_data_table: 4.1.0
   image_picker: ^0.8.6
+  table_sticky_headers: 2.0.2
 
 dev_dependencies:
   flutter_test:

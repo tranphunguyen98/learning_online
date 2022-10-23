@@ -12,7 +12,7 @@ class HistoryScheduleItem extends StatelessWidget {
       padding: const EdgeInsets.only(top: 16, left: 10, right: 12),
       decoration: BoxDecoration(
         color: Colors.grey.withOpacity(0.1),
-        borderRadius: BorderRadius.all(Radius.circular(2)),
+        borderRadius: const BorderRadius.all(Radius.circular(2)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -22,13 +22,13 @@ class HistoryScheduleItem extends StatelessWidget {
             'CN, 23 Tháng 10 2022',
             style: kFontSemiboldBlack_16,
           ),
-          SizedBox(height: 6),
+          const SizedBox(height: 6),
           Text(
             '10 giờ trước',
             style: kFontRegularDefault_12,
           ),
-          SizedBox(height: 16),
-          WidgetScheduleTutor(),
+          const SizedBox(height: 16),
+          const WidgetScheduleTutor(),
           Card(
             elevation: 0,
             child: Container(
@@ -45,7 +45,7 @@ class HistoryScheduleItem extends StatelessWidget {
                     onPressed: () {},
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
-                      children: [
+                      children: const [
                         Icon(Icons.smart_display_outlined, size: 16,),
                         SizedBox(width: 6),
                         Text('Bản ghi')
@@ -62,13 +62,13 @@ class HistoryScheduleItem extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0, left: 12, right: 12, bottom: 12),
+                const Padding(
+                  padding: EdgeInsets.only(top: 8.0, left: 12, right: 12, bottom: 12),
                   child: HistoryExpansionArea(title: 'Yêu cầu cho buổi học'),
                 ),
                 Container(height: 1, color: kLightGrayColor,),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0, left: 12, right: 12, bottom: 12),
+                const Padding(
+                  padding: EdgeInsets.only(top: 8.0, left: 12, right: 12, bottom: 12),
                   child: HistoryExpansionArea(title: 'Đánh giá từ gia sư',),
                 ),
                 Container(height: 1, color: kLightGrayColor,),
@@ -76,14 +76,14 @@ class HistoryScheduleItem extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 12.0, left: 12, right: 12, bottom: 12),
                   child: Row(children: [
                     Text('Đánh giá', style: kFontRegularBlue_12,),
-                    Spacer(),
+                    const Spacer(),
                     Text('Báo cáo', style: kFontRegularBlue_12,),
                   ],),
                 ),
               ],
             ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
         ],
       ),
     );
@@ -101,16 +101,16 @@ class HistoryScheduleItem extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(2)),
+              borderRadius: const BorderRadius.all(Radius.circular(2)),
               border: Border.all(color: Colors.red)),
           child: Row(
             children: [
-              Icon(
+              const Icon(
                 Icons.cancel,
                 size: 12,
                 color: Colors.red,
               ),
-              SizedBox(width: 4),
+              const SizedBox(width: 4),
               Text(
                 'Hủy',
                 style: kFontRegularDefault_12.copyWith(color: Colors.red),

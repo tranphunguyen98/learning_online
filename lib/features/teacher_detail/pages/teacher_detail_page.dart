@@ -18,7 +18,7 @@ import '../../teacher_list/logic.dart';
 
 class TeacherDetailPage extends StatefulWidget {
   final TeacherModel teacherModel;
-  TeacherDetailPage({Key? key, required this.teacherModel}) : super(key: key);
+  const TeacherDetailPage({Key? key, required this.teacherModel}) : super(key: key);
 
   @override
   _TeacherDetailPageState createState() => _TeacherDetailPageState();
@@ -48,7 +48,7 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _widgetInfoHeader(),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Builder(
                   builder: (context) {
                     return WidgetRoundedButton(
@@ -57,21 +57,23 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
                     );
                   },
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 _widgetRowFunction(),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
                 Text(
                   widget.teacherModel.description,
                   style: kFontRegularDefault_14,
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 _widgetTitleChipsColumn('Ngôn ngữ', widget.teacherModel.languages),
                 _widgetTitleTextColumn('Học vấn', widget.teacherModel.education),
                 _widgetTitleTextColumn('Kinh nghiêm', widget.teacherModel.experience),
                 _widgetTitleTextColumn('Sở thích', widget.teacherModel.hobby),
                 _widgetTitleTextColumn('Nghề nghiệp', widget.teacherModel.career),
                 _widgetTitleChipsColumn('Chuyên môn', widget.teacherModel.fields),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
+                const WidgetSchedule(),
+                const SizedBox(height: 16),
                 _widgetViewReview(),
               ],
             ),
@@ -89,7 +91,7 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
           'Đánh giá và bình luận (5)',
           style: kFontRegularPrimary_14,
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         WidgetReviewTutorList(),
       ],
     );
@@ -99,7 +101,7 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         Text(
           title,
           style: kFontRegularPrimary_14,
@@ -119,14 +121,14 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         Text(
           title,
           style: kFontRegularPrimary_14,
         ),
         Padding(
           padding: const EdgeInsets.only(left: 8.0, top: 8.0),
-          child: Container(
+          child: SizedBox(
             height: 32,
             width: double.infinity,
             child: ListView.separated(
@@ -135,7 +137,7 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
               itemBuilder: (context, index) {
                 return WidgetChip(text: data[index]);
               },
-              separatorBuilder: (context, index) => SizedBox(width: 4),
+              separatorBuilder: (context, index) => const SizedBox(width: 4),
             ),
           ),
         ),
@@ -146,7 +148,7 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
   Row _widgetRowFunction() {
     return Row(
       children: [
-        SizedBox(width: 64),
+        const SizedBox(width: 64),
         WidgetIconTextColumn(
           iconData: Icons.message,
           text: 'Nhắn tin',
@@ -154,13 +156,13 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
             Navigator.pushNamed(context, AppRouter.kMessage);
           },
         ),
-        Spacer(),
+        const Spacer(),
         WidgetIconTextColumn(
           iconData: Icons.info,
           text: 'Báo cáo',
           onTap: _showReportDialog,
         ),
-        SizedBox(width: 64),
+        const SizedBox(width: 64),
       ],
     );
   }
@@ -172,7 +174,7 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
           backgroundImage: NetworkImage(widget.teacherModel.imageUrl),
           radius: 42,
         ),
-        SizedBox(width: 8),
+        const SizedBox(width: 8),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -180,7 +182,7 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
               widget.teacherModel.name,
               style: kFontRegularDefault_16,
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               'Tutor',
               style: kFontRegularDefault_14,
@@ -191,13 +193,13 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
             ),
           ],
         ),
-        Spacer(),
+        const Spacer(),
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             WidgetRatingBarIndicator(star: widget.teacherModel.star),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             WidgetFavorite(
               isFavorite: widget.teacherModel.isFavorite,
               onFavoriteChanged: (isFavorite) {
@@ -222,14 +224,14 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
   void _showChooseDateBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(16),
           topRight: Radius.circular(16),
         ),
       ),
       builder: (context) {
-        return WidgetChooseDateBottomSheet();
+        return const WidgetChooseDateBottomSheet();
       },
     );
   }

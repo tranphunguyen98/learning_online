@@ -25,15 +25,15 @@ class _WidgetCoreDropdownState extends State<WidgetCoreDropdown> {
     return Container(
       height: 48,
       width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(
+        borderRadius: const BorderRadius.all(
           Radius.circular(8),
         ),
         border: Border.all(color: Colors.blueGrey, width: 0.25),
       ),
       child: DropdownButton<String>(
-        underline: SizedBox.shrink(),
+        underline: const SizedBox.shrink(),
         value: _selectedValue,
         hint: Text(widget.hint ?? 'Chọn'),
         isExpanded: true,

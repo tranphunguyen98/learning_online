@@ -19,7 +19,7 @@ class _HistoryExpansionAreaState extends State<HistoryExpansionArea> with Ticker
 
   @override
   void initState() {
-    _animationController = AnimationController(duration: Duration(milliseconds: 250), vsync: this);
+    _animationController = AnimationController(duration: const Duration(milliseconds: 250), vsync: this);
     _animationController.value = 1;
     _iconTurns = Tween<double>(begin: 0.0, end: 0.25).animate(_animationController);
     _heightFactor = Tween<double>(begin: 0.0, end: 1.0).animate(_animationController);
@@ -69,7 +69,7 @@ class _HistoryExpansionAreaState extends State<HistoryExpansionArea> with Ticker
             ),
             RotationTransition(
               turns: _iconTurns,
-              child: Icon(
+              child: const Icon(
                 Icons.keyboard_arrow_right,
                 size: 16,
               ),
@@ -82,7 +82,7 @@ class _HistoryExpansionAreaState extends State<HistoryExpansionArea> with Ticker
 
   Widget content() {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 250),
+      duration: const Duration(milliseconds: 250),
       child: Text('Nội dung ${widget.title} \nNội dung ${widget.title}' ),
     );
   }

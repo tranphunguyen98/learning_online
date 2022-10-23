@@ -5,7 +5,7 @@ import 'package:learning_online/model/review_tutor.dart';
 
 class ReviewTutorItem extends StatelessWidget {
   final ReviewTutorModel reviewTutorModel;
-  ReviewTutorItem({Key? key, required this.reviewTutorModel}) : super(key: key);
+  const ReviewTutorItem({Key? key, required this.reviewTutorModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class ReviewTutorItem extends StatelessWidget {
               backgroundImage: NetworkImage(reviewTutorModel.imageUrl),
               radius: 24,
             ),
-            SizedBox(width: 12),
+            const SizedBox(width: 12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,19 +30,19 @@ class ReviewTutorItem extends StatelessWidget {
                         reviewTutorModel.name,
                         style: kFontRegularDefault_14,
                       ),
-                      Spacer(),
+                      const Spacer(),
                       WidgetRatingBarIndicator(
                         star: reviewTutorModel.star,
                         itemSize: 16,
                       ),
                     ],
                   ),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Text(
                     reviewTutorModel.comment,
                     style: kFontRegularDefault_12,
                   ),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Align(
                     alignment: Alignment.centerRight,
                     child: Text(

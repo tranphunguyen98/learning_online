@@ -15,8 +15,8 @@ class WidgetLogoText extends StatelessWidget {
           height: 80,
           width: 80,
         ),
-        SizedBox(height: 8),
-        Text(
+        const SizedBox(height: 8),
+        const Text(
           'LET TUTOR',
           style: TextStyle(
             color: kPrimaryColor,

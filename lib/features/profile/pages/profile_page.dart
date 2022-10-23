@@ -15,7 +15,7 @@ import 'package:learning_online/core/widgets/widget_rounded_text_field_with_titl
 import 'package:learning_online/model/user.dart';
 
 class ProfilePage extends StatefulWidget {
-  ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -45,14 +45,14 @@ class _ProfilePageState extends State<ProfilePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               _widgetAvatar(),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               TextField(
-                decoration: InputDecoration(border: InputBorder.none, hintText: 'Nhập tên'),
+                decoration: const InputDecoration(border: InputBorder.none, hintText: 'Nhập tên'),
                 controller: nameController,
                 textAlign: TextAlign.center,
                 style: kFontSemiboldBlack_16,
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 _userModel.email,
                 style: kFontSemiboldBlack_14,
@@ -62,7 +62,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Column(
                   children: [
                     _widgetDateOfBirth(),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     WidgetRoundedTextFieldWithTitle(
                       title: 'Số điện thoại',
                       hint: 'Cập nhật số điện thoại',
@@ -77,17 +77,17 @@ class _ProfilePageState extends State<ProfilePage> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 8),
-                    WidgetDropdownWithTitle(title: 'Quốc gia', hint: 'Chọn quốc gia', data: kNations),
-                    SizedBox(height: 8),
-                    WidgetDropdownWithTitle(title: 'Trình độ', hint: 'Chọn trình độ', data: kLevels),
-                    SizedBox(height: 8),
-                    WidgetDropdownWithTitle(
+                    const SizedBox(height: 8),
+                    const WidgetDropdownWithTitle(title: 'Quốc gia', hint: 'Chọn quốc gia', data: kNations),
+                    const SizedBox(height: 8),
+                    const WidgetDropdownWithTitle(title: 'Trình độ', hint: 'Chọn trình độ', data: kLevels),
+                    const SizedBox(height: 8),
+                    const WidgetDropdownWithTitle(
                       title: 'Muốn học',
                       hint: 'Chọn môn muốn học',
                       data: kSubjects,
                     ),
-                    SizedBox(height: 32),
+                    const SizedBox(height: 32),
                     WidgetRoundedButton(
                       text: 'Lưu',
                       onPressed: () {
@@ -97,7 +97,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         }
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text(message),
-                          duration: Duration(milliseconds: 1000),
+                          duration: const Duration(milliseconds: 1000),
                         ));
                       },
                     ),
@@ -132,7 +132,7 @@ class _ProfilePageState extends State<ProfilePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('Ngày sinh', style: kFontRegularDefault_14),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           WidgetCoreDatePicker(
             date: _userModel.dateOfBirth,
           ),
@@ -161,7 +161,7 @@ class _ProfilePageState extends State<ProfilePage> {
             backgroundImage: imageProvider,
             radius: 36,
           ),
-          Positioned(
+          const Positioned(
             bottom: 0.0,
             right: 0.0,
             child: CircleAvatar(

@@ -19,7 +19,7 @@ class RegisterPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: kWhiteColor,
         elevation: 0,
-        leading: Icon(
+        leading: const Icon(
           Icons.arrow_back_ios_rounded,
           color: kBlackColor,
         ),
@@ -42,9 +42,9 @@ class RegisterPage extends StatelessWidget {
                   }
                 },
               ),
-              SizedBox(height: 16),
-              WidgetRowWithSocial(title: 'Hoặc đăng ký với'),
-              SizedBox(height: 32),
+              const SizedBox(height: 16),
+              const WidgetRowWithSocial(title: 'Hoặc đăng ký với'),
+              const SizedBox(height: 32),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -52,7 +52,7 @@ class RegisterPage extends StatelessWidget {
                     'Bạn đã có tài khoản?',
                     style: kFontRegularDefault_14,
                   ),
-                  SizedBox(width: 4),
+                  const SizedBox(width: 4),
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context).pushNamed(AppRouter.kLogin);
@@ -82,7 +82,7 @@ class RegisterPage extends StatelessWidget {
             isRequired: true,
             validator: (value) => (value?.isNotEmpty == true) ? null : 'Vui lòng nhập tên',
           ),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
           WidgetRoundedTextFieldWithTitle(
             title: 'Địa chỉ E-mail',
             hint: 'example@gmail.com',
@@ -96,7 +96,7 @@ class RegisterPage extends StatelessWidget {
               return null;
             },
           ),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
           WidgetRoundedTextFieldWithTitle(
             title: 'Mật khẩu',
             isRequired: true,
@@ -109,9 +109,10 @@ class RegisterPage extends StatelessWidget {
               } else if (value!.length < 6) {
                 return 'Vui lòng nhập mật khẩu lớn hơn 6 ký tư';
               }
+              return null;
             },
           ),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
           WidgetRoundedTextFieldWithTitle(
             title: 'Xác nhận Mật khẩu',
             isRequired: true,
@@ -126,9 +127,10 @@ class RegisterPage extends StatelessWidget {
               } else if (passwordController.text != confirmPasswordController.text) {
                 return 'Mật khẩu xác nhận không khớp với mật khẩu';
               }
+              return null;
             },
           ),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
         ],
       ),
     );

@@ -10,8 +10,8 @@ class WidgetChooseDateBottomSheet extends StatelessWidget {
     return Column(
       // mainAxisSize: MainAxisSize.min,
       children: [
-        WidgetTextHeader(title: 'Hãy chọn ngày của bạn!'),
-        SizedBox(height: 16),
+        const WidgetTextHeader(title: 'Hãy chọn ngày của bạn!'),
+        const SizedBox(height: 16),
         ...List.generate(
           7,
           (index) => Padding(
@@ -24,14 +24,14 @@ class WidgetChooseDateBottomSheet extends StatelessWidget {
                   context: context,
                   builder: (context) {
                     return AlertDialog(
-                      title: Text('Đặt lịch học thành công'),
-                      content: Text('Chúc mừng bạn đã đặt lịch học thành công'),
+                      title: const Text('Đặt lịch học thành công'),
+                      content: const Text('Chúc mừng bạn đã đặt lịch học thành công'),
                       actions: [
                         OutlinedButton(
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            child: Text('OK'))
+                            child: const Text('OK'))
                       ],
                     );
                   },

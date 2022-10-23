@@ -16,29 +16,29 @@ class ReportDialog extends StatelessWidget {
         child: Column(
           children: [
             WidgetTextHeader(title: 'Báo cáo $teacherName'),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
             Text(
               'Bạn đang gặp phải vấn đề gì?',
               style: kFontSemiboldPrimary_16,
             ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
+            const Padding(
+              padding: EdgeInsets.all(16.0),
               child: WidgetMultiLineTextField(
                 minLines: 3,
                 hint: 'Nội dung',
               ),
             ),
-            WidgetChip(text: 'Tutor này làm phiền tôi'),
-            WidgetChip(text: 'Hồ sơ này là giả mạo'),
-            WidgetChip(text: 'Ảnh hồ sơ không phù hợp'),
-            Divider(height: 1),
+            const WidgetChip(text: 'Tutor này làm phiền tôi'),
+            const WidgetChip(text: 'Hồ sơ này là giả mạo'),
+            const WidgetChip(text: 'Ảnh hồ sơ không phù hợp'),
+            const Divider(height: 1),
             SizedBox(
               height: 64,
               width: double.infinity,
               child: TextButton(
                 onPressed: () {
                   Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                     content: Text('Báo cáo thành công'),
                     duration: Duration(milliseconds: 1000),
                   ));

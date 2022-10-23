@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 import 'colors.dart';
 
-final kFontRegular = TextStyle(
+const kFontRegular = TextStyle(
     fontFamily: 'Poppins', fontWeight: FontWeight.w400, color: kBlackColor);
 
-final kFontMedium = TextStyle(
+const kFontMedium = TextStyle(
   fontFamily: 'Poppins',
   fontWeight: FontWeight.w500,
   color: kBlackColor,
 );
 
-final kFontSemibold = TextStyle(
+const kFontSemibold = TextStyle(
   fontFamily: 'Poppins',
   fontWeight: FontWeight.w600,
   color: kBlackColor,
@@ -20,6 +20,7 @@ final kFontSemibold = TextStyle(
 //REGULAR
 final kFontRegularDefault = kFontRegular.copyWith(color: kBlackColor);
 final kFontRegularDefault_10 = kFontRegular.copyWith(fontSize: 10);
+final kFontRegularDefault_11 = kFontRegular.copyWith(fontSize: 11);
 final kFontRegularDefault_12 = kFontRegular.copyWith(fontSize: 12);
 final kFontRegularDefault_13 = kFontRegular.copyWith(fontSize: 13);
 final kFontRegularDefault_14 = kFontRegular.copyWith(fontSize: 14);
@@ -90,7 +91,7 @@ final kFontMediumWhite_16 = kFontMediumWhite.copyWith(fontSize: 16);
 final kFontMediumWhite_18 = kFontMediumWhite.copyWith(fontSize: 18);
 final kFontMediumWhite_22 = kFontMediumWhite.copyWith(fontSize: 22);
 
-final kFontMediumBlack = kFontMedium;
+const kFontMediumBlack = kFontMedium;
 final kFontMediumBlack_12 = kFontMediumBlack.copyWith(fontSize: 12);
 final kFontMediumBlack_14 = kFontMediumBlack.copyWith(fontSize: 14);
 final kFontMediumBlack_16 = kFontMediumBlack.copyWith(fontSize: 16);
@@ -107,6 +108,8 @@ final kFontSemiboldWhite_16 = kFontSemiboldWhite.copyWith(fontSize: 16);
 final kFontSemiboldWhite_18 = kFontSemiboldWhite.copyWith(fontSize: 18);
 
 final kFontSemiboldBlack = kFontSemibold.copyWith(color: kBlackColor);
+final kFontSemiboldBlack_11 = kFontSemiboldBlack.copyWith(fontSize: 11);
+final kFontSemiboldBlack_12 = kFontSemiboldBlack.copyWith(fontSize: 12);
 final kFontSemiboldBlack_14 = kFontSemiboldBlack.copyWith(fontSize: 14);
 final kFontSemiboldBlack_16 = kFontSemiboldBlack.copyWith(fontSize: 16);
 final kFontSemiboldBlack_18 = kFontSemiboldBlack.copyWith(fontSize: 18);

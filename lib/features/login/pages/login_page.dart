@@ -25,8 +25,8 @@ class LoginPage extends StatelessWidget {
             key: _formKey,
             child: Column(
               children: [
-                WidgetLogoText(),
-                SizedBox(height: 32),
+                const WidgetLogoText(),
+                const SizedBox(height: 32),
                 WidgetRoundedTextFieldWithTitle(
                   title: 'Địa chỉ E-mail',
                   hint: 'example@gmail.com',
@@ -40,7 +40,7 @@ class LoginPage extends StatelessWidget {
                     return null;
                   },
                 ),
-                SizedBox(height: 32),
+                const SizedBox(height: 32),
                 WidgetRoundedTextFieldWithTitle(
                   title: 'Mật khẩu',
                   isRequired: true,
@@ -52,9 +52,10 @@ class LoginPage extends StatelessWidget {
                     } else if (value!.length < 6) {
                       return 'Vui lòng nhập mật khẩu lớn hơn 6 ký tư';
                     }
+                    return null;
                   },
                 ),
-                SizedBox(height: 32),
+                const SizedBox(height: 32),
                 Align(
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
@@ -67,7 +68,7 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 WidgetRoundedButton(
                   text: 'Đăng nhập',
                   onPressed: () {
@@ -76,9 +77,9 @@ class LoginPage extends StatelessWidget {
                     }
                   },
                 ),
-                SizedBox(height: 16),
-                WidgetRowWithSocial(title: 'Hoặc đăng nhập với'),
-                SizedBox(height: 32),
+                const SizedBox(height: 16),
+                const WidgetRowWithSocial(title: 'Hoặc đăng nhập với'),
+                const SizedBox(height: 32),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -86,7 +87,7 @@ class LoginPage extends StatelessWidget {
                       'Chưa có tài khoản?',
                       style: kFontRegularDefault_14,
                     ),
-                    SizedBox(width: 4),
+                    const SizedBox(width: 4),
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).pushNamed(AppRouter.kRegister);

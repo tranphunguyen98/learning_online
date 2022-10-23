@@ -14,7 +14,7 @@ class FavoriteTeacherPage extends StatelessWidget {
       appBar: widgetCoreAppBar(title: 'Danh sách giáo viên ưa thích', context: context),
       body: Column(
         children: [
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Expanded(child: _buildListOfTeacher()),
         ],
       ),
@@ -40,7 +40,7 @@ class FavoriteTeacherPage extends StatelessWidget {
                 children: [
                   ListView.separated(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: logic.favoriteTeachers.length,
                     itemBuilder: (context, index) => GestureDetector(
                       onTap: () {
@@ -52,7 +52,7 @@ class FavoriteTeacherPage extends StatelessWidget {
                         teacherModel: logic.favoriteTeachers[index],
                       ),
                     ),
-                    separatorBuilder: (context, index) => SizedBox(height: 16),
+                    separatorBuilder: (context, index) => const SizedBox(height: 16),
                   ),
                 ],
               ),

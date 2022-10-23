@@ -19,7 +19,7 @@ class ForgotPasswordPage extends StatelessWidget {
           onTap: () {
             Navigator.of(context).pop();
           },
-          child: Icon(
+          child: const Icon(
             Icons.arrow_back_ios_rounded,
             color: kBlackColor,
           ),
@@ -36,13 +36,13 @@ class ForgotPasswordPage extends StatelessWidget {
             key: _formKey,
             child: Column(
               children: [
-                WidgetLogoText(),
-                SizedBox(height: 32),
+                const WidgetLogoText(),
+                const SizedBox(height: 32),
                 Text(
                   'Nhập địa chỉ email của bạn. Chúng tôi sẽ gửi cho bạn một đường link để đặt lại mật khẩu',
                   style: kFontRegularDefault_14,
                 ),
-                SizedBox(height: 64),
+                const SizedBox(height: 64),
                 WidgetRoundedTextField(
                   hint: 'Nhập địa chỉ email',
                   validator: (value) {
@@ -54,7 +54,7 @@ class ForgotPasswordPage extends StatelessWidget {
                     return null;
                   },
                 ),
-                SizedBox(height: 64),
+                const SizedBox(height: 64),
                 WidgetRoundedButton(
                   text: 'Gửi',
                   onPressed: () {

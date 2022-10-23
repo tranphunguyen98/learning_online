@@ -32,7 +32,7 @@ class WidgetRoundedTextFieldWithTitle extends StatelessWidget {
           '$title ${isRequired ? '*' : ''}',
           style: kFontRegularDefault_14,
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         WidgetRoundedTextField(
           hint: hint,
           radius: radius,

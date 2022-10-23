@@ -24,7 +24,7 @@ class WidgetIconTextColumn extends StatelessWidget {
             size: 24,
             color: kPrimaryColor,
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(text, style: kFontRegularPrimary_14),
         ],
       ),

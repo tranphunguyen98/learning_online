@@ -9,7 +9,6 @@ import 'package:learning_online/features/register/pages/register_page.dart';
 import 'package:learning_online/features/schedule/schedule_page.dart';
 
 import '../features/favorite_teacher/pages/favorite_teacher_page.dart';
-import '../features/home/pages/home_page.dart';
 import '../features/message/message_page.dart';
 import '../features/profile/pages/profile_page.dart';
 import '../features/root_page.dart';
@@ -58,21 +57,21 @@ class AppRouter {
       case kTeacherDetail:
         return MaterialPageRoute(builder: (_) => TeacherDetailPage(teacherModel: settings.arguments as TeacherModel));
       case kUserProfile:
-        return MaterialPageRoute(builder: (_) => ProfilePage());
+        return MaterialPageRoute(builder: (_) => const ProfilePage());
       case kTeacherFavorite:
         return MaterialPageRoute(builder: (_) => FavoriteTeacherPage());
       case kMessage:
         return MaterialPageRoute(builder: (_) => MessagePage());
       case kSchedule:
-        return MaterialPageRoute(builder: (_) => SchedulePage());
+        return MaterialPageRoute(builder: (_) => const SchedulePage());
       case kHistory:
-        return MaterialPageRoute(builder: (_) => HistoryPage());
+        return MaterialPageRoute(builder: (_) => const HistoryPage());
       case kJitsi:
-        return MaterialPageRoute(builder: (_) => JitsiPage());
+        return MaterialPageRoute(builder: (_) => const JitsiPage());
       case kCourseList:
-        return MaterialPageRoute(builder: (_) => CourseListPage());
+        return MaterialPageRoute(builder: (_) => const CourseListPage());
       case kCourseDetail:
-        return MaterialPageRoute(builder: (_) => CourseDetailPage());
+        return MaterialPageRoute(builder: (_) => const CourseDetailPage());
     // case kChangePassword:
     //   return MaterialPageRoute(builder: (_) => ChangePasswordScreen());
     // case kSetting:

@@ -12,7 +12,7 @@ class WidgetScheduleTutor extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
         child: Row(
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               radius: 28,
               backgroundImage: NetworkImage(
                 'https://cdn-img.thethao247.vn/upload/kienlv/2020/09/11/tuyen-thu-dt-viet-nam-cong-khai-ban-gai-xinh-nhu-mong1599795990.png',
@@ -35,13 +35,13 @@ class WidgetScheduleTutor extends StatelessWidget {
                           'https://upload.wikimedia.org/wikipedia/en/thumb/c/c3/Flag_of_France.svg/2560px-Flag_of_France.svg.png',
                           height: 12,
                         ),
-                        SizedBox(width: 6),
+                        const SizedBox(width: 6),
                         Text('France', style: kFontRegularDefault_12,)
                       ],
                     ),
                     Row(children: [
-                      Icon(Icons.message_outlined, color: kBlueColor, size: 12,),
-                      SizedBox(width: 6),
+                      const Icon(Icons.message_outlined, color: kBlueColor, size: 12,),
+                      const SizedBox(width: 6),
                       Text('Nhắn tin', style: kFontRegularBlue_12,)
                     ],)
                   ],
