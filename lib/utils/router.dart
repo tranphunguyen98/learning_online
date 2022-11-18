@@ -47,7 +47,12 @@ class AppRouter {
       case kHome:
         return MaterialPageRoute(builder: (_) => RootPage());
       case kLogin:
-        return MaterialPageRoute(builder: (_) => LoginPage());
+        if (settings.arguments is Map) {
+          final arguments = settings.arguments as Map<String, dynamic>;
+          return MaterialPageRoute(builder: (_) => LoginPage(arguments: arguments));
+        } else {
+          return MaterialPageRoute(builder: (_) => LoginPage());
+        }
       case kRegister:
         return MaterialPageRoute(builder: (_) => RegisterPage());
       case kForgotPassword:
