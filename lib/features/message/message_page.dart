@@ -15,7 +15,7 @@ class MessagePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _widgetAppBar(),
+      appBar: _widgetAppBar(context),
       body: Column(
         children: [
           Expanded(
@@ -54,13 +54,18 @@ class MessagePage extends StatelessWidget {
     );
   }
 
-  AppBar _widgetAppBar() {
+  AppBar _widgetAppBar(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.white,
-      leading: const Icon(
-        Icons.arrow_back_ios_rounded,
-        size: 16,
-        color: kBlackColor,
+      leading: GestureDetector(
+        onTap: () {
+          Navigator.pop(context);
+        },
+        child: const Icon(
+          Icons.arrow_back_ios_rounded,
+          size: 16,
+          color: kBlackColor,
+        ),
       ),
       title: Row(
         children: [

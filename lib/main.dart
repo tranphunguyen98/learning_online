@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:learning_online/features/register/pages/register_page.dart';
 import 'package:learning_online/utils/router.dart';
 
+import 'features/login/pages/login_page.dart';
 import 'features/root_page.dart';
 
 void main() {
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: RootPage(),
+      home: RegisterPage(),
     );
   }
 }

@@ -21,7 +21,7 @@ class WidgetCoreDatePicker extends StatelessWidget {
       child: Align(
         alignment: Alignment.centerLeft,
         child: Text(
-          date,
+          '12-01-2001',
           style: kFontRegularDefault_14,
         ),
       ),

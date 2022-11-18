@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:learning_online/core/core.dart';
 import 'package:learning_online/core/widgets/widget_chip.dart';
-import 'package:learning_online/core/widgets/widget_favorite.dart';
 import 'package:learning_online/core/widgets/widget_icon_text_column.dart';
 import 'package:learning_online/core/widgets/widget_rating_bar_indicator.dart';
-import 'package:learning_online/core/widgets/widget_rounded_button.dart';
 import 'package:learning_online/core/widgets/widget_video_player.dart';
 import 'package:learning_online/features/teacher_detail/widgets/report_dialog.dart';
 import 'package:learning_online/features/teacher_detail/widgets/review_tutor_list.dart';
@@ -14,7 +11,6 @@ import 'package:learning_online/features/teacher_detail/widgets/widget_schedule.
 import 'package:learning_online/model/teacher.dart';
 
 import '../../../utils/router.dart';
-import '../../teacher_list/logic.dart';
 
 class TeacherDetailPage extends StatefulWidget {
   final TeacherModel teacherModel;
@@ -49,21 +45,12 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
               children: [
                 _widgetInfoHeader(),
                 const SizedBox(height: 16),
-                Builder(
-                  builder: (context) {
-                    return WidgetRoundedButton(
-                      text: 'Đặt lịch ngay',
-                      onPressed: () => _showChooseDateBottomSheet(context),
-                    );
-                  },
-                ),
-                const SizedBox(height: 16),
-                _widgetRowFunction(),
-                const SizedBox(height: 24),
                 Text(
                   widget.teacherModel.description,
                   style: kFontRegularDefault_14,
                 ),
+                const SizedBox(height: 16),
+                _widgetRowFunction(),
                 const SizedBox(height: 8),
                 _widgetTitleChipsColumn('Ngôn ngữ', widget.teacherModel.languages),
                 _widgetTitleTextColumn('Học vấn', widget.teacherModel.education),
@@ -146,9 +133,30 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
   }
 
   Row _widgetRowFunction() {
+    bool _isFavorite = widget.teacherModel.isFavorite;
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const SizedBox(width: 64),
+        // WidgetFavorite(
+        //   isFavorite: widget.teacherModel.isFavorite,
+        //   onFavoriteChanged: (isFavorite) {
+        //     Get.find<TeacherListController>().updateFavorite(isFavorite, widget.teacherModel.id);
+        //   },
+        // ),
+        StatefulBuilder(
+          builder: (context, _setState) {
+            return WidgetIconTextColumn(
+             iconData: _isFavorite ? Icons.favorite : Icons.favorite_border,
+              text: 'Yêu thích',
+              color: _isFavorite ? kRedColor : kBlueColor,
+              onTap: () {
+              _setState(() {
+                _isFavorite = !_isFavorite;
+              });
+              },
+            );
+          }
+        ),
         WidgetIconTextColumn(
           iconData: Icons.message,
           text: 'Nhắn tin',
@@ -156,25 +164,24 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
             Navigator.pushNamed(context, AppRouter.kMessage);
           },
         ),
-        const Spacer(),
         WidgetIconTextColumn(
           iconData: Icons.info,
           text: 'Báo cáo',
           onTap: _showReportDialog,
         ),
-        const SizedBox(width: 64),
       ],
     );
   }
 
   Row _widgetInfoHeader() {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CircleAvatar(
           backgroundImage: NetworkImage(widget.teacherModel.imageUrl),
           radius: 42,
         ),
-        const SizedBox(width: 8),
+        const SizedBox(width: 12),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -182,7 +189,13 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
               widget.teacherModel.name,
               style: kFontRegularDefault_16,
             ),
-            const SizedBox(height: 8),
+            Row(
+              children: [
+                WidgetRatingBarIndicator(star: widget.teacherModel.star),
+                SizedBox(width: 4),
+                Text('(12)')
+              ],
+            ),
             Text(
               'Tutor',
               style: kFontRegularDefault_14,
@@ -190,21 +203,6 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
             Text(
               widget.teacherModel.nation,
               style: kFontRegularDefault_14,
-            ),
-          ],
-        ),
-        const Spacer(),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            WidgetRatingBarIndicator(star: widget.teacherModel.star),
-            const SizedBox(height: 8),
-            WidgetFavorite(
-              isFavorite: widget.teacherModel.isFavorite,
-              onFavoriteChanged: (isFavorite) {
-                Get.find<TeacherListController>().updateFavorite(isFavorite, widget.teacherModel.id);
-              },
             ),
           ],
         ),

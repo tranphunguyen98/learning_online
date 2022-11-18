@@ -5,10 +5,11 @@ import '../styles.dart';
 
 class WidgetIconTextColumn extends StatelessWidget {
   final IconData iconData;
+  final Color? color;
   final String text;
   final VoidCallback? onTap;
   const WidgetIconTextColumn(
-      {Key? key, required this.iconData, required this.text, this.onTap})
+      {Key? key, required this.iconData, required this.text, this.onTap, this.color})
       : super(key: key);
 
   @override
@@ -22,10 +23,10 @@ class WidgetIconTextColumn extends StatelessWidget {
           Icon(
             iconData,
             size: 24,
-            color: kPrimaryColor,
+            color: color ?? kPrimaryColor,
           ),
           const SizedBox(height: 8),
-          Text(text, style: kFontRegularPrimary_14),
+          Text(text, style: kFontRegularPrimary_14.copyWith(color: color ?? kPrimaryColor)),
         ],
       ),
     );

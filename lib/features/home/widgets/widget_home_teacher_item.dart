@@ -61,13 +61,13 @@ class WidgetHomeTeacherItem extends StatelessWidget {
                         height: 32,
                         width: double.infinity,
                         child: ListView.separated(
-                          itemCount: teacherModel.languages.length,
+                          itemCount: teacherModel.fields.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
                             return Chip(
                               backgroundColor: kBlueColor.withOpacity(0.2),
                               label: Text(
-                                teacherModel.languages[index],
+                                teacherModel.fields[index],
                                 style: kFontRegularBlue_12,
                               ),
                             );

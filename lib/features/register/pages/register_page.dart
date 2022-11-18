@@ -19,9 +19,14 @@ class RegisterPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: kWhiteColor,
         elevation: 0,
-        leading: const Icon(
-          Icons.arrow_back_ios_rounded,
-          color: kBlackColor,
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: const Icon(
+            Icons.arrow_back_ios_rounded,
+            color: kBlackColor,
+          ),
         ),
         title: Text(
           'Đăng ký',
