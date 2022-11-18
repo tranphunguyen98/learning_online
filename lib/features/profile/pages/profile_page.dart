@@ -142,7 +142,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget _widgetAvatar() {
-    ImageProvider imageProvider = NetworkImage(_userModel.imageUrl ?? '');
+    ImageProvider imageProvider = NetworkImage(_userModel.avatar ?? '');
     if (image != null) {
       imageProvider = FileImage(File(image!.path));
     }

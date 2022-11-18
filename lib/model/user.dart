@@ -1,13 +1,14 @@
 class UserModel {
-  final int id;
+  final String id;
   final String name;
-  final String? imageUrl;
+  final String? avatar;
   final String? phoneNumber;
   final String dateOfBirth;
   final String email;
   final String? nation;
   final String? level;
   final String? subject;
+  final String accessToken;
 
   const UserModel({
     this.phoneNumber,
@@ -16,22 +17,24 @@ class UserModel {
     this.nation,
     this.level,
     this.subject,
+    required this.accessToken,
     required this.id,
     required this.name,
-    required this.imageUrl,
+    required this.avatar,
   });
 
   static UserModel mock = UserModel(
     email: 'ntran@gmail.com',
-    id: 1,
+    accessToken: '',
+    id: '',
     name: 'name',
     dateOfBirth: DateTime.now().toIso8601String(),
-    imageUrl:
+    avatar:
     'https://cdn-img.thethao247.vn/upload/kienlv/2020/09/11/tuyen-thu-dt-viet-nam-cong-khai-ban-gai-xinh-nhu-mong1599795990.png',
   );
 
   UserModel copyWith({
-    int? id,
+    String? id,
     String? name,
     String? imageUrl,
     String? phoneNumber,
@@ -40,17 +43,19 @@ class UserModel {
     String? nation,
     String? level,
     String? subject,
+    String? accessToken,
   }) {
     return UserModel(
       id: id ?? this.id,
       name: name ?? this.name,
-      imageUrl: imageUrl ?? this.imageUrl,
+      avatar: imageUrl ?? this.avatar,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       dateOfBirth: dateOfBirth ?? this.dateOfBirth,
       email: email ?? this.email,
       nation: nation ?? this.nation,
       level: level ?? this.level,
       subject: subject ?? this.subject,
+      accessToken: accessToken ?? this.accessToken,
     );
   }
 }

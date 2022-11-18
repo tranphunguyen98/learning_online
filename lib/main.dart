@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:learning_online/features/register/pages/register_page.dart';
+import 'package:learning_online/features/root_controller.dart';
 import 'package:learning_online/utils/router.dart';
 
 import 'features/login/pages/login_page.dart';
@@ -10,6 +12,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  final RootController rootController = Get.put(RootController());
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
