@@ -1,8 +1,8 @@
 import 'dart:math';
 
 class TeacherModel {
-  final int id;
-  final double star;
+  final String id;
+  final double? star;
   final List<String> fields;
   final String name;
   final String nation;
@@ -11,17 +11,17 @@ class TeacherModel {
   final String hobby;
   final String career;
   final String description;
-  final String imageUrl;
+  final String avatar;
   final List<String> languages;
   final bool isFavorite;
 
-  const TeacherModel({
+  TeacherModel({
     required this.id,
     required this.star,
     required this.fields,
     required this.name,
     required this.description,
-    required this.imageUrl,
+    required this.avatar,
     required this.isFavorite,
     required this.nation,
     required this.education,
@@ -32,7 +32,7 @@ class TeacherModel {
   });
 
   static TeacherModel mock = TeacherModel(
-    id: Random().nextInt(10000),
+    id: '1',
     star: 5,
     fields: [
       'English for Adults1',
@@ -40,8 +40,8 @@ class TeacherModel {
     name: 'Teacher Yolly',
     description:
     'Tiền thân của Vingroup là Tập đoàn Technocom, thành lập năm 1993 tại Ucraina. Đầu những năm 2000, Technocom trở về Việt Nam, tập trung đầu tư vào lĩnh vực du lịch và bất động sản với hai thương hiệu chiến lược ban đầu là Vinpearl và Vincom..',
-    imageUrl:
-    'https://i.postimg.cc/X7MW3xbD/D848-E499-3378-4-CDA-88-B7-058-A64245-D58.jpg',
+    avatar:
+    'https://cdn-img.thethao247.vn/upload/kienlv/2020/09/11/tuyen-thu-dt-viet-nam-cong-khai-ban-gai-xinh-nhu-mong1599795990.png',
     isFavorite: true,
     career:
     'Tiền thân của Vingroup là Tập đoàn Technocom, thành lập năm 1993 tại Ucraina. Đầu những năm 2000, Technocom trở về Việt Nam, tập trung đầu tư vào lĩnh vực du lịch và bất động sản với hai thương hiệu chiến lược ban đầu là Vinpearl và Vincom. Đến tháng 1/2012, công ty CP Vincom và Công ty CP Vinpearl sáp nhập, chính thức hoạt động dưới mô hình Tập đoàn với tên gọi Tập đoàn Vingroup – Công ty CP.',
@@ -55,7 +55,7 @@ class TeacherModel {
     languages: ['English', 'French', 'Vietnamese'],
   );
   static TeacherModel mock1 = TeacherModel(
-    id: Random().nextInt(10000),
+    id: '2',
     star: 4,
     fields: [
       'English for Kids',
@@ -64,8 +64,8 @@ class TeacherModel {
     name: 'Teacher Allan',
     description:
     'Tiền thân của Vingroup là Tập đoàn Technocom, thành lập năm 1993 tại Ucraina. Đầu những năm 2000, Technocom trở về Việt Nam, tập trung đầu tư vào lĩnh vực du lịch và bất động sản với hai thương hiệu chiến lược ban đầu là Vinpearl và Vincom. Đến tháng 1/2012, công ty CP Vincom và Công ty CP Vinpearl sáp nhập, chính thức hoạt động dưới mô hình Tập đoàn với tên gọi Tập đoàn Vingroup – Công ty CP.',
-    imageUrl:
-    'https://i.postimg.cc/X7MW3xbD/D848-E499-3378-4-CDA-88-B7-058-A64245-D58.jpg',
+    avatar:
+    'https://cdn-img.thethao247.vn/upload/kienlv/2020/09/11/tuyen-thu-dt-viet-nam-cong-khai-ban-gai-xinh-nhu-mong1599795990.png',
     isFavorite: false,
     career:
     'Tiền thân của Vingroup là Tập đoàn Technocom, thành lập năm 1993 tại Ucraina. Đầu những năm 2000, Technocom trở về Việt Nam, tập trung đầu tư vào lĩnh vực du lịch và bất động sản với hai thương hiệu chiến lược ban đầu là Vinpearl và Vincom. Đến tháng 1/2012, công ty CP Vincom và Công ty CP Vinpearl sáp nhập, chính thức hoạt động dưới mô hình Tập đoàn với tên gọi Tập đoàn Vingroup – Công ty CP.',
@@ -80,7 +80,7 @@ class TeacherModel {
   );
 
   static TeacherModel mock2 = TeacherModel(
-    id: Random().nextInt(10000),
+    id: '3',
     star: 3,
     fields: [
       'English for Adults1',
@@ -88,8 +88,8 @@ class TeacherModel {
     name: 'Hoang Hong Ha',
     description:
     'Tiền thân của Vingroup là Tập đoàn Technocom, thành lập năm 1993 tại Ucraina. Đầu những năm 2000, Technocom trở về Việt Nam, tập trung đầu tư vào lĩnh vực du lịch và bất động sản với hai thương hiệu chiến lược ban đầu là Vinpearl và Vincom..',
-    imageUrl:
-    'https://i.postimg.cc/X7MW3xbD/D848-E499-3378-4-CDA-88-B7-058-A64245-D58.jpg',
+    avatar:
+    'https://cdn-img.thethao247.vn/upload/kienlv/2020/09/11/tuyen-thu-dt-viet-nam-cong-khai-ban-gai-xinh-nhu-mong1599795990.png',
     isFavorite: true,
     career:
     'Tiền thân của Vingroup là Tập đoàn Technocom, thành lập năm 1993 tại Ucraina. Đầu những năm 2000, Technocom trở về Việt Nam, tập trung đầu tư vào lĩnh vực du lịch và bất động sản với hai thương hiệu chiến lược ban đầu là Vinpearl và Vincom. Đến tháng 1/2012, công ty CP Vincom và Công ty CP Vinpearl sáp nhập, chính thức hoạt động dưới mô hình Tập đoàn với tên gọi Tập đoàn Vingroup – Công ty CP.',
@@ -104,7 +104,7 @@ class TeacherModel {
   );
 
   TeacherModel copyWith({
-    int? id,
+    String? id,
     double? star,
     List<String>? fields,
     String? name,
@@ -114,7 +114,7 @@ class TeacherModel {
     String? hobby,
     String? career,
     String? description,
-    String? imageUrl,
+    String? avatar,
     List<String>? languages,
     bool? isFavorite,
   }) {
@@ -129,7 +129,7 @@ class TeacherModel {
       hobby: hobby ?? this.hobby,
       career: career ?? this.career,
       description: description ?? this.description,
-      imageUrl: imageUrl ?? this.imageUrl,
+      avatar: avatar ?? this.avatar,
       languages: languages ?? this.languages,
       isFavorite: isFavorite ?? this.isFavorite,
     );

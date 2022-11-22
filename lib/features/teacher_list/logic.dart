@@ -1,35 +1,89 @@
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
+import '../../core/base_api.dart';
 import '../../model/teacher.dart';
-
+import 'data/teacher_response.dart';
 
 enum ETeacherFilter { Default, Favorite, Rating }
+
+const fieldMap = const {
+  'business-english': 'Tiếng anh cho công việc',
+  'english-for-kids': 'Tiếng anh cho trẻ em',
+  'conversational-english': 'Giao tiếp',
+  'toeic': 'Toeic',
+  'ielts': 'IELTS',
+};
 
 class TeacherListController extends GetxController {
   ETeacherFilter teacherFilter = ETeacherFilter.Favorite;
   String specialize = '';
   String keyword = '';
+  bool isLoading = false;
 
-  final List<TeacherModel> _teachers = [
-    TeacherModel.mock,
-    TeacherModel.mock1,
-    TeacherModel.mock2,
-    TeacherModel.mock1,
-    TeacherModel.mock,
-    TeacherModel.mock1,
-    TeacherModel.mock2,
-    TeacherModel.mock1,
-  ];
+  List<TeacherModel> _teachers = [];
 
   late List<TeacherModel> displayedTeachers;
 
-  List<TeacherModel> get favoriteTeachers => _teachers.where((element) => element.isFavorite).toList() ?? [];
+  List<TeacherModel> get favoriteTeachers =>
+      _teachers.where((element) => element.isFavorite).toList() ?? [];
 
   TeacherListController() {
     displayedTeachers = _teachers;
   }
 
-  void updateFavorite(bool isFavorite, int id) {
+  Future<List<TeacherModel>> search(String key, String specialty) async {
+    isLoading = true;
+    update();
+
+    List<String> specialties = <String>[];
+    if (specialty.isNotEmpty) {
+      specialties = [specialty];
+    }
+    try {
+      final response = await BaseApi().post('/tutor/search', {
+        'search': key,
+        'page': '2',
+        'filters': {
+          'specialties': specialties,
+        },
+      });
+
+      final teachersResponse = TeacherListResponse.fromJson(response);
+
+      final teachersModel = teachersResponse.teachers.map(
+        (response) {
+          List<String> fields = [];
+          fields = response.specialties?.split(',').map((e) => fieldMap[e] ?? '').where((element) => element.isNotEmpty).toList() ?? [];
+          return TeacherModel(
+            isFavorite: false,
+            description: response.bio ?? '',
+            name: response.name ?? '',
+            avatar: response.avatar ?? '',
+            id: response.id ?? '',
+            nation: response.country ?? '',
+            hobby: response.interests ?? '',
+            career: '',
+            education: '',
+            experience: '',
+            fields: fields,
+            languages: response.languages != null ? response.languages!.split(',') : [],
+            star: response.rating,
+          );
+        },
+      ).toList();
+      _teachers = teachersModel;
+      displayedTeachers = _teachers;
+      isLoading = false;
+      update();
+      return teachersModel;
+    } catch (e) {
+      isLoading = false;
+      update();
+      rethrow;
+    }
+  }
+
+  void updateFavorite(bool isFavorite, String id) {
     final favoriteIndex = _teachers.indexWhere((element) => element.id == id);
     if (favoriteIndex >= 0) {
       _teachers[favoriteIndex] = _teachers[favoriteIndex].copyWith(isFavorite: isFavorite);
@@ -73,7 +127,8 @@ class TeacherListController extends GetxController {
         List<TeacherModel> result = [];
         result.addAll(_teachers);
         result.sort((a, b) {
-          return b.star.compareTo(a.star);
+          return 1;
+          // return b.star.compareTo(a.star);
         });
         displayedTeachers = result;
         break;
@@ -90,7 +145,8 @@ class TeacherListController extends GetxController {
       List<TeacherModel> result = [];
       result.addAll(displayedTeachers);
       result.removeWhere((element) =>
-      !element.name.toLowerCase().contains(keyword) && !element.nation.toLowerCase().contains(keyword));
+          !element.name.toLowerCase().contains(keyword) &&
+          !element.nation.toLowerCase().contains(keyword));
       displayedTeachers = result;
     }
     update();

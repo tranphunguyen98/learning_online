@@ -32,10 +32,10 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     if (widget.arguments['email'] != null) {
       emailController.text = widget.arguments['email'];
-    } else {
-      emailController.text = '';
     }
-    passwordController.text = '';
+
+    emailController.text = 'ntranphu4@gmail.com';
+    passwordController.text = '123456';
     super.initState();
   }
 

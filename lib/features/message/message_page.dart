@@ -70,7 +70,7 @@ class MessagePage extends StatelessWidget {
       title: Row(
         children: [
           CircleAvatar(
-            backgroundImage: NetworkImage(teacherModel.imageUrl),
+            backgroundImage: NetworkImage(teacherModel.avatar),
             radius: 16,
           ),
           const SizedBox(width: 8),

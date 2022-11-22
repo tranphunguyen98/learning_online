@@ -178,7 +178,7 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CircleAvatar(
-          backgroundImage: NetworkImage(widget.teacherModel.imageUrl),
+          backgroundImage: NetworkImage(widget.teacherModel.avatar),
           radius: 42,
         ),
         const SizedBox(width: 12),

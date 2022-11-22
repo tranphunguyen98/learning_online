@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learning_online/core/core.dart';
@@ -19,13 +20,14 @@ class WidgetHomeTeacherItem extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
                 CircleAvatar(
                   radius: 28,
-                  backgroundImage: NetworkImage(
-                    teacherModel.imageUrl,
+                  child: CachedNetworkImage(
+                    imageUrl: teacherModel.avatar,
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -72,7 +74,7 @@ class WidgetHomeTeacherItem extends StatelessWidget {
                               ),
                             );
                           },
-                          separatorBuilder: (context, index) => const SizedBox(width: 4),
+                          separatorBuilder: (context, index) => const SizedBox(width: 2),
                         ),
                       ),
                     ],

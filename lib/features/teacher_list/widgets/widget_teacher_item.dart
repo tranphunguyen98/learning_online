@@ -22,7 +22,7 @@ class WidgetTeacherItem extends StatelessWidget {
                 CircleAvatar(
                   radius: 28,
                   backgroundImage: NetworkImage(
-                    teacherModel.imageUrl,
+                    teacherModel.avatar,
                   ),
                 ),
                 const SizedBox(width: 8),
