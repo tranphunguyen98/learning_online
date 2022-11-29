@@ -7,11 +7,18 @@ import 'data/teacher_response.dart';
 enum ETeacherFilter { Default, Favorite, Rating }
 
 const fieldMap = const {
-  'business-english': 'Tiếng anh cho công việc',
+  'All': 'Tất cả',
   'english-for-kids': 'Tiếng anh cho trẻ em',
+  'business-english': 'Tiếng anh cho công việc',
   'conversational-english': 'Giao tiếp',
-  'toeic': 'Toeic',
+  'starters': 'STARTERS',
+  'movers': 'MOVERS',
+  'flyers': 'FLYERS',
+  'ket': 'KET',
+  'pet': 'PET',
   'ielts': 'IELTS',
+  'toefl': 'TOEFL',
+  'toeic': 'Toeic',
 };
 
 class TeacherListController extends GetxController {
@@ -42,8 +49,11 @@ class TeacherListController extends GetxController {
     try {
       final response = await BaseApi().post('/tutor/search', {
         'search': key,
-        'page': '2',
+        'page': '1',
+        'perPage': 12,
         'filters': {
+          'date': null,
+          'tutoringTimeAvailable': [null, null],
           'specialties': specialties,
         },
       });
@@ -53,7 +63,12 @@ class TeacherListController extends GetxController {
       final teachersModel = teachersResponse.teachers.map(
         (response) {
           List<String> fields = [];
-          fields = response.specialties?.split(',').map((e) => fieldMap[e] ?? '').where((element) => element.isNotEmpty).toList() ?? [];
+          fields = response.specialties
+                  ?.split(',')
+                  .map((e) => fieldMap[e] ?? '')
+                  .where((element) => element.isNotEmpty)
+                  .toList() ??
+              [];
           return TeacherModel(
             isFavorite: false,
             description: response.bio ?? '',
@@ -98,7 +113,7 @@ class TeacherListController extends GetxController {
 
   void changeSpecialize(String specialize) {
     this.specialize = specialize;
-    updateTeacher();
+    search('', specialize);
   }
 
   void changeKeyword(String keyword) {

@@ -3,8 +3,9 @@ import 'package:learning_online/core/core.dart';
 
 class WidgetRadioRowGroup extends StatefulWidget {
   final List<String> data;
+  final String Function(String key) displayText;
   final Function(String value)? onValueChanged;
-  const WidgetRadioRowGroup({Key? key, required this.data, this.onValueChanged})
+  const WidgetRadioRowGroup({Key? key, required this.data, this.onValueChanged, required this.displayText})
       : super(key: key);
 
   @override
@@ -37,7 +38,7 @@ class _WidgetRadioRowGroupState extends State<WidgetRadioRowGroup> {
           },
           child: Chip(
             label: Text(
-              item,
+              widget.displayText(item),
               style: kFontRegularDefault_12.copyWith(
                   color: item == selectedItem ? Colors.blue : Colors.black54),
             ),

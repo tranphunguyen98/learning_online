@@ -43,6 +43,7 @@ dependencies:
   image_picker: ^0.8.6
   table_sticky_headers: 2.0.2
   dio: ^4.0.6
+  cached_network_image: ^3.2.2
 
 dev_dependencies:
   flutter_test:

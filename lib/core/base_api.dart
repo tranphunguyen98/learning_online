@@ -17,7 +17,7 @@ class BaseApi {
     BaseOptions(
       baseUrl: 'https://sandbox.api.lettutor.com',
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "application/json",
         "Authorization": 'Bearer ${Get.find<RootController>().user?.accessToken ?? ''}'
       },
     ),
@@ -26,7 +26,8 @@ class BaseApi {
   Future<Map<String, dynamic>> post(String path, Map<String, dynamic> data) async {
     try {
       final user = Get.find<RootController>().user;
-      _dio.options.headers['Authorization'] = 'Bearer ${user?.accessToken ?? ''}';
+      final auth = 'Bearer ${user?.accessToken ?? ''}';
+      _dio.options.headers['Authorization'] = auth;
       final response = await _dio.post(path, data: data);
       final dataReponse = response.data as Map<String, dynamic>;
       print('nguyentp ==> $dataReponse');

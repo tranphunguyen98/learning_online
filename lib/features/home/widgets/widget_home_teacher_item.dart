@@ -23,11 +23,18 @@ class WidgetHomeTeacherItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CircleAvatar(
-                  radius: 28,
+                ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(28)),
                   child: CachedNetworkImage(
+                    width: 28 * 2,
+                    height: 28 * 2,
                     imageUrl: teacherModel.avatar,
+                    errorWidget: (_, __, ___) => Container(
+                      color: kPrimaryColor,
+                      child: Icon(Icons.person, size: 32, color: Colors.white,),
+                    ),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -53,7 +60,8 @@ class WidgetHomeTeacherItem extends StatelessWidget {
                           WidgetFavorite(
                             isFavorite: teacherModel.isFavorite,
                             onFavoriteChanged: (isFavorite) {
-                              Get.find<TeacherListController>().updateFavorite(isFavorite, teacherModel.id);
+                              Get.find<TeacherListController>()
+                                  .updateFavorite(isFavorite, teacherModel.id);
                             },
                           ),
                         ],

@@ -15,13 +15,7 @@ class TeacherListPage extends StatefulWidget {
 
 class _TeacherListPageState extends State<TeacherListPage> {
   final List<String> categoryList = [
-    'All',
-    'English for Kids',
-    'English for Adults',
-    'English for Adults1',
-    'English for Adults2',
-    'English for Adults3',
-    'English for Adults4',
+    ...fieldMap.keys
   ];
 
   TeacherListController controller = Get.find<TeacherListController>();
@@ -88,6 +82,7 @@ class _TeacherListPageState extends State<TeacherListPage> {
             margin: const EdgeInsets.symmetric(horizontal: 16),
             width: double.infinity,
             child: WidgetRadioRowGroup(
+              displayText: (key) => fieldMap[key] ?? '',
               data: categoryList,
               onValueChanged: (value) {
                 controller.changeSpecialize(value != 'All' ? value : '');
