@@ -70,7 +70,7 @@ class TeacherListController extends GetxController {
                   .toList() ??
               [];
           return TeacherModel(
-            isFavorite: false,
+            isFavorite: response.isFavorite ?? false,
             description: response.bio ?? '',
             name: response.name ?? '',
             avatar: response.avatar ?? '',
@@ -83,6 +83,7 @@ class TeacherListController extends GetxController {
             fields: fields,
             languages: response.languages != null ? response.languages!.split(',') : [],
             star: response.rating,
+            userId: response.userId ?? '',
           );
         },
       ).toList();
@@ -98,8 +99,21 @@ class TeacherListController extends GetxController {
     }
   }
 
-  void updateFavorite(bool isFavorite, String id) {
-    final favoriteIndex = _teachers.indexWhere((element) => element.id == id);
+  Future<void> updateFavorite(bool isFavorite, String userId) async {
+    try {
+      final response = await BaseApi().post('/user/manageFavoriteTutor', {
+        'tutorId': userId,
+      });
+
+      print('nguyentp ==> ');
+      // final teachersResponse = TeacherListResponse.fromJson(response);
+
+      // return teachersModel;
+    } catch (e) {
+      print('nguyentp ==> ');
+    }
+
+    final favoriteIndex = _teachers.indexWhere((element) => element.id == userId);
     if (favoriteIndex >= 0) {
       _teachers[favoriteIndex] = _teachers[favoriteIndex].copyWith(isFavorite: isFavorite);
       update();

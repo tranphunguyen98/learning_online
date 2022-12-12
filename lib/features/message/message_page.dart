@@ -6,7 +6,7 @@ import 'package:learning_online/model/message.dart';
 import 'package:learning_online/model/teacher.dart';
 
 class MessagePage extends StatelessWidget {
-  final TeacherModel teacherModel = TeacherModel.mock;
+  // final TeacherModel teacherModel = TeacherModel.mock;
   final List<MessageModel> messages = List.generate(3, (index) => MessageModel.mock);
   MessagePage({
     Key? key,
@@ -69,18 +69,18 @@ class MessagePage extends StatelessWidget {
       ),
       title: Row(
         children: [
-          CircleAvatar(
-            backgroundImage: NetworkImage(teacherModel.avatar),
-            radius: 16,
-          ),
+          // CircleAvatar(
+          //   backgroundImage: NetworkImage(teacherModel.avatar),
+          //   radius: 16,
+          // ),
           const SizedBox(width: 8),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                teacherModel.name,
-                style: kFontRegularDefault_14,
-              ),
+              // Text(
+              //   teacherModel.name,
+              //   style: kFontRegularDefault_14,
+              // ),
               Text(
                 'Tutor',
                 style: kFontRegularGray_12,

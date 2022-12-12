@@ -67,15 +67,15 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           const SizedBox(height: 16),
-          ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: 6,
-            itemBuilder: (context, index) => WidgetHomeTeacherItem(
-              teacherModel: index % 2 == 0 ? TeacherModel.mock : TeacherModel.mock1,
-            ),
-            separatorBuilder: (context, index) => const SizedBox(height: 16),
-          ),
+          // ListView.separated(
+          //   shrinkWrap: true,
+          //   physics: const NeverScrollableScrollPhysics(),
+          //   itemCount: 6,
+          //   itemBuilder: (context, index) => WidgetHomeTeacherItem(
+          //     teacherModel: index % 2 == 0 ? TeacherModel.mock : TeacherModel.mock1,
+          //   ),
+          //   separatorBuilder: (context, index) => const SizedBox(height: 16),
+          // ),
         ],
       ),
     );

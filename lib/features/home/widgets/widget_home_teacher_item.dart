@@ -61,7 +61,7 @@ class WidgetHomeTeacherItem extends StatelessWidget {
                             isFavorite: teacherModel.isFavorite,
                             onFavoriteChanged: (isFavorite) {
                               Get.find<TeacherListController>()
-                                  .updateFavorite(isFavorite, teacherModel.id);
+                                  .updateFavorite(isFavorite, teacherModel.userId);
                             },
                           ),
                         ],

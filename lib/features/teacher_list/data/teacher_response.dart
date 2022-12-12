@@ -52,6 +52,7 @@ class TeacherResponse {
   int? price;
   bool? isOnline;
   double? rating;
+  bool? isFavorite;
 
   TeacherResponse(
       {this.level,
@@ -93,6 +94,7 @@ class TeacherResponse {
       this.price,
       this.isOnline,
       this.rating,
+        this.isFavorite,
       });
 
   TeacherResponse.fromJson(Map<String, dynamic> json) {
@@ -140,6 +142,7 @@ class TeacherResponse {
     isNative = json['isNative'];
     price = json['price'];
     isOnline = json['isOnline'];
+    isFavorite = json['isfavoritetutor'] == '1';
   }
 
   Map<String, dynamic> toJson() {
@@ -184,6 +187,7 @@ class TeacherResponse {
     data['isNative'] = this.isNative;
     data['price'] = this.price;
     data['isOnline'] = this.isOnline;
+    data['isFavoriteTutor'] = this.isFavorite;
     return data;
   }
 }

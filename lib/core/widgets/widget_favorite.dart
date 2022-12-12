@@ -31,7 +31,7 @@ class _WidgetFavoriteState extends State<WidgetFavorite> {
         splashRadius: 24,
         icon: Icon(
           isFavorite ? Icons.favorite : Icons.favorite_border,
-          color: widget.isFavorite ? kRedColor : kPrimaryColor,
+          color: isFavorite ? kRedColor : kPrimaryColor,
           size: 24,
         ),
         onPressed: _onClickFavoriteButton,
