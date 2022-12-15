@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learning_online/core/core.dart';
+import 'package:learning_online/core/widgets/widget_national_group.dart';
 import 'package:learning_online/core/widgets/widget_radio_row_group.dart';
 import 'package:learning_online/core/widgets/widget_search_text_field.dart';
 import 'package:learning_online/utils/router.dart';
@@ -22,7 +23,7 @@ class _TeacherListPageState extends State<TeacherListPage> {
 
   @override
   void initState() {
-    controller.search('', '');
+    controller.search();
     super.initState();
   }
 
@@ -74,6 +75,19 @@ class _TeacherListPageState extends State<TeacherListPage> {
                   ),
                 )
               ],
+            ),
+          ),
+          SizedBox(height: 16),
+          Container(
+            height: 36,
+            margin: const EdgeInsets.symmetric(horizontal: 16),
+            width: double.infinity,
+            child: WidgetNationalGroup(
+              displayText: (key) => nationalMap[key] ?? '',
+              data: nationalMap.keys.toList(),
+              onValueChanged: (value) {
+                controller.changeNational(value);
+              },
             ),
           ),
           SizedBox(height: 16),

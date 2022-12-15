@@ -6,6 +6,12 @@ import 'data/teacher_response.dart';
 
 enum ETeacherFilter { Default, Favorite, Rating }
 
+const nationalMap = const {
+  'isVietNamese': 'Gia Sư Việt Nam',
+  'isForeigner': 'Gia Sư Nước Ngoài',
+  'isNative': 'Gia Sư Tiếng Anh Bản Ngữ'
+};
+
 const fieldMap = const {
   'All': 'Tất cả',
   'english-for-kids': 'Tiếng anh cho trẻ em',
@@ -24,6 +30,7 @@ const fieldMap = const {
 class TeacherListController extends GetxController {
   ETeacherFilter teacherFilter = ETeacherFilter.Favorite;
   String specialize = '';
+  List<String> nationals = [];
   String keyword = '';
   bool isLoading = false;
 
@@ -38,21 +45,60 @@ class TeacherListController extends GetxController {
     displayedTeachers = _teachers;
   }
 
-  Future<List<TeacherModel>> search(String key, String specialty) async {
+  Future<List<TeacherModel>> search() async {
     isLoading = true;
     update();
 
     List<String> specialties = <String>[];
-    if (specialty.isNotEmpty) {
-      specialties = [specialty];
+    if (specialize.isNotEmpty) {
+      specialties = [specialize];
+    }
+
+    var nationality = <String, dynamic>{};
+    if(nationals.isNotEmpty && nationals.length <= 2) {
+      if(nationals.length == 1) {
+        if(nationals.contains('isForeigner')) {
+          print('nguyentp ==> ');
+          nationality = {
+            'isVietNamese': false,
+            'isNative': false,
+          };
+        } else if(nationals.contains('isVietNamese')) {
+          nationality = {
+            'isVietNamese': true,
+          };
+        } else if(nationals.contains('isNative')) {
+          nationality = {
+            'isNative': true,
+          };
+        }
+      } else {
+        print('nguyentp ==> ');
+        if(!nationals.contains('isVietNamese')) {
+          nationality = {
+            'isVietNamese': false,
+          };
+        } else if(!nationals.contains('isNative')) {
+          nationality = {
+            'isNative': false,
+          };
+        } else if(!nationals.contains('isForeigner')) {
+          nationality = {
+            'isVietNamese': true,
+            'isNative': true,
+          };
+        }
+      }
+      print('nguyentp ==> ');
     }
     try {
       final response = await BaseApi().post('/tutor/search', {
-        'search': key,
+        'search': keyword,
         'page': '1',
         'perPage': 12,
         'filters': {
           'date': null,
+          'nationality': nationality,
           'tutoringTimeAvailable': [null, null],
           'specialties': specialties,
         },
@@ -101,7 +147,7 @@ class TeacherListController extends GetxController {
 
   Future<void> updateFavorite(bool isFavorite, String userId) async {
     try {
-      final response = await BaseApi().post('/user/manageFavoriteTutor', {
+       await BaseApi().post('/user/manageFavoriteTutor', {
         'tutorId': userId,
       });
 
@@ -127,12 +173,17 @@ class TeacherListController extends GetxController {
 
   void changeSpecialize(String specialize) {
     this.specialize = specialize;
-    search('', specialize);
+    search();
+  }
+
+  void changeNational(List<String> nationals) {
+    this.nationals = nationals;
+    search();
   }
 
   void changeKeyword(String keyword) {
     this.keyword = keyword.toLowerCase();
-    updateTeacher();
+    search();
   }
 
   void updateTeacher() {
