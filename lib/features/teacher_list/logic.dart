@@ -125,11 +125,12 @@ class TeacherListController extends GetxController {
             hobby: response.interests ?? '',
             career: '',
             education: '',
-            experience: '',
+            experience: response.experience ?? '',
             fields: fields,
             languages: response.languages != null ? response.languages!.split(',') : [],
             star: response.rating,
             userId: response.userId ?? '',
+            video: response.video ?? '',
           );
         },
       ).toList();

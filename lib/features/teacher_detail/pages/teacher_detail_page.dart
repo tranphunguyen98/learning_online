@@ -1,20 +1,27 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:learning_online/core/base_api.dart';
 import 'package:learning_online/core/core.dart';
 import 'package:learning_online/core/widgets/widget_chip.dart';
 import 'package:learning_online/core/widgets/widget_icon_text_column.dart';
 import 'package:learning_online/core/widgets/widget_rating_bar_indicator.dart';
 import 'package:learning_online/core/widgets/widget_video_player.dart';
+import 'package:learning_online/features/teacher_detail/teacher_detail_logic.dart';
 import 'package:learning_online/features/teacher_detail/widgets/report_dialog.dart';
 import 'package:learning_online/features/teacher_detail/widgets/review_tutor_list.dart';
 import 'package:learning_online/features/teacher_detail/widgets/widget_choose_date_bottom_sheet.dart';
 import 'package:learning_online/features/teacher_detail/widgets/widget_schedule.dart';
 import 'package:learning_online/model/teacher.dart';
+import 'package:learning_online/utils/data.dart';
+import 'package:learning_online/utils/nation_data.dart';
 
 import '../../../utils/router.dart';
 
 class TeacherDetailPage extends StatefulWidget {
-  final TeacherModel teacherModel;
-  const TeacherDetailPage({Key? key, required this.teacherModel}) : super(key: key);
+  final String teacherId;
+
+  const TeacherDetailPage({Key? key, required this.teacherId}) : super(key: key);
 
   @override
   _TeacherDetailPageState createState() => _TeacherDetailPageState();
@@ -22,13 +29,42 @@ class TeacherDetailPage extends StatefulWidget {
 
 class _TeacherDetailPageState extends State<TeacherDetailPage> {
   late BuildContext _context;
+  late TeacherModel teacherModel;
+
+  // late Future getNations;
+  // Map<String, dynamic> nationalData = {};
+  List<String> languageNames = [];
+  TeachDetailLogic controller = Get.put<TeachDetailLogic>(TeachDetailLogic());
+
+  @override
+  void initState() {
+    controller.getTeacher(widget.teacherId);
+    // getNations = BaseApi().getNations(teacherModel.nation);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     _context = context;
     return Scaffold(
       body: SafeArea(
-        child: _buildBody(),
+        child: GetBuilder<TeachDetailLogic>(
+          init: controller,
+          builder: (logic) {
+            if (logic.teacherModel != null) {
+              teacherModel = logic.teacherModel!;
+              languageNames = teacherModel.languages.map((la) {
+                final languageData = languages.firstWhereOrNull((e) => e['code'] == la);
+                return languageData?['name'] ?? la;
+              }).toList();
+              return _buildBody();
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        ),
       ),
     );
   }
@@ -37,7 +73,9 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          WidgetVideoPlayer(),
+          WidgetVideoPlayer(
+            video: teacherModel.video,
+          ),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -46,18 +84,18 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
                 _widgetInfoHeader(),
                 const SizedBox(height: 16),
                 Text(
-                  widget.teacherModel.description,
+                  teacherModel.description,
                   style: kFontRegularDefault_14,
                 ),
                 const SizedBox(height: 16),
                 _widgetRowFunction(),
                 const SizedBox(height: 8),
-                _widgetTitleChipsColumn('Ngôn ngữ', widget.teacherModel.languages),
-                _widgetTitleTextColumn('Học vấn', widget.teacherModel.education),
-                _widgetTitleTextColumn('Kinh nghiêm', widget.teacherModel.experience),
-                _widgetTitleTextColumn('Sở thích', widget.teacherModel.hobby),
-                _widgetTitleTextColumn('Nghề nghiệp', widget.teacherModel.career),
-                _widgetTitleChipsColumn('Chuyên môn', widget.teacherModel.fields),
+                _widgetTitleChipsColumn('Ngôn ngữ', languageNames),
+                _widgetTitleChipsColumn('Chuyên ngành', teacherModel.fields),
+                _widgetTitleTextColumn('Sở thích', teacherModel.hobby),
+                _widgetTitleTextColumn('Kinh nghiêm', teacherModel.experience),
+                // _widgetTitleTextColumn('Học vấn', teacherModel.education),
+                // _widgetTitleTextColumn('Nghề nghiệp', teacherModel.career),
                 const SizedBox(height: 16),
                 const WidgetSchedule(),
                 const SizedBox(height: 16),
@@ -114,7 +152,7 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
           style: kFontRegularPrimary_14,
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 8.0, top: 8.0),
+          padding: const EdgeInsets.only(top: 8.0, right: 8),
           child: SizedBox(
             height: 32,
             width: double.infinity,
@@ -133,30 +171,28 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
   }
 
   Row _widgetRowFunction() {
-    bool _isFavorite = widget.teacherModel.isFavorite;
+    bool _isFavorite = teacherModel.isFavorite;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         // WidgetFavorite(
-        //   isFavorite: widget.teacherModel.isFavorite,
+        //   isFavorite: teacherModel.isFavorite,
         //   onFavoriteChanged: (isFavorite) {
-        //     Get.find<TeacherListController>().updateFavorite(isFavorite, widget.teacherModel.id);
+        //     Get.find<TeacherListController>().updateFavorite(isFavorite, teacherModel.id);
         //   },
         // ),
-        StatefulBuilder(
-          builder: (context, _setState) {
-            return WidgetIconTextColumn(
-             iconData: _isFavorite ? Icons.favorite : Icons.favorite_border,
-              text: 'Yêu thích',
-              color: _isFavorite ? kRedColor : kBlueColor,
-              onTap: () {
+        StatefulBuilder(builder: (context, _setState) {
+          return WidgetIconTextColumn(
+            iconData: _isFavorite ? Icons.favorite : Icons.favorite_border,
+            text: 'Yêu thích',
+            color: _isFavorite ? kRedColor : kBlueColor,
+            onTap: () {
               _setState(() {
                 _isFavorite = !_isFavorite;
               });
-              },
-            );
-          }
-        ),
+            },
+          );
+        }),
         WidgetIconTextColumn(
           iconData: Icons.message,
           text: 'Nhắn tin',
@@ -174,11 +210,21 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
   }
 
   Row _widgetInfoHeader() {
+    // BaseApi().getLanguageName('');
+    Map<String, dynamic>? nationalData =
+        nations.firstWhereOrNull((element) => element['code'] == teacherModel.nation);
+    final nameData = nationalData?['name'] ?? '';
+    String name = '';
+    if (nameData is String) {
+      name = nameData;
+    }
+    String flag = nationalData?['flag'] ?? '';
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CircleAvatar(
-          backgroundImage: NetworkImage(widget.teacherModel.avatar),
+          backgroundImage: NetworkImage(teacherModel.avatar),
           radius: 42,
         ),
         const SizedBox(width: 12),
@@ -186,23 +232,33 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              widget.teacherModel.name,
+              teacherModel.name,
               style: kFontRegularDefault_16,
             ),
             Row(
               children: [
-                WidgetRatingBarIndicator(star: widget.teacherModel.star),
+                WidgetRatingBarIndicator(star: teacherModel.star),
                 SizedBox(width: 4),
-                Text('(12)')
+                Text(teacherModel.totalFeedback > 0 ? '(${teacherModel.totalFeedback})' : ''),
               ],
             ),
             Text(
               'Tutor',
               style: kFontRegularDefault_14,
             ),
-            Text(
-              widget.teacherModel.nation,
-              style: kFontRegularDefault_14,
+            Row(
+              children: [
+                CachedNetworkImage(
+                  imageUrl: flag,
+                  height: 24,
+                  width: 24,
+                ),
+                SizedBox(width: 4),
+                Text(
+                  name,
+                  style: kFontRegularDefault_14,
+                ),
+              ],
             ),
           ],
         ),
@@ -214,7 +270,7 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
     showDialog<void>(
       context: _context,
       builder: (BuildContext dialogContext) {
-        return ReportDialog(teacherName: widget.teacherModel.name);
+        return ReportDialog(teacherName: teacherModel.name);
       },
     );
   }

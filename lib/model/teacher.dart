@@ -15,6 +15,8 @@ class TeacherModel {
   final String avatar;
   final List<String> languages;
   final bool isFavorite;
+  final String video;
+  final int totalFeedback;
 
   TeacherModel({
     required this.id,
@@ -31,10 +33,13 @@ class TeacherModel {
     required this.career,
     required this.languages,
     required this.userId,
+    required this.video,
+    this.totalFeedback = 0,
   });
 
   TeacherModel copyWith({
     String? id,
+    String? userId,
     double? star,
     List<String>? fields,
     String? name,
@@ -47,10 +52,12 @@ class TeacherModel {
     String? avatar,
     List<String>? languages,
     bool? isFavorite,
-    String? userId,
+    String? video,
+    int? totalFeedback,
   }) {
     return TeacherModel(
       id: id ?? this.id,
+      userId: userId ?? this.userId,
       star: star ?? this.star,
       fields: fields ?? this.fields,
       name: name ?? this.name,
@@ -63,7 +70,8 @@ class TeacherModel {
       avatar: avatar ?? this.avatar,
       languages: languages ?? this.languages,
       isFavorite: isFavorite ?? this.isFavorite,
-      userId: userId ?? this.userId,
+      video: video ?? this.video,
+      totalFeedback: totalFeedback ?? this.totalFeedback,
     );
   }
 }

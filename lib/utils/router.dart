@@ -60,7 +60,7 @@ class AppRouter {
       case kTeacherList:
         return MaterialPageRoute(builder: (_) => TeacherListPage());
       case kTeacherDetail:
-        return MaterialPageRoute(builder: (_) => TeacherDetailPage(teacherModel: settings.arguments as TeacherModel));
+        return MaterialPageRoute(builder: (_) => TeacherDetailPage(teacherId: settings.arguments as String));
       case kUserProfile:
         return MaterialPageRoute(builder: (_) => const ProfilePage());
       case kTeacherFavorite:

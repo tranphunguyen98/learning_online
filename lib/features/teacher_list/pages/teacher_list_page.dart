@@ -15,9 +15,7 @@ class TeacherListPage extends StatefulWidget {
 }
 
 class _TeacherListPageState extends State<TeacherListPage> {
-  final List<String> categoryList = [
-    ...fieldMap.keys
-  ];
+  final List<String> categoryList = [...fieldMap.keys];
 
   TeacherListController controller = Get.find<TeacherListController>();
 
@@ -147,8 +145,11 @@ class _TeacherListPageState extends State<TeacherListPage> {
                         itemCount: logic.displayedTeachers.length,
                         itemBuilder: (context, index) => GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(context, AppRouter.kTeacherDetail,
-                                arguments: logic.displayedTeachers[index]);
+                            Navigator.pushNamed(
+                              context,
+                              AppRouter.kTeacherDetail,
+                              arguments: logic.displayedTeachers[index].userId,
+                            );
                           },
                           child: WidgetHomeTeacherItem(
                             key: UniqueKey(),
