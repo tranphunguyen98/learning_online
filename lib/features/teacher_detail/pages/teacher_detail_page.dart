@@ -39,6 +39,7 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
   @override
   void initState() {
     controller.getTeacher(widget.teacherId);
+    controller.getReview(widget.teacherId);
     // getNations = BaseApi().getNations(teacherModel.nation);
     super.initState();
   }
@@ -98,10 +99,12 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
                 // _widgetTitleTextColumn('Nghề nghiệp', teacherModel.career),
                 const SizedBox(height: 16),
                 const WidgetSchedule(),
-                const SizedBox(height: 16),
-                _widgetViewReview(),
               ],
             ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16, top: 16),
+            child: _widgetViewReview(),
           ),
         ],
       ),
@@ -113,11 +116,13 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Đánh giá và bình luận (5)',
+          'Đánh giá và bình luận (${controller.totalReview})',
           style: kFontRegularPrimary_14,
         ),
         const SizedBox(height: 16),
-        WidgetReviewTutorList(),
+        WidgetReviewTutorList(
+          reviewTutors: controller.reviews,
+        ),
       ],
     );
   }
@@ -132,7 +137,7 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
           style: kFontRegularPrimary_14,
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 4.0, left: 8.0),
+          padding: const EdgeInsets.only(top: 4.0),
           child: Text(
             text,
             style: kFontRegularGray_14,

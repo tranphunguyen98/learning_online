@@ -3,9 +3,8 @@ import 'package:learning_online/features/teacher_detail/widgets/review_tutor_ite
 import 'package:learning_online/model/review_tutor.dart';
 
 class WidgetReviewTutorList extends StatelessWidget {
-  final List<ReviewTutorModel> reviewTutors =
-      List.generate(5, (index) => ReviewTutorModel.mock);
-  WidgetReviewTutorList({Key? key}) : super(key: key);
+  final List<ReviewTutorModel> reviewTutors;
+  const WidgetReviewTutorList({Key? key, required this.reviewTutors}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
