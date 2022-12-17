@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:learning_online/core/base_api.dart';
-import 'package:learning_online/features/teacher_detail/review.dart';
+import 'package:learning_online/features/teacher_detail/data/review.dart';
 import 'package:learning_online/features/teacher_list/data/teacher_response.dart';
 import 'package:learning_online/features/teacher_list/logic.dart';
 import 'package:learning_online/model/review_tutor.dart';

@@ -38,7 +38,7 @@ class _RootPageState extends State<RootPage> {
           if (selectedIndex == 0) {
             currentPage = HomePage();
           } else if (selectedIndex == 1) {
-            currentPage = const CourseListPage();
+            currentPage = CourseListPage();
           } else if (selectedIndex == 2) {
             currentPage = const SchedulePage();
           } else if (selectedIndex == 3) {

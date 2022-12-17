@@ -74,7 +74,7 @@ class AppRouter {
       case kJitsi:
         return MaterialPageRoute(builder: (_) => const JitsiPage());
       case kCourseList:
-        return MaterialPageRoute(builder: (_) => const CourseListPage());
+        return MaterialPageRoute(builder: (_) => CourseListPage());
       case kCourseDetail:
         return MaterialPageRoute(builder: (_) => const CourseDetailPage());
     // case kChangePassword:
