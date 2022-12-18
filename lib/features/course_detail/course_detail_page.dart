@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:learning_online/core/widgets/widget_core_app_bar.dart';
+import 'package:learning_online/features/course_list/widgets/course_item.dart';
 
 import '../../core/colors.dart';
 import '../../core/styles.dart';
+import '../course_list/data/course.dart';
 
-class CourseDetailPage extends StatelessWidget {
-  const CourseDetailPage({Key? key}) : super(key: key);
+class CourseDetailPage extends StatefulWidget {
+  final Course course;
 
+  const CourseDetailPage({Key? key, required this.course}) : super(key: key);
+
+  @override
+  State<CourseDetailPage> createState() => _CourseDetailPageState();
+}
+
+class _CourseDetailPageState extends State<CourseDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,10 +49,9 @@ class CourseDetailPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
-              borderRadius:
-                  const BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
-              child: Image.network(
-                  'https://camblycurriculumicons.s3.amazonaws.com/5e2b895e541a832674533c18?h=d41d8cd98f00b204e9800998ecf8427e'),
+              borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(8), topRight: Radius.circular(8)),
+              child: Image.network(widget.course.imageUrl ?? ''),
             ),
             const SizedBox(height: 8),
             Padding(
@@ -52,21 +60,21 @@ class CourseDetailPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    'Advanced Conversation Topics',
+                    widget.course.name ?? '',
                     style: kFontMediumBlack_16,
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    'Gain confidence speaking about familiar topics',
-                    style: kFontRegularDefault_12.copyWith(
+                    widget.course.description ?? '',
+                    style: kFontRegularDefault_14.copyWith(
                       color: kGrayColor,
                     ),
                   ),
-                  const SizedBox(height: 12),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('Khám phá'),
-                  ),
+                  // const SizedBox(height: 12),
+                  // ElevatedButton(
+                  //   onPressed: () {},
+                  //   child: const Text('Khám phá'),
+                  // ),
                 ],
               ),
             )
@@ -89,17 +97,17 @@ class CourseDetailPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 20),
             child: Text(
-              'It can be intimidating to speak with a foreigner, no matter how much grammar and vocabulary you\'ve mastered. If you have basic knowledge of English but have not spent much time speaking, this course will help you ease into your first English conversations.',
+              widget.course.reason ?? '',
               style: kFontRegularDefault_12,
             ),
           ),
           const SizedBox(height: 8),
-          _buildRowTitle(Icons.question_mark, 'Tại sao bạn nên học khóa học này', Colors.red),
+          _buildRowTitle(Icons.question_mark, 'Bạn có thể làm gì?', Colors.red),
           const SizedBox(height: 6),
           Padding(
             padding: const EdgeInsets.only(left: 20),
             child: Text(
-              'It can be intimidating to speak with a foreigner, no matter how much grammar and vocabulary you\'ve mastered. If you have basic knowledge of English but have not spent much time speaking, this course will help you ease into your first English conversations.',
+              widget.course.purpose ?? '',
               style: kFontRegularDefault_12,
             ),
           ),
@@ -152,7 +160,8 @@ class CourseDetailPage extends StatelessWidget {
         children: [
           _buildTitle('Trình độ yêu cầu'),
           const SizedBox(height: 16),
-          _buildRowTitle(Icons.person_outline, 'Beginner', Colors.blueAccent),
+          _buildRowTitle(
+              Icons.person_outline, levelMap[widget.course.level ?? ''] ?? '', Colors.blueAccent),
           const SizedBox(height: 16),
         ],
       ),
@@ -166,7 +175,8 @@ class CourseDetailPage extends StatelessWidget {
         children: [
           _buildTitle('Thời lượng khóa học'),
           const SizedBox(height: 16),
-          _buildRowTitle(Icons.book_outlined, '10 Chủ đề', Colors.blueAccent),
+          _buildRowTitle(Icons.book_outlined, '${widget.course.topics?.length ?? 0} Chủ đề',
+              Colors.blueAccent),
           const SizedBox(height: 16),
         ],
       ),
@@ -182,18 +192,19 @@ class CourseDetailPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _buildItemSubject(),
-              _buildItemSubject(),
-              _buildItemSubject(),
-            ],
+            children: List.generate(widget.course.topics?.length ?? 0, (index) {
+              return _buildItemSubject(index: index, topic: widget.course.topics![index]);
+            }),
           ),
         ),
       ],
     );
   }
 
-  OutlinedButton _buildItemSubject() {
+  OutlinedButton _buildItemSubject({
+    required int index,
+    required Topics topic,
+  }) {
     return OutlinedButton(
       onPressed: () {},
       child: Align(
@@ -201,7 +212,7 @@ class CourseDetailPage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(left: 4.0),
           child: Text(
-            '1.  Foods You Love',
+            '${index + 1}.  ${topic.name}',
             style: kFontSemiboldBlack_14.copyWith(fontWeight: FontWeight.w500),
           ),
         ),

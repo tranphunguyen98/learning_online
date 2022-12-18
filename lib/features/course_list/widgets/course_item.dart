@@ -20,7 +20,7 @@ class CourseItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, AppRouter.kCourseDetail);
+        Navigator.pushNamed(context, AppRouter.kCourseDetail, arguments: course);
       },
       child: Card(
         child: Column(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learning_online/features/course_detail/course_detail_page.dart';
 import 'package:learning_online/features/course_list/course_list_page.dart';
+import 'package:learning_online/features/course_list/data/course.dart';
 import 'package:learning_online/features/forgot_password/pages/forgot_password_page.dart';
 import 'package:learning_online/features/history/history_page.dart';
 import 'package:learning_online/features/jitsi_page.dart';
@@ -76,7 +77,7 @@ class AppRouter {
       case kCourseList:
         return MaterialPageRoute(builder: (_) => CourseListPage());
       case kCourseDetail:
-        return MaterialPageRoute(builder: (_) => const CourseDetailPage());
+        return MaterialPageRoute(builder: (_) => CourseDetailPage(course: settings.arguments as Course,));
     // case kChangePassword:
     //   return MaterialPageRoute(builder: (_) => ChangePasswordScreen());
     // case kSetting:
