@@ -18,8 +18,16 @@ extension DateTimeEx on DateTime {
 
 class CourseListLogic extends GetxController {
   List<Category> categories = [];
+  String _keyword = '';
+  bool loading = false;
+
+  void search(String keyword) {
+    _keyword = keyword;
+    getCourses();
+  }
 
   Future<void> getCourses() async {
+    loading = true;
     var courses = <Course>[];
 
     List<Future> futures = [];
@@ -35,7 +43,7 @@ class CourseListLogic extends GetxController {
 
     futures.add(
       BaseApi().get(
-        '/course?page=1&size=100',
+        '/course?page=1&size=100&q=$_keyword',
       ).then((value) {
         courses =
             (value['data']['rows'] as List).map((e) => Course.fromJson(e)).toList();
@@ -56,6 +64,7 @@ class CourseListLogic extends GetxController {
     
     categories.removeWhere((element) => element.courses?.isEmpty ?? true);
 
+    loading = false;
     update();
   }
 

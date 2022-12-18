@@ -34,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
       emailController.text = widget.arguments['email'];
     }
 
-    emailController.text = 'ntranphu4@gmail.com';
+    emailController.text = 'student@lettutor.com';
     passwordController.text = '123456';
     super.initState();
   }

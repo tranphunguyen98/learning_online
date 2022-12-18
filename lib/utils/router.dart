@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learning_online/features/course_detail/course_detail_page.dart';
+import 'package:learning_online/features/course_detail/topic_detail_page.dart';
 import 'package:learning_online/features/course_list/course_list_page.dart';
 import 'package:learning_online/features/course_list/data/course.dart';
 import 'package:learning_online/features/forgot_password/pages/forgot_password_page.dart';
@@ -30,6 +31,7 @@ class AppRouter {
   static const String kTeacherDetail = '/teacherDetail';
   static const String kTeacherFavorite = '/teacherFavorite';
   static const String kUserProfile = '/userProfile';
+  static const String kTopicDetail = '/topicDetail';
   static const String kMessage = '/message';
   static const String kSchedule = '/schedule';
   static const String kHistory = '/history';
@@ -78,6 +80,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => CourseListPage());
       case kCourseDetail:
         return MaterialPageRoute(builder: (_) => CourseDetailPage(course: settings.arguments as Course,));
+      case kTopicDetail:
+        return MaterialPageRoute(builder: (_) => TopicDetailPage(topic: settings.arguments as Topics,));
     // case kChangePassword:
     //   return MaterialPageRoute(builder: (_) => ChangePasswordScreen());
     // case kSetting:

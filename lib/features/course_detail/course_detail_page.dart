@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learning_online/core/widgets/widget_core_app_bar.dart';
 import 'package:learning_online/features/course_list/widgets/course_item.dart';
+import 'package:learning_online/utils/router.dart';
 
 import '../../core/colors.dart';
 import '../../core/styles.dart';
@@ -206,7 +207,9 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
     required Topics topic,
   }) {
     return OutlinedButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.pushNamed(context, AppRouter.kTopicDetail, arguments: topic);
+      },
       child: Align(
         alignment: Alignment.centerLeft,
         child: Padding(

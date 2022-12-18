@@ -30,6 +30,13 @@ class CourseItem extends StatelessWidget {
               course.imageUrl ?? '',
               height: 120,
               fit: BoxFit.cover,
+              loadingBuilder: (_, child, progress) {
+                if(progress == null) return child;
+                return Container(
+                  height: 120,
+                  color: Colors.blueAccent.shade200.withOpacity(0.4),
+                );
+              },
             ),
             const SizedBox(height: 8),
             Expanded(

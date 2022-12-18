@@ -111,7 +111,7 @@ class _TeacherListPageState extends State<TeacherListPage> {
     return GetBuilder<TeacherListController>(
         init: controller,
         builder: (logic) {
-          if (logic.displayedTeachers.isEmpty) {
+          if (logic.displayedTeachers.isEmpty && !logic.isLoading) {
             return Stack(
               children: [
                 Center(
