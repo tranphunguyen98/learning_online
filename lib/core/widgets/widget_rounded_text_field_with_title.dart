@@ -11,6 +11,7 @@ class WidgetRoundedTextFieldWithTitle extends StatelessWidget {
   final TextEditingController? controller;
   final bool obscureText;
   final TextInputType? textInputType;
+  final bool isDisable;
   const WidgetRoundedTextFieldWithTitle({
     Key? key,
     required this.title,
@@ -21,6 +22,7 @@ class WidgetRoundedTextFieldWithTitle extends StatelessWidget {
     this.controller,
     this.obscureText = false,
     this.textInputType,
+    this.isDisable = false,
   }) : super(key: key);
 
   @override
@@ -28,9 +30,16 @@ class WidgetRoundedTextFieldWithTitle extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          '$title ${isRequired ? '*' : ''}',
-          style: kFontRegularDefault_14,
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if(isRequired)
+            Text('* ', style: TextStyle(color: Colors.red),),
+            Text(
+              title,
+              style: kFontRegularDefault_14,
+            ),
+          ],
         ),
         const SizedBox(height: 8),
         WidgetRoundedTextField(
@@ -40,6 +49,7 @@ class WidgetRoundedTextFieldWithTitle extends StatelessWidget {
           controller: controller,
           obscureText: obscureText,
           textInputType: textInputType,
+          isDisable: isDisable,
         ),
       ],
     );

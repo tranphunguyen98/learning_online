@@ -1,4 +1,99 @@
-final nations = [
+import 'package:learning_online/features/profile/data/user.dart';
+
+final learnTopics =
+[
+  {
+    "id": 3,
+    "key": "english-for-kids",
+    "name": "English for Kids",
+    "createdAt": "2021-09-03T13:27:18.266Z",
+    "updatedAt": "2021-09-03T13:27:18.266Z"
+  },
+  {
+    "id": 4,
+    "key": "business-english",
+    "name": "Business English",
+    "createdAt": "2021-09-03T13:27:18.266Z",
+    "updatedAt": "2021-09-03T13:27:18.266Z"
+  },
+  {
+    "id": 5,
+    "key": "conversational-english",
+    "name": "Conversational English",
+    "createdAt": "2021-09-03T13:27:18.266Z",
+    "updatedAt": "2021-09-03T13:27:18.266Z"
+  }
+].map((e) => LearnTopic.fromJson(e)).toList();
+
+final tests = [
+  {
+    "id": 1,
+    "key": "starters",
+    "name": "STARTERS",
+    "createdAt": "2021-09-03T13:27:18.820Z",
+    "updatedAt": "2021-09-03T13:27:18.820Z"
+  },
+  {
+    "id": 2,
+    "key": "movers",
+    "name": "MOVERS",
+    "createdAt": "2021-09-03T13:27:18.820Z",
+    "updatedAt": "2021-09-03T13:27:18.820Z"
+  },
+  {
+    "id": 3,
+    "key": "flyers",
+    "name": "FLYERS",
+    "createdAt": "2021-09-03T13:27:18.820Z",
+    "updatedAt": "2021-09-03T13:27:18.820Z"
+  },
+  {
+    "id": 4,
+    "key": "ket",
+    "name": "KET",
+    "createdAt": "2021-09-03T13:27:18.820Z",
+    "updatedAt": "2021-09-03T13:27:18.820Z"
+  },
+  {
+    "id": 5,
+    "key": "pet",
+    "name": "PET",
+    "createdAt": "2021-09-03T13:27:18.820Z",
+    "updatedAt": "2021-09-03T13:27:18.820Z"
+  },
+  {
+    "id": 6,
+    "key": "ielts",
+    "name": "IELTS",
+    "createdAt": "2021-09-03T13:27:18.820Z",
+    "updatedAt": "2021-09-03T13:27:18.820Z"
+  },
+  {
+    "id": 7,
+    "key": "toefl",
+    "name": "TOEFL",
+    "createdAt": "2021-09-03T13:27:18.820Z",
+    "updatedAt": "2021-09-03T13:27:18.820Z"
+  },
+  {
+    "id": 8,
+    "key": "toeic",
+    "name": "TOEIC",
+    "createdAt": "2021-09-03T13:27:18.820Z",
+    "updatedAt": "2021-09-03T13:27:18.820Z"
+  }
+].map((e) => TestPreparation.fromJson(e)).toList();
+
+final Map<String, String> levels = {
+  'BEGINNER': 'Pre A1 (Beginner)',
+  'HIGHER-BEGINNER': 'A1 (Higher Beginner',
+  'PRE_INTERMEDIATE': 'A2 (Pre-Intermediate)',
+  'INTERMEDIATE': 'B1 (Intermediate)',
+  'UPPER-INTERMEDIATE': 'B2 (Upper-Intermediate)',
+  'ADVANCED': 'C1 (Advanced)',
+  'PROFICIENCY': 'C2 (Proficiency)',
+};
+final List<Map<String, String>> nations = [
   {
     "code": "AF",
     "name": "Afghanistan",

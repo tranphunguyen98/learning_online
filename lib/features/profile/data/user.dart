@@ -1,12 +1,12 @@
 /// user : {"id":"f569c202-7bbf-4620-af77-ecc1419a6b28","email":"student@lettutor.com","name":"Demo1111","avatar":"https://sandbox.api.lettutor.com/avatar/f569c202-7bbf-4620-af77-ecc1419a6b28avatar1671339081995.jpg","country":"AG","phone":"842499996508","roles":["student","CHANGE_PASSWORD"],"language":"Albanian","birthday":"2022-12-08","isActivated":true,"tutorInfo":{"id":"db37f185-399f-470d-995b-bf6143cb1a5f","video":"https://sandbox.api.lettutor.com/video/f569c202-7bbf-4620-af77-ecc1419a6b28video1643096811438.mp4","bio":"You can't Xi me ! Bing chilling ! 1","education":"University of Science 3","experience":"3 years","profession":"WWE, Online English teacher","accent":null,"targetStudent":"Advanced","interests":"I like reading book","languages":"+1268","specialties":"conversational-english,movers,flyers,toefl,toeic,business-english,Business English,Conversational English,Ielts,Movers,Toeic","resume":null,"rating":4.378378378378378,"isActivated":false,"isNative":false},"walletInfo":{"amount":"60300000","isBlocked":false,"bonus":0},"requireNote":null,"level":"BEGINNER","learnTopics":[{"id":3,"key":"english-for-kids","name":"English for Kids"}],"testPreparations":[{"id":3,"key":"flyers","name":"FLYERS"}],"isPhoneActivated":true,"timezone":7,"referralInfo":{"referralCode":"RSJYDZYQLE","referralPackInfo":{"earnPercent":5}},"studySchedule":"","canSendMessage":false,"studentGroup":null,"studentInfo":null,"avgRating":4.378378378378378}
 
-class User {
-  User({
+class UserData {
+  UserData({
       User? user,}){
     _user = user;
 }
 
-  User.fromJson(dynamic json) {
+  UserData.fromJson(dynamic json) {
     _user = json['user'] != null ? User.fromJson(json['user']) : null;
   }
   User? _user;
@@ -64,8 +64,8 @@ class User {
       WalletInfo? walletInfo, 
       dynamic requireNote, 
       String? level, 
-      List<LearnTopics>? learnTopics, 
-      List<TestPreparations>? testPreparations, 
+      List<LearnTopic>? learnTopics,
+      List<TestPreparation>? testPreparations,
       bool? isPhoneActivated, 
       int? timezone, 
       ReferralInfo? referralInfo, 
@@ -118,13 +118,13 @@ class User {
     if (json['learnTopics'] != null) {
       _learnTopics = [];
       json['learnTopics'].forEach((v) {
-        _learnTopics?.add(LearnTopics.fromJson(v));
+        _learnTopics?.add(LearnTopic.fromJson(v));
       });
     }
     if (json['testPreparations'] != null) {
       _testPreparations = [];
       json['testPreparations'].forEach((v) {
-        _testPreparations?.add(TestPreparations.fromJson(v));
+        _testPreparations?.add(TestPreparation.fromJson(v));
       });
     }
     _isPhoneActivated = json['isPhoneActivated'];
@@ -134,7 +134,7 @@ class User {
     _canSendMessage = json['canSendMessage'];
     _studentGroup = json['studentGroup'];
     _studentInfo = json['studentInfo'];
-    _avgRating = json['avgRating'];
+    _avgRating = json['avgRating'] is double? ? json['avgRating'] : (json['avgRating'] as int?)?.toDouble();
   }
   String? _id;
   String? _email;
@@ -150,8 +150,8 @@ class User {
   WalletInfo? _walletInfo;
   dynamic _requireNote;
   String? _level;
-  List<LearnTopics>? _learnTopics;
-  List<TestPreparations>? _testPreparations;
+  List<LearnTopic>? _learnTopics;
+  List<TestPreparation>? _testPreparations;
   bool? _isPhoneActivated;
   int? _timezone;
   ReferralInfo? _referralInfo;
@@ -175,8 +175,8 @@ class User {
   WalletInfo? get walletInfo => _walletInfo;
   dynamic get requireNote => _requireNote;
   String? get level => _level;
-  List<LearnTopics>? get learnTopics => _learnTopics;
-  List<TestPreparations>? get testPreparations => _testPreparations;
+  List<LearnTopic>? get learnTopics => _learnTopics;
+  List<TestPreparation>? get testPreparations => _testPreparations;
   bool? get isPhoneActivated => _isPhoneActivated;
   int? get timezone => _timezone;
   ReferralInfo? get referralInfo => _referralInfo;
@@ -225,6 +225,59 @@ class User {
     return map;
   }
 
+  User copyWith({
+    String? id,
+    String? email,
+    String? name,
+    String? avatar,
+    String? country,
+    String? phone,
+    List<String>? roles,
+    String? language,
+    String? birthday,
+    bool? isActivated,
+    TutorInfo? tutorInfo,
+    WalletInfo? walletInfo,
+    dynamic? requireNote,
+    String? level,
+    List<LearnTopic>? learnTopics,
+    List<TestPreparation>? testPreparations,
+    bool? isPhoneActivated,
+    int? timezone,
+    ReferralInfo? referralInfo,
+    String? studySchedule,
+    bool? canSendMessage,
+    dynamic? studentGroup,
+    dynamic? studentInfo,
+    double? avgRating,
+  }) {
+    return User(
+      id: id ?? this._id,
+      email: email ?? this._email,
+      name: name ?? this._name,
+      avatar: avatar ?? this._avatar,
+      country: country ?? this._country,
+      phone: phone ?? this._phone,
+      roles: roles ?? this._roles,
+      language: language ?? this._language,
+      birthday: birthday ?? this._birthday,
+      isActivated: isActivated ?? this._isActivated,
+      tutorInfo: tutorInfo ?? this._tutorInfo,
+      walletInfo: walletInfo ?? this._walletInfo,
+      requireNote: requireNote ?? this._requireNote,
+      level: level ?? this._level,
+      learnTopics: learnTopics ?? this._learnTopics,
+      testPreparations: testPreparations ?? this._testPreparations,
+      isPhoneActivated: isPhoneActivated ?? this._isPhoneActivated,
+      timezone: timezone ?? this._timezone,
+      referralInfo: referralInfo ?? this._referralInfo,
+      studySchedule: studySchedule ?? this._studySchedule,
+      canSendMessage: canSendMessage ?? this._canSendMessage,
+      studentGroup: studentGroup ?? this._studentGroup,
+      studentInfo: studentInfo ?? this._studentInfo,
+      avgRating: avgRating ?? this._avgRating,
+    );
+  }
 }
 
 /// referralCode : "RSJYDZYQLE"
@@ -286,8 +339,8 @@ class ReferralPackInfo {
 /// key : "flyers"
 /// name : "FLYERS"
 
-class TestPreparations {
-  TestPreparations({
+class TestPreparation {
+  TestPreparation({
       int? id, 
       String? key, 
       String? name,}){
@@ -296,7 +349,7 @@ class TestPreparations {
     _name = name;
 }
 
-  TestPreparations.fromJson(dynamic json) {
+  TestPreparation.fromJson(dynamic json) {
     _id = json['id'];
     _key = json['key'];
     _name = json['name'];
@@ -323,8 +376,8 @@ class TestPreparations {
 /// key : "english-for-kids"
 /// name : "English for Kids"
 
-class LearnTopics {
-  LearnTopics({
+class LearnTopic {
+  LearnTopic({
       int? id, 
       String? key, 
       String? name,}){
@@ -333,7 +386,7 @@ class LearnTopics {
     _name = name;
 }
 
-  LearnTopics.fromJson(dynamic json) {
+  LearnTopic.fromJson(dynamic json) {
     _id = json['id'];
     _key = json['key'];
     _name = json['name'];

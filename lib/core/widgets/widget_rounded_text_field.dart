@@ -9,6 +9,7 @@ class WidgetRoundedTextField extends StatelessWidget {
   final TextEditingController? controller;
   final bool obscureText;
   final TextInputType? textInputType;
+  final bool isDisable;
 
   const WidgetRoundedTextField({
     Key? key,
@@ -18,6 +19,7 @@ class WidgetRoundedTextField extends StatelessWidget {
     this.minLines,
     this.controller,
     this.obscureText = false,
+    this.isDisable = false,
     this.textInputType,
   }) : super(key: key);
 
@@ -28,6 +30,7 @@ class WidgetRoundedTextField extends StatelessWidget {
         Container(
           height: minLines != null ? 48.0 * minLines! : 48,
           decoration: BoxDecoration(
+            color: isDisable ? Colors.grey.shade200 : null,
               borderRadius: BorderRadius.all(
                 Radius.circular(radius ?? 24),
               ),
@@ -37,7 +40,7 @@ class WidgetRoundedTextField extends StatelessWidget {
               )),
         ),
         TextFormField(
-          style: kFontRegularDefault_14,
+          style: kFontRegularDefault_14.copyWith(color: kBlackColor.withOpacity(isDisable ? 0.3 : 1.0)),
           minLines: obscureText ? 1 : minLines,
           maxLines: obscureText ? 1 : minLines,
           controller: controller,
@@ -45,6 +48,7 @@ class WidgetRoundedTextField extends StatelessWidget {
           validator: validator,
           obscureText: obscureText,
           keyboardType: textInputType,
+          enabled: !isDisable,
           decoration: InputDecoration(
             hintText: hint,
             contentPadding: EdgeInsets.symmetric(horizontal: radius != null ? 16 : 24, vertical: 8),

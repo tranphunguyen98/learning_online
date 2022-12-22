@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:learning_online/core/core.dart';
 
 class WidgetCoreDatePicker extends StatelessWidget {
@@ -21,7 +22,7 @@ class WidgetCoreDatePicker extends StatelessWidget {
       child: Align(
         alignment: Alignment.centerLeft,
         child: Text(
-          '12-01-2001',
+          date,
           style: kFontRegularDefault_14,
         ),
       ),

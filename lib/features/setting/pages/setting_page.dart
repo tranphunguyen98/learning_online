@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:learning_online/core/core.dart';
 import 'package:learning_online/core/widgets/widget_rounded_button.dart';
+import 'package:learning_online/features/root_controller.dart';
 import 'package:learning_online/features/setting/widgets/widget_setting_button.dart';
 import 'package:learning_online/model/user.dart';
 
@@ -14,8 +16,13 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
-  final UserModel userModel = UserModel.mock;
+  late UserModel? userModel;
 
+  @override
+  void initState() {
+    userModel = Get.find<RootController>().user;
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -81,7 +88,7 @@ class _SettingPageState extends State<SettingPage> {
       child: Row(
         children: [
           CircleAvatar(
-            backgroundImage: NetworkImage(userModel.avatar ?? ''),
+            backgroundImage: NetworkImage(userModel?.avatar ?? ''),
             radius: 28,
           ),
           const SizedBox(width: 16),
@@ -89,12 +96,12 @@ class _SettingPageState extends State<SettingPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                userModel.name,
+                userModel?.name ?? '',
                 style: kFontRegularDefault_16,
               ),
               const SizedBox(height: 8),
               Text(
-                userModel.email,
+                userModel?.phoneNumber ?? '',
                 style: kFontRegularDefault_14,
               ),
             ],
