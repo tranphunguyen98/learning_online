@@ -14,6 +14,7 @@ extension DateTimeEx on DateTime {
     DateFormat format = DateFormat('dd/MM/yyyy HH:mm');
     return format.format(this);
   }
+
 }
 
 class CourseListLogic extends GetxController {
