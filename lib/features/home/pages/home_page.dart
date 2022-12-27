@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learning_online/core/core.dart';
+import 'package:learning_online/features/home/home_logic.dart';
 import 'package:learning_online/features/home/widgets/widget_header_home.dart';
 import 'package:learning_online/features/home/widgets/widget_home_teacher_item.dart';
 import 'package:learning_online/model/teacher.dart';
-
-import '../logic.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -14,7 +13,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final logic = Get.put(HomeLogic());
-  final state = Get.find<HomeLogic>().state;
 
   @override
   Widget build(BuildContext context) {
