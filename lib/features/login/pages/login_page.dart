@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
 
     emailController.text = 'student@lettutor.com';
     // emailController.text = 'ntranphu4@gmail.com';
-    passwordController.text = '123456';
+    passwordController.text = '111111';
     super.initState();
   }
 

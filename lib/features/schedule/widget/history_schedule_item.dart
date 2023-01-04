@@ -28,7 +28,7 @@ class HistoryScheduleItem extends StatelessWidget {
             style: kFontRegularDefault_12,
           ),
           const SizedBox(height: 16),
-          const WidgetScheduleTutor(),
+          // const WidgetScheduleTutor(),
           Card(
             elevation: 0,
             child: Container(

@@ -1,14 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:learning_online/core/core.dart';
+import 'package:learning_online/features/schedule/data/history_schedule.dart';
+import 'package:learning_online/features/schedule/schedule_logic.dart';
 import 'package:learning_online/features/schedule/widget/widget_schedule_tutor.dart';
 
 import 'history_expansion_area.dart';
 
 class ScheduleItem extends StatelessWidget {
-  const ScheduleItem({Key? key}) : super(key: key);
+  final MySchedule schedule;
+  const ScheduleItem({Key? key, required this.schedule}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final tutorInfo = schedule.tutorInfo;
+
+    DateFormat formatHour = DateFormat('HH:mm');
+    DateFormat formatDay = DateFormat('dd');
+    DateFormat formatMonth = DateFormat('MM yyyy');
+
+    final startDay = DateTime.fromMillisecondsSinceEpoch(schedule.dates.first.startDay);
+    final endDay = DateTime.fromMillisecondsSinceEpoch(schedule.dates.last.endDay);
+    final dateText = '${formatDay.format(startDay)} Tháng ${formatMonth.format(startDay)}';
+    final lessonTimeText = '${formatHour.format(startDay)} - ${formatHour.format(endDay)}';
+
     return Container(
       padding: const EdgeInsets.only(top: 16, left: 10, right: 12),
       decoration: BoxDecoration(
@@ -20,16 +35,17 @@ class ScheduleItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'CN, 23 Tháng 10 2022',
+            dateText,
             style: kFontSemiboldBlack_16,
           ),
           const SizedBox(height: 6),
           Text(
-            '2 buồi học liên tục',
+            schedule.dates.length > 1 ? '${schedule.dates.length} buồi học liên tục' : '1 buổi học',
             style: kFontRegularDefault_12,
           ),
           const SizedBox(height: 16),
-          const WidgetScheduleTutor(),
+          if(tutorInfo != null)
+          WidgetScheduleTutor(tutor: tutorInfo,),
           Card(
             elevation: 0,
             child: Padding(
@@ -39,7 +55,7 @@ class ScheduleItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Thời gian học: 10:00 - 11:00',
+                    'Thời gian học: $lessonTimeText',
                     style: kFontRegularDefault_14.copyWith(fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(height: 8),
@@ -47,12 +63,12 @@ class ScheduleItem extends StatelessWidget {
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     padding: const EdgeInsets.only(),
-                    itemBuilder: (_, index) => _widgetRowTime(),
+                    itemBuilder: (_, index) => _widgetRowTime(index, schedule.dates[index]),
                     separatorBuilder: (_, index) => const SizedBox(height: 8),
-                    itemCount: 2,
+                    itemCount: schedule.dates.length,
                   ),
                   const SizedBox(height: 8),
-                  const ExpansionArea(),
+                  ExpansionArea(request: schedule.studentRequest,),
                 ],
               ),
             ),
@@ -76,12 +92,18 @@ class ScheduleItem extends StatelessWidget {
     );
   }
 
-  Widget _widgetRowTime() {
+  Widget _widgetRowTime(int index, MyDate date) {
+
+    DateFormat formatHour = DateFormat('HH:mm');
+    final startDay = DateTime.fromMillisecondsSinceEpoch(date.startDay);
+    final endDay = DateTime.fromMillisecondsSinceEpoch(date.endDay);
+    final lessonTimeText = '${formatHour.format(startDay)} - ${formatHour.format(endDay)}';
+
     return Row(
       children: [
         Expanded(
           child: Text(
-            'Buổi 1: 10:00 - 10:25',
+            'Buổi ${index + 1}: $lessonTimeText',
             style: kFontRegularDefault_13,
           ),
         ),

@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:learning_online/core/core.dart';
 import 'package:learning_online/features/history/widget/schedule_item.dart';
+import 'package:learning_online/features/schedule/schedule_logic.dart';
 
-class SchedulePage extends StatelessWidget {
+class SchedulePage extends StatefulWidget {
   const SchedulePage({Key? key}) : super(key: key);
 
+  @override
+  State<SchedulePage> createState() => _SchedulePageState();
+}
+
+class _SchedulePageState extends State<SchedulePage> {
+  final ScheduleLogic controller = Get.put(ScheduleLogic());
+
+  @override
+  void initState() {
+    controller.getSchedule();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,10 +31,18 @@ class SchedulePage extends StatelessWidget {
             Text('Lịch đã đặt', style: kFontSemiboldBlack_22,),
             const SizedBox(height: 8),
             Expanded(
-              child: ListView.separated(
-                itemBuilder: (_, i) => const ScheduleItem(),
-                separatorBuilder: (_, i) => const SizedBox(height: 16),
-                itemCount: 3,
+              child: GetBuilder<ScheduleLogic>(
+                init: controller,
+                builder: (logic) {
+                  if(logic.schedules.isNotEmpty) {
+                    return ListView.separated(
+                      itemBuilder: (_, i) => ScheduleItem(schedule: logic.schedules[i],),
+                      separatorBuilder: (_, i) => const SizedBox(height: 16),
+                      itemCount: logic.schedules.length,
+                    );
+                  }
+                  return Center(child: CircularProgressIndicator(),);
+                }
               ),
             ),
           ],

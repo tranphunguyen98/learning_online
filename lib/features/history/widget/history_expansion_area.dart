@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:learning_online/core/core.dart';
 
 class ExpansionArea extends StatefulWidget {
+  final String request;
+
   const ExpansionArea({
     Key? key,
+    required this.request,
   }) : super(key: key);
 
   @override
@@ -18,7 +21,8 @@ class _ExpansionAreaState extends State<ExpansionArea> with TickerProviderStateM
 
   @override
   void initState() {
-    _animationController = AnimationController(duration: const Duration(milliseconds: 250), vsync: this);
+    _animationController =
+        AnimationController(duration: const Duration(milliseconds: 250), vsync: this);
     _animationController.value = 1;
     _iconTurns = Tween<double>(begin: 0.0, end: 0.25).animate(_animationController);
     _heightFactor = Tween<double>(begin: 0.0, end: 1.0).animate(_animationController);
@@ -105,13 +109,12 @@ class _ExpansionAreaState extends State<ExpansionArea> with TickerProviderStateM
         padding: const EdgeInsets.only(),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text('Yêu cầu 1'),
-              Text('Yêu cầu 2'),
-            ],
-          ),
+          child: widget.request.isNotEmpty
+              ? Text(widget.request)
+              : Text(
+                  'Hiện tại không có yêu cầu cho lớp học này. Xin vui lòng viết ra bất kỳ yêu cầu nào cho giáo viên nếu có.',
+                  style: TextStyle(color: Colors.black45),
+                ),
         ),
       ),
     );

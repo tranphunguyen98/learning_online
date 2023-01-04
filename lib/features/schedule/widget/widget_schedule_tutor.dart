@@ -1,21 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:learning_online/core/core.dart';
+import 'package:learning_online/utils/data.dart';
+
+import '../data/history_schedule.dart';
 
 class WidgetScheduleTutor extends StatelessWidget {
-  const WidgetScheduleTutor({Key? key}) : super(key: key);
+  final TutorInfo tutor;
+  const WidgetScheduleTutor({Key? key, required this.tutor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Map<String, dynamic>? nationalData =
+    nations.firstWhereOrNull((element) => element['code'] == tutor.country);
+    final nameData = nationalData?['name'] ?? '';
+    String name = '';
+    if (nameData is String) {
+      name = nameData;
+    }
+    String flag = nationalData?['flag'] ?? '';
     return Card(
       elevation: 0,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
         child: Row(
           children: [
-            const CircleAvatar(
+            CircleAvatar(
               radius: 28,
               backgroundImage: NetworkImage(
-                'https://cdn-img.thethao247.vn/upload/kienlv/2020/09/11/tuyen-thu-dt-viet-nam-cong-khai-ban-gai-xinh-nhu-mong1599795990.png',
+                tutor.avatar ?? '',
               ),
             ),
             Expanded(
@@ -26,17 +39,17 @@ class WidgetScheduleTutor extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Keegan',
+                      tutor.name ?? '',
                       style: kFontSemiboldBlack_14,
                     ),
                     Row(
                       children: [
                         Image.network(
-                          'https://upload.wikimedia.org/wikipedia/en/thumb/c/c3/Flag_of_France.svg/2560px-Flag_of_France.svg.png',
+                          flag,
                           height: 12,
                         ),
                         const SizedBox(width: 6),
-                        Text('France', style: kFontRegularDefault_12,)
+                        Text(name, style: kFontRegularDefault_12,)
                       ],
                     ),
                     Row(children: [
