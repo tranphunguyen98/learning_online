@@ -34,12 +34,16 @@ class _SchedulePageState extends State<SchedulePage> {
               child: GetBuilder<ScheduleLogic>(
                 init: controller,
                 builder: (logic) {
-                  if(logic.schedules.isNotEmpty) {
-                    return ListView.separated(
-                      itemBuilder: (_, i) => ScheduleItem(schedule: logic.schedules[i],),
-                      separatorBuilder: (_, i) => const SizedBox(height: 16),
-                      itemCount: logic.schedules.length,
-                    );
+                  if(logic.isLoaded) {
+                    if(logic.schedules.isNotEmpty) {
+                      return ListView.separated(
+                        itemBuilder: (_, i) => ScheduleItem(schedule: logic.schedules[i],),
+                        separatorBuilder: (_, i) => const SizedBox(height: 16),
+                        itemCount: logic.schedules.length,
+                      );
+                    } else {
+                     return Center(child: Text('Lịch học rỗng'));
+                    }
                   }
                   return Center(child: CircularProgressIndicator(),);
                 }

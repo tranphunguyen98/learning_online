@@ -57,6 +57,7 @@ class _WidgetCoreDropdownState extends State<WidgetCoreDropdown> {
                 if (value != null) {
                   setState(() {
                     _selectedValue = value;
+                    widget.onChanged(_selectedValue!);
                   });
                 }
               },

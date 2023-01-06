@@ -132,30 +132,58 @@ class _TimerState extends State<_Timer> {
     if(widget.startDay != null) {
       final now = DateTime.now();
       final difference = widget.startDay!.difference(now);
-      var hour = '';
-      if(difference.inHours < 10) {
-        hour = '0${difference.inHours}';
-      } else {
-        hour = '${difference.inHours}';
-      }
+      if(difference.isNegative) {
+        var hour = '';
+        final hours = -difference.inHours;
 
-      var minuteText = '';
-      final minutes = difference.inMinutes.remainder(60);
-      if(minutes < 10) {
-        minuteText = '0${minutes}';
+        if(hours < 10) {
+          hour = '0${difference.inHours}';
+        } else {
+          hour = '${difference.inHours}';
+        }
+
+        var minuteText = '';
+        final minutes = -difference.inMinutes.remainder(60);
+        if(minutes < 10) {
+          minuteText = '0${minutes}';
+        } else {
+          minuteText = '${minutes}';
+        }
+
+        var secondText = '';
+        final seconds = -difference.inSeconds.remainder(60);
+        if(seconds < 10) {
+          secondText = '0${seconds}';
+        } else {
+          secondText = '${seconds}';
+        }
+        text = 'Giờ học $hour:$minuteText:$secondText';
       } else {
-        minuteText = '${minutes}';
-      }
+        var hour = '';
+        if(difference.inHours < 10) {
+          hour = '0${difference.inHours}';
+        } else {
+          hour = '${difference.inHours}';
+        }
+
+        var minuteText = '';
+        final minutes = difference.inMinutes.remainder(60);
+        if(minutes < 10) {
+          minuteText = '0${minutes}';
+        } else {
+          minuteText = '${minutes}';
+        }
 
 
-      var secondText = '';
-      final seconds = difference.inSeconds.remainder(60);
-      if(minutes < 10) {
-        secondText = '0${seconds}';
-      } else {
-        secondText = '${seconds}';
+        var secondText = '';
+        final seconds = difference.inSeconds.remainder(60);
+        if(seconds < 10) {
+          secondText = '0${seconds}';
+        } else {
+          secondText = '${seconds}';
+        }
+        text = 'Còn $hour:$minuteText:$secondText';
       }
-      text = 'Còn $hour:$minuteText:$secondText';
     }
     return Text(
       text,

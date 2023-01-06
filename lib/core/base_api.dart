@@ -49,6 +49,27 @@ class BaseApi {
     }
   }
 
+  Future<Map<String, dynamic>> delete(String path, [Map<String, dynamic>? params]) async {
+    try {
+      final user = Get.find<RootController>().user;
+      final auth = 'Bearer ${user?.accessToken ?? ''}';
+      _dio.options.headers['Authorization'] = auth;
+      final response = await _dio.delete(path, data: params);
+      final dataReponse = response.data as Map<String, dynamic>;
+      print('nguyentp ==> $dataReponse');
+      if (dataReponse.isEmpty) {
+        throw ServerFailure();
+      } else {
+        return dataReponse;
+      }
+    } on DioError catch (e) {
+      final response = (e.response?.data ?? {}) as Map<String, dynamic>;
+      throw ServerFailure(response['message']);
+    } catch (e) {
+      throw ServerFailure();
+    }
+  }
+
   Future<Map<String, dynamic>> post(String path, Map<String, dynamic> data) async {
     try {
       final user = Get.find<RootController>().user;

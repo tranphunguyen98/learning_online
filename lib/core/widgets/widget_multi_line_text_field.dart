@@ -6,8 +6,9 @@ class WidgetMultiLineTextField extends StatelessWidget {
   final String? validator;
   final double? radius;
   final int? minLines;
+  final TextEditingController? controller;
   const WidgetMultiLineTextField(
-      {Key? key, this.hint, this.validator, this.radius, this.minLines})
+      {Key? key, this.hint, this.validator, this.radius, this.minLines, this.controller})
       : super(key: key);
 
   @override
@@ -23,6 +24,7 @@ class WidgetMultiLineTextField extends StatelessWidget {
     );
 
     return TextFormField(
+      controller: controller,
       style: kFontRegularDefault_14,
       minLines: minLines,
       maxLines: minLines,
