@@ -86,10 +86,10 @@ final tests = [
 
 final Map<String, String> levels = {
   'BEGINNER': 'Pre A1 (Beginner)',
-  'HIGHER-BEGINNER': 'A1 (Higher Beginner',
+  'HIGHER_BEGINNER': 'A1 (Higher Beginner',
   'PRE_INTERMEDIATE': 'A2 (Pre-Intermediate)',
   'INTERMEDIATE': 'B1 (Intermediate)',
-  'UPPER-INTERMEDIATE': 'B2 (Upper-Intermediate)',
+  'UPPER_INTERMEDIATE': 'B2 (Upper-Intermediate)',
   'ADVANCED': 'C1 (Advanced)',
   'PROFICIENCY': 'C2 (Proficiency)',
 };

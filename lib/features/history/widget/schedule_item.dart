@@ -56,7 +56,9 @@ class _ScheduleItemState extends State<ScheduleItem> {
           ),
           const SizedBox(height: 6),
           Text(
-            widget.schedule.dates.length > 1 ? '${widget.schedule.dates.length} buồi học liên tục' : '1 buổi học',
+            widget.schedule.dates.length > 1
+                ? '${widget.schedule.dates.length} buồi học liên tục'
+                : '1 buổi học',
             style: kFontRegularDefault_12,
           ),
           const SizedBox(height: 16),
@@ -119,128 +121,157 @@ class _ScheduleItemState extends State<ScheduleItem> {
     final endDay = DateTime.fromMillisecondsSinceEpoch(date.endDay);
     final lessonTimeText = '${formatHour.format(startDay)} - ${formatHour.format(endDay)}';
 
-    return Row(
-      children: [
-        Expanded(
-          child: Text(
-            'Buổi ${index + 1}: $lessonTimeText',
-            style: kFontRegularDefault_13,
+    DateFormat formatDay = DateFormat('dd');
+    DateFormat formatMonth = DateFormat('MM yyyy');
+
+    final dateText = '${formatDay.format(startDay)} Tháng ${formatMonth.format(startDay)}';
+    
+    return SizedBox(
+      height: 40,
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              'Buổi ${index + 1}: $lessonTimeText',
+              style: kFontRegularDefault_13,
+            ),
           ),
-        ),
-        if (startDay.difference(DateTime.now()).inMinutes > 120)
-          GestureDetector(
-            onTap: () {
-              if (startDay.difference(DateTime.now()).inMinutes > 120) {
-                showDialog(
-                    context: context,
-                    builder: (_) {
-                      return Dialog(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            WidgetTextHeader(title: 'Hủy buổi học'),
-                            const SizedBox(height: 16),
-                            Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    '* ',
-                                    style: TextStyle(color: Colors.red),
-                                  ),
-                                  Text(
-                                    'Lý do bạn hủy buổi học này là gì?',
-                                    style: kFontSemiboldPrimary_16,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                              child: WidgetCoreDropdown(
-                                data:
-                                    cancelReasons.map((e) => e['reason'] as String ?? '').toList(),
-                                hint: '',
-                                initialValue: cancelReasons.first['reason'] as String,
-                                onDisplay: (value) {
-                                  return cancelReasons.firstWhere(
-                                      (element) => element['reason'] == value,
-                                      orElse: () => const {})['reason'] as String;
-                                },
-                                onChanged: (value) {
-                                  cancelReason = cancelReasons.firstWhere((element) => element['reason'] == value);
-                                },
-                              ),
-                            ),
-                            const Divider(height: 1),
-                            Padding(
-                              padding: EdgeInsets.all(16.0),
-                              child: WidgetMultiLineTextField(
-                                controller: controller,
-                                minLines: 3,
-                                hint: 'Ghi chú thêm',
-                              ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
+          if (startDay.difference(DateTime.now()).inMinutes > 120)
+            GestureDetector(
+              onTap: () {
+                if (startDay.difference(DateTime.now()).inMinutes > 120) {
+                  showDialog(
+                      context: context,
+                      builder: (_) {
+                        final tutorInfo = widget.schedule.tutorInfo;
+                        return Dialog(
+                          child: SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
                               children: [
-                                SizedBox(
-                                  height: 64,
-                                  child: TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text(
-                                      'Bỏ qua',
-                                      style: kFontRegularDefault_14,
-                                    ),
+                                WidgetTextHeader(title: 'Hủy buổi học'),
+                                const SizedBox(height: 16),
+                                CircleAvatar(
+                                  radius: 32,
+                                  backgroundImage: NetworkImage(
+                                    tutorInfo.avatar ?? '',
                                   ),
                                 ),
-                                SizedBox(width: 8),
-                                ElevatedButton(
-                                    onPressed: () async {
-                                      final message = await Get.find<ScheduleLogic>().deleteSchedule(date.scheduleId, cancelReason['id'] as int, controller.text);
-                                      Navigator.pop(context);
-                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                        content: Text(message),
-                                        duration: Duration(milliseconds: 1000),
-                                      ));
+                                SizedBox(height: 16),
+                                Text(tutorInfo.name ?? '', style: kFontSemiboldBlack_14, ),
+                                SizedBox(height: 16),
+                                Text('Thời gian học'),
+                                SizedBox(height: 6),
+                                Text(dateText,  style: kFontSemiboldBlack_14, ),
+                                SizedBox(height: 16),
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        '* ',
+                                        style: TextStyle(color: Colors.red),
+                                      ),
+                                      Text(
+                                        'Lý do bạn hủy buổi học này là gì?',
+                                        style: kFontSemiboldPrimary_16,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                  child: WidgetCoreDropdown(
+                                    data:
+                                        cancelReasons.map((e) => e['reason'] as String ?? '').toList(),
+                                    hint: '',
+                                    initialValue: cancelReasons.first['reason'] as String,
+                                    onDisplay: (value) {
+                                      return cancelReasons.firstWhere(
+                                          (element) => element['reason'] == value,
+                                          orElse: () => const {})['reason'] as String;
                                     },
-                                    child: Text('Xác nhận hủy')),
-                                SizedBox(width: 16),
+                                    onChanged: (value) {
+                                      cancelReason = cancelReasons
+                                          .firstWhere((element) => element['reason'] == value);
+                                    },
+                                  ),
+                                ),
+                                const Divider(height: 1),
+                                Padding(
+                                  padding: EdgeInsets.all(16.0),
+                                  child: WidgetMultiLineTextField(
+                                    controller: controller,
+                                    minLines: 3,
+                                    hint: 'Ghi chú thêm',
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    SizedBox(
+                                      height: 64,
+                                      child: TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text(
+                                          'Bỏ qua',
+                                          style: kFontRegularDefault_14,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(width: 8),
+                                    ElevatedButton(
+                                      onPressed: () async {
+                                        final message = await Get.find<ScheduleLogic>().deleteSchedule(
+                                            date.scheduleId,
+                                            cancelReason['id'] as int,
+                                            controller.text);
+                                        Navigator.pop(context);
+                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                          content: Text(message),
+                                          duration: Duration(milliseconds: 1000),
+                                        ));
+                                      },
+                                      child: Text('Xác nhận hủy'),
+                                    ),
+                                    SizedBox(width: 16),
+                                  ],
+                                )
                               ],
-                            )
-                          ],
-                        ),
-                      );
-                    });
-              } else {
-                ScaffoldMessenger.of(context)
-                    .showSnackBar(SnackBar(content: Text('Bạn chỉ được hủy buổi học trước 2h')));
-              }
-            },
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
-              decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(2)),
-                  border: Border.all(color: Colors.red)),
-              child: Row(
-                children: [
-                  const Icon(
-                    Icons.cancel,
-                    size: 12,
-                    color: Colors.red,
-                  ),
-                  const SizedBox(width: 4),
-                  Text(
-                    'Hủy',
-                    style: kFontRegularDefault_12.copyWith(color: Colors.red),
-                  )
-                ],
+                            ),
+                          ),
+                        );
+                      });
+                } else {
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text('Bạn chỉ được hủy buổi học trước 2h')));
+                }
+              },
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(2)),
+                    border: Border.all(color: Colors.red)),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.cancel,
+                      size: 12,
+                      color: Colors.red,
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      'Hủy',
+                      style: kFontRegularDefault_12.copyWith(color: Colors.red),
+                    )
+                  ],
+                ),
               ),
-            ),
-          )
-      ],
+            )
+        ],
+      ),
     );
   }
 }

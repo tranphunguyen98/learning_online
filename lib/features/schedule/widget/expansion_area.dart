@@ -3,8 +3,9 @@ import 'package:learning_online/core/core.dart';
 
 class HistoryExpansionArea extends StatefulWidget {
   final String title;
+  final String content;
   const HistoryExpansionArea({
-    Key? key, required this.title,
+    Key? key, required this.title, required this.content,
   }) : super(key: key);
 
   @override
@@ -83,7 +84,7 @@ class _HistoryExpansionAreaState extends State<HistoryExpansionArea> with Ticker
   Widget content() {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 250),
-      child: Text('Nội dung ${widget.title} \nNội dung ${widget.title}' ),
+      child: Text(widget.content),
     );
   }
 
