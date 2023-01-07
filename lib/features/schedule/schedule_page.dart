@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:learning_online/core/core.dart';
 import 'package:learning_online/features/history/widget/schedule_item.dart';
 import 'package:learning_online/features/schedule/schedule_logic.dart';
+import 'package:loadmore/loadmore.dart';
 
 class SchedulePage extends StatefulWidget {
   const SchedulePage({Key? key}) : super(key: key);
@@ -36,10 +37,19 @@ class _SchedulePageState extends State<SchedulePage> {
                 builder: (logic) {
                   if(logic.isLoaded) {
                     if(logic.schedules.isNotEmpty) {
-                      return ListView.separated(
-                        itemBuilder: (_, i) => ScheduleItem(schedule: logic.schedules[i],),
-                        separatorBuilder: (_, i) => const SizedBox(height: 16),
-                        itemCount: logic.schedules.length,
+                      return LoadMore(
+                        isFinish: controller.isFinish,
+                        textBuilder: (status) {
+                          return '';
+                        },
+                        onLoadMore: () {
+                          return controller.loadMore();
+                        },
+                        child: ListView.separated(
+                          itemBuilder: (_, i) => ScheduleItem(schedule: logic.schedules[i],),
+                          separatorBuilder: (_, i) => const SizedBox(height: 16),
+                          itemCount: logic.schedules.length,
+                        ),
                       );
                     } else {
                      return Center(child: Text('Lịch học rỗng'));

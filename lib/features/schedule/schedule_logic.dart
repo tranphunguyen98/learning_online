@@ -52,7 +52,9 @@ class MySchedule {
 
 class ScheduleLogic extends GetxController {
   List<MySchedule> schedules = [];
+  int currentPage = 1;
   bool isLoaded = false;
+  bool isFinish = false;
 
   Future<String> deleteSchedule(String scheduleDetailId, int cancelReason, String note) async {
     try {
@@ -75,11 +77,56 @@ class ScheduleLogic extends GetxController {
     }
   }
 
-  Future<void> getSchedule() async {
-    isLoaded = false;
+  Future<bool> loadMore() async {
+    currentPage += 1;
     final currentTime = DateTime.now().millisecondsSinceEpoch;
     final responseData = await BaseApi().get(
-      'https://sandbox.api.lettutor.com/booking/list/student?page=1&perPage=20&dateTimeGte=$currentTime&orderBy=meeting&sortBy=asc',
+      'https://sandbox.api.lettutor.com/booking/list/student?page=$currentPage&perPage=15&dateTimeGte=$currentTime&orderBy=meeting&sortBy=asc',
+    );
+
+    final scheduleData = HistorySchedule.fromJson(responseData).data?.rows ?? [];
+    if(scheduleData.isEmpty) {
+      isFinish = true;
+    }
+    for (var schedule in scheduleData) {
+      if (schedules.isNotEmpty &&
+          schedule.scheduleDetailInfo!.startPeriodTimestamp! - schedules.last.dates.last.startDay ==
+              30 * 60 * 1000) {
+        schedules.last.dates.add(
+          MyDate(
+            startDay: schedule.scheduleDetailInfo!.startPeriodTimestamp!,
+            endDay: schedule.scheduleDetailInfo!.endPeriodTimestamp!,
+            scheduleId: schedule.id ?? '',
+          ),
+        );
+      } else {
+        schedules.add(
+          MySchedule(
+            tutorInfo: schedule.scheduleDetailInfo!.scheduleInfo!.tutorInfo!,
+            studentRequest: schedule.studentRequest ?? '',
+            dates: [
+              MyDate(
+                startDay: schedule.scheduleDetailInfo?.startPeriodTimestamp ?? 0,
+                endDay: schedule.scheduleDetailInfo?.endPeriodTimestamp ?? 0,
+                scheduleId: schedule.id ?? '',
+              )
+            ],
+          ),
+        );
+      }
+    }
+
+    update();
+    return true;
+  }
+
+  Future<void> getSchedule() async {
+    isLoaded = false;
+    isFinish = false;
+    currentPage = 1;
+    final currentTime = DateTime.now().millisecondsSinceEpoch;
+    final responseData = await BaseApi().get(
+      'https://sandbox.api.lettutor.com/booking/list/student?page=1&perPage=15&dateTimeGte=$currentTime&orderBy=meeting&sortBy=asc',
     );
 
     isLoaded = true;
