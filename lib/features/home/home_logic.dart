@@ -20,8 +20,9 @@ class HomeLogic extends GetxController {
   }
 
   Future<void> getClasses() async {
+    final time = DateTime.now().millisecondsSinceEpoch;
     final responseData = await BaseApi().get(
-      'https://sandbox.api.lettutor.com/booking/next?dateTime=1672160425425',
+      'https://sandbox.api.lettutor.com/booking/next?dateTime=$time',
     );
 
     final schedule = ScheduleData.fromJson(responseData);

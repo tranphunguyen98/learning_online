@@ -1,6 +1,9 @@
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:learning_online/core/base_api.dart';
+import 'package:learning_online/features/profile/data/user.dart';
+import 'package:learning_online/features/root_controller.dart';
+import 'package:learning_online/features/teacher_detail/data/booking.dart';
 import 'package:learning_online/features/teacher_detail/data/review.dart';
 import 'package:learning_online/features/teacher_list/data/teacher_response.dart';
 import 'package:learning_online/features/teacher_list/logic.dart';
@@ -18,6 +21,7 @@ class TeachDetailLogic extends GetxController {
   TeacherModel? teacherModel;
   int totalReview = 0;
   List<ReviewTutorModel> reviews = [];
+  List<ScheduleOfTutor> bookings = [];
 
   Future<void> getTeacher(String id) async {
     final responseData = await BaseApi().get(
@@ -57,6 +61,18 @@ class TeachDetailLogic extends GetxController {
     update();
   }
 
+  Future<String> booking(String id, String note) async {
+    final responseData = await BaseApi().post(
+      '/booking',
+      {
+        'scheduleDetailIds': [id],
+        'note': note
+      },
+    );
+
+    return responseData['message'];
+  }
+
   Future<void> getReview(String id) async {
     final responseData = await BaseApi().get(
       'https://sandbox.api.lettutor.com/feedback/v2/$id?page=1&perPage=12',
@@ -79,5 +95,37 @@ class TeachDetailLogic extends GetxController {
 
     print('nguyentp ==> ');
     update();
+  }
+
+  Future<void> getCalendar(String tutorId, int startTime, int endTime) async {
+    final responseData = await BaseApi().get(
+      'https://sandbox.api.lettutor.com/schedule?tutorId=$tutorId&startTimestamp=$startTime&endTimestamp=$endTime',
+    );
+
+    Booking bookingData = Booking.fromJson(responseData);
+    bookings = bookingData.scheduleOfTutor ?? [];
+
+    print('nguyentp ==> ');
+    update();
+  }
+
+  Future<void> getUserInfo() async {
+    final responseData = await BaseApi().get(
+      'https://sandbox.api.lettutor.com/user/info',
+    );
+
+    final user = UserData.fromJson(responseData).user;
+
+    final _user = Get.find<RootController>().user;
+
+    Get.find<RootController>().user = _user?.copyWith(
+      dateOfBirth: user?.birthday ?? '',
+      email: user?.email ?? '',
+      id: user?.id ?? '',
+      name: user?.name ?? '',
+      avatar: user?.avatar ?? '',
+      phoneNumber: user?.phone,
+      walletInfo: user?.walletInfo,
+    );
   }
 }

@@ -30,6 +30,7 @@ class LoginController extends GetxController {
         avatar: user?.avatar ?? '',
         accessToken: token?.access?.token ?? '',
         phoneNumber: user?.phone,
+        walletInfo: user?.walletInfo,
       );
 
       Get.find<RootController>().user = userModel;

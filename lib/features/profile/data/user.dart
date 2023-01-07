@@ -1,3 +1,5 @@
+import 'package:learning_online/features/login/data/login_reponse.dart';
+
 /// user : {"id":"f569c202-7bbf-4620-af77-ecc1419a6b28","email":"student@lettutor.com","name":"Demo1111","avatar":"https://sandbox.api.lettutor.com/avatar/f569c202-7bbf-4620-af77-ecc1419a6b28avatar1671339081995.jpg","country":"AG","phone":"842499996508","roles":["student","CHANGE_PASSWORD"],"language":"Albanian","birthday":"2022-12-08","isActivated":true,"tutorInfo":{"id":"db37f185-399f-470d-995b-bf6143cb1a5f","video":"https://sandbox.api.lettutor.com/video/f569c202-7bbf-4620-af77-ecc1419a6b28video1643096811438.mp4","bio":"You can't Xi me ! Bing chilling ! 1","education":"University of Science 3","experience":"3 years","profession":"WWE, Online English teacher","accent":null,"targetStudent":"Advanced","interests":"I like reading book","languages":"+1268","specialties":"conversational-english,movers,flyers,toefl,toeic,business-english,Business English,Conversational English,Ielts,Movers,Toeic","resume":null,"rating":4.378378378378378,"isActivated":false,"isNative":false},"walletInfo":{"amount":"60300000","isBlocked":false,"bonus":0},"requireNote":null,"level":"BEGINNER","learnTopics":[{"id":3,"key":"english-for-kids","name":"English for Kids"}],"testPreparations":[{"id":3,"key":"flyers","name":"FLYERS"}],"isPhoneActivated":true,"timezone":7,"referralInfo":{"referralCode":"RSJYDZYQLE","referralPackInfo":{"earnPercent":5}},"studySchedule":"","canSendMessage":false,"studentGroup":null,"studentInfo":null,"avgRating":4.378378378378378}
 
 class UserData {
@@ -404,43 +406,6 @@ class LearnTopic {
     map['id'] = _id;
     map['key'] = _key;
     map['name'] = _name;
-    return map;
-  }
-
-}
-
-/// amount : "60300000"
-/// isBlocked : false
-/// bonus : 0
-
-class WalletInfo {
-  WalletInfo({
-      String? amount, 
-      bool? isBlocked, 
-      int? bonus,}){
-    _amount = amount;
-    _isBlocked = isBlocked;
-    _bonus = bonus;
-}
-
-  WalletInfo.fromJson(dynamic json) {
-    _amount = json['amount'];
-    _isBlocked = json['isBlocked'];
-    _bonus = json['bonus'];
-  }
-  String? _amount;
-  bool? _isBlocked;
-  int? _bonus;
-
-  String? get amount => _amount;
-  bool? get isBlocked => _isBlocked;
-  int? get bonus => _bonus;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['amount'] = _amount;
-    map['isBlocked'] = _isBlocked;
-    map['bonus'] = _bonus;
     return map;
   }
 

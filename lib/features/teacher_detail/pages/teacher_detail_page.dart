@@ -98,7 +98,7 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
                 // _widgetTitleTextColumn('Học vấn', teacherModel.education),
                 // _widgetTitleTextColumn('Nghề nghiệp', teacherModel.career),
                 const SizedBox(height: 16),
-                const WidgetSchedule(),
+                WidgetSchedule(tutorId: widget.teacherId),
               ],
             ),
           ),

@@ -1,3 +1,5 @@
+import 'package:learning_online/features/login/data/login_reponse.dart';
+
 class UserModel {
   final String id;
   final String name;
@@ -9,6 +11,8 @@ class UserModel {
   final String? level;
   final String? subject;
   final String accessToken;
+  final WalletInfo? walletInfo;
+
 
   const UserModel({
     this.phoneNumber,
@@ -21,22 +25,13 @@ class UserModel {
     required this.id,
     required this.name,
     required this.avatar,
+    required this.walletInfo,
   });
-
-  static UserModel mock = UserModel(
-    email: 'ntran@gmail.com',
-    accessToken: '',
-    id: '',
-    name: 'name',
-    dateOfBirth: DateTime.now().toIso8601String(),
-    avatar:
-    'https://cdn-img.thethao247.vn/upload/kienlv/2020/09/11/tuyen-thu-dt-viet-nam-cong-khai-ban-gai-xinh-nhu-mong1599795990.png',
-  );
 
   UserModel copyWith({
     String? id,
     String? name,
-    String? imageUrl,
+    String? avatar,
     String? phoneNumber,
     String? dateOfBirth,
     String? email,
@@ -44,11 +39,12 @@ class UserModel {
     String? level,
     String? subject,
     String? accessToken,
+    WalletInfo? walletInfo,
   }) {
     return UserModel(
       id: id ?? this.id,
       name: name ?? this.name,
-      avatar: imageUrl ?? this.avatar,
+      avatar: avatar ?? this.avatar,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       dateOfBirth: dateOfBirth ?? this.dateOfBirth,
       email: email ?? this.email,
@@ -56,6 +52,7 @@ class UserModel {
       level: level ?? this.level,
       subject: subject ?? this.subject,
       accessToken: accessToken ?? this.accessToken,
+      walletInfo: walletInfo ?? this.walletInfo,
     );
   }
 }

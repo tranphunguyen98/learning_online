@@ -28,6 +28,7 @@ class RegisterController extends GetxController {
         name: user?.name ?? '',
         avatar: user?.avatar ?? '',
         accessToken: token?.access?.token ?? '',
+        walletInfo: null,
       );
     } catch (e) {
       isLoading = false;
