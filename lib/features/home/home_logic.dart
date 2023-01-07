@@ -28,7 +28,16 @@ class HomeLogic extends GetxController {
     final schedule = ScheduleData.fromJson(responseData);
 
     if(schedule.data?.isNotEmpty ?? false) {
-      booking = schedule.data!.last;
+      final datas = schedule.data!;
+      datas.sort((a, b) {
+        return a.scheduleDetailInfo!.startPeriodTimestamp!.compareTo(b.scheduleDetailInfo!.startPeriodTimestamp!);
+      });
+      for(var data in datas) {
+        if(!DateTime.fromMillisecondsSinceEpoch(data.scheduleDetailInfo?.startPeriodTimestamp ?? 0).difference(DateTime.now()).isNegative)  {
+          booking = data;
+          break;
+        }
+      }
     }
 
     update();

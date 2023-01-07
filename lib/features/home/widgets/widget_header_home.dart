@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learning_online/core/core.dart';
 import 'package:learning_online/features/home/home_logic.dart';
+import 'package:learning_online/features/home/stream/jitsi.dart';
 
 import '../../../utils/router.dart';
 
@@ -57,7 +58,11 @@ class _WidgetHeaderHomeState extends State<WidgetHeaderHome> {
                               shape:
                                   RoundedRectangleBorder(borderRadius: BorderRadius.circular(24))),
                           onPressed: () {
-                            Navigator.pushNamed(context, AppRouter.kJitsi);
+                            // Navigator.pushNamed(context, AppRouter.kJitsi);
+                            JitsiMeetHelper.joinMeeting(
+                              booking.scheduleDetailInfo?.scheduleInfo?.tutorInfo?.name ?? '',
+                              booking.studentMeetingLink ?? '',
+                            );
                           },
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
