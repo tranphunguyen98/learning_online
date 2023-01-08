@@ -41,7 +41,7 @@ class _WidgetHeaderHomeState extends State<WidgetHeaderHome> {
                     Column(
                       children: [
                         Text(
-                          'Buổi học sắp diễn ra',
+                          'Buổi học sắp diễn ra'.tr,
                           style: kFontRegularWhite_18,
                         ),
                         const SizedBox(height: 8),
@@ -74,7 +74,7 @@ class _WidgetHeaderHomeState extends State<WidgetHeaderHome> {
                               ),
                               const SizedBox(width: 8),
                               Text(
-                                'Vào lớp học',
+                                'Vào lớp học'.tr,
                                 style: kFontRegularBlue_14,
                               ),
                             ],
@@ -84,7 +84,7 @@ class _WidgetHeaderHomeState extends State<WidgetHeaderHome> {
                     )
                   else
                     Text(
-                      'Bạn không có buổi học nào.',
+                      'Bạn không có buổi học nào.'.tr,
                       style: kFontRegularWhite_18,
                     ),
                   const SizedBox(height: 8),
@@ -187,7 +187,7 @@ class _TimerState extends State<_Timer> {
         } else {
           secondText = '${seconds}';
         }
-        text = 'Còn $hour:$minuteText:$secondText';
+        text = '${'Còn'.tr} $hour:$minuteText:$secondText';
       }
     }
     return Text(

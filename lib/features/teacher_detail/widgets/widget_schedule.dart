@@ -48,11 +48,11 @@ class _WidgetSheduleState extends State<WidgetSchedule> {
       String dateText = '';
       if (startTime.month != endTime.month && startTime.year == endTime.year) {
         dateText =
-            'Tháng ${formatMonthOnly.format(startTime)} - Tháng ${formatMonth.format(endTime)}';
+            '${'Tháng'.tr} ${formatMonthOnly.format(startTime)} - ${'Tháng'.tr} ${formatMonth.format(endTime)}';
       } else if (startTime.month != endTime.month && startTime.year != endTime.year) {
-        dateText = 'Tháng ${formatMonth.format(startTime)} - Tháng ${formatMonth.format(endTime)}';
+        dateText = '${'Tháng'.tr} ${formatMonth.format(startTime)} - ${'Tháng'.tr} ${formatMonth.format(endTime)}';
       } else {
-        dateText = 'Tháng ${formatMonth.format(startTime)}';
+        dateText = '${'Tháng'.tr} ${formatMonth.format(startTime)}';
       }
 
       final rowsLength = 48;
@@ -176,12 +176,12 @@ class _WidgetSheduleState extends State<WidgetSchedule> {
                     }
                     if (isOtherBooked) {
                       _child = Text(
-                        'Đã được đặt',
+                        'Đã được đặt'.tr,
                         style: kFontRegularBlue_12.copyWith(color: Colors.black45),
                       );
                     } else {
                       _child = Text(
-                        'Đã đặt',
+                        'Đã đặt'.tr,
                         style: kFontRegularBlue_12.copyWith(color: Colors.green),
                       );
                     }
@@ -272,7 +272,7 @@ class _WidgetSheduleState extends State<WidgetSchedule> {
             : () {
                 showDialog(
                     context: context,
-                    builder: (_) {
+                    builder: (dialogContext) {
                       DateFormat formatHour = DateFormat('HH:mm');
                       DateFormat formatDay = DateFormat('dd');
                       DateFormat formatMonth = DateFormat('MM, yyyy');
@@ -421,7 +421,7 @@ class _WidgetSheduleState extends State<WidgetSchedule> {
                                             backgroundColor: Colors.white.withOpacity(0.2),
                                           ),
                                           onPressed: () {
-                                            Navigator.pop(context);
+                                            Navigator.pop(dialogContext);
                                           },
                                           child: Text('Hủy'),
                                         ),
@@ -459,7 +459,7 @@ class _WidgetSheduleState extends State<WidgetSchedule> {
                                                 ));
                                               }
                                             },
-                                            child: Text('Đặt lịch'))
+                                            child: Text('Đặt lịch'.tr))
                                       ],
                                     )
                                   ],
@@ -472,7 +472,7 @@ class _WidgetSheduleState extends State<WidgetSchedule> {
                     });
               },
         child: Text(
-          'Đặt lịch',
+          'Đặt lịch'.tr,
           style: _isOverTime
               ? kFontRegularWhite_10.copyWith(color: Colors.black45)
               : kFontRegularWhite_10,

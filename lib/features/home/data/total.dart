@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+
 /// total : 12625
 
 class Total {
@@ -17,15 +19,15 @@ class Total {
 
   String get totalText {
     if (total != null && total! > 0) {
-      var result = 'Tổng số giờ bạn đã học là';
+      var result = 'Tổng số giờ bạn đã học là'.tr;
       final hours = total! ~/ 60;
       if(hours > 0) {
-        result += ' $hours giờ';
+        result += ' $hours ${ 'giờ'.tr }';
       }
 
       final minutes = total! % 60;
       if(minutes > 0) {
-        result += ' $minutes phút';
+        result += ' $minutes ${ 'phút'.tr }';
       }
 
       return result;

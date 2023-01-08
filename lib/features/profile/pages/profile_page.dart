@@ -51,7 +51,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: widgetCoreAppBar(title: 'Hồ sơ', context: context),
+      appBar: widgetCoreAppBar(title: 'Hồ sơ'.tr, context: context),
       backgroundColor: Colors.white,
       body: GetBuilder<ProfileLogic>(
           init: logic,
@@ -97,14 +97,14 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           WidgetRoundedTextFieldWithTitle(
                             controller: nameController,
-                            title: 'Tên',
-                            hint: 'Họ và Tên',
+                            title: 'Tên'.tr,
+                            hint: 'Họ và Tên'.tr,
                             isRequired: true,
                             radius: 8,
                             textInputType: TextInputType.phone,
                             validator: (value) {
                               if (value?.isEmpty == true) {
-                                  return 'Vui lòng nhập tên';
+                                  return 'Vui lòng nhập tên'.tr;
                               }
                               return null;
                             },
@@ -113,14 +113,14 @@ class _ProfilePageState extends State<ProfilePage> {
                           WidgetRoundedTextFieldWithTitle(
                             isDisable: _userModel.isActivated ?? false,
                             controller: emailController,
-                            title: 'Địa chỉ email',
-                            hint: 'Địa chỉ email',
+                            title: 'Địa chỉ email'.tr,
+                            hint: 'Địa chỉ email'.tr,
                             radius: 8,
                             textInputType: TextInputType.phone,
                             validator: (value) {
                               if (value?.isNotEmpty == true) {
                                 if (!GetUtils.isEmail(value!)) {
-                                  return 'Vui lòng nhập đúng định dạng email.';
+                                  return 'Vui lòng nhập đúng định dạng email.'.tr;
                                 }
                               }
                               return null;
@@ -128,8 +128,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           const SizedBox(height: 8),
                           WidgetSearchableDropdownWithTitle<Map<String, String>>(
-                            title: 'Quốc gia',
-                            hint: 'Chọn quốc gia',
+                            title: 'Quốc gia'.tr,
+                            hint: 'Chọn quốc gia'.tr,
                             selected: selected,
                             items: nations,
                             onDisplay: (value) => value['name'] ?? '',
@@ -145,7 +145,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             isRequired: true,
                             isDisable: _userModel.isPhoneActivated ?? false,
                             controller: phoneController,
-                            title: 'Số điện thoại',
+                            title: 'Số điện thoại'.tr,
                             hint: 'Cập nhật số điện thoại',
                             radius: 8,
                             textInputType: TextInputType.phone,
@@ -160,8 +160,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           const SizedBox(height: 8),
                           WidgetDropdownWithTitle(
-                            title: 'Trình độ',
-                            hint: 'Chọn trình độ',
+                            title: 'Trình độ'.tr,
+                            hint: 'Chọn trình độ'.tr,
                             initValue: _userModel.level ?? '',
                             onChanged: (value) {
                               _userModel = _userModel.copyWith(level: value);
@@ -178,7 +178,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             onChanged: (topics, tests) {
                               if(topics.isEmpty && tests.isEmpty) {
                                 setState(() {
-                                  subjectsErrorText = 'Bắt buộc chọn môn muốn học';
+                                  subjectsErrorText = 'Bắt buộc chọn môn muốn học'.tr;
                                 });
                               } else {
                                 if(subjectsErrorText.isNotEmpty) {
@@ -202,7 +202,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           SizedBox(height: 16),
                           Text(
-                            'Lịch học',
+                            'Lịch học'.tr,
                             style: kFontRegularDefault_14,
                           ),
                           SizedBox(height: 8),
@@ -212,17 +212,17 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           const SizedBox(height: 32),
                           WidgetRoundedButton(
-                            text: 'Lưu',
+                            text: 'Lưu'.tr,
                             onPressed: () async {
                               if ((_userModel.learnTopics?.isEmpty ?? true) &&
                                   (_userModel.testPreparations?.isEmpty ?? true)) {
                                 setState(() {
-                                  subjectsErrorText = 'Bắt buộc chọn môn muốn học';
+                                  subjectsErrorText = 'Bắt buộc chọn môn muốn học'.tr;
                                 });
                               } else {
-                                String message = 'Lưu thành công';
+                                String message = 'Lưu thành công'.tr;
                                 if (nameController.text.isEmpty) {
-                                  message = 'Vui lòng nhập tên';
+                                  message = 'Vui lòng nhập tên'.tr;
                                 }
                                 logic.user = logic.user?.copyWith(
                                   studySchedule: scheduleController.text,
@@ -272,7 +272,7 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Ngày sinh', style: kFontRegularDefault_14),
+          Text('Ngày sinh'.tr, style: kFontRegularDefault_14),
           const SizedBox(height: 8),
           WidgetCoreDatePicker(
             date: _userModel.birthday ?? '',

@@ -33,7 +33,7 @@ class RegisterPage extends StatelessWidget {
           color: kBlackColor,
         ),
         title: Text(
-          'Đăng ký',
+          'Đăng ký'.tr,
           style: kFontSemiboldBlack_16,
         ),
       ),
@@ -47,7 +47,7 @@ class RegisterPage extends StatelessWidget {
                   children: [
                     _widgetForm(),
                     WidgetRoundedButton(
-                      text: 'Đăng ký',
+                      text: 'Đăng ký'.tr,
                       onPressed: () async {
                         if (_formKey.currentState?.validate() ?? false) {
                           try {
@@ -63,13 +63,13 @@ class RegisterPage extends StatelessWidget {
                       },
                     ),
                     SizedBox(height: 16),
-                    WidgetRowWithSocial(title: 'Hoặc đăng ký với'),
+                    WidgetRowWithSocial(title: 'Hoặc đăng ký với'.tr),
                     SizedBox(height: 32),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Bạn đã có tài khoản?',
+                          'Bạn đã có tài khoản?'.tr,
                           style: kFontRegularDefault_14,
                         ),
                         SizedBox(width: 4),
@@ -78,7 +78,7 @@ class RegisterPage extends StatelessWidget {
                             Navigator.of(context).pushNamed(AppRouter.kLogin);
                           },
                           child: Text(
-                            'Đăng nhập',
+                            'Đăng nhập'.tr,
                             style: kFontRegularBlue_14,
                           ),
                         ),
@@ -110,7 +110,7 @@ class RegisterPage extends StatelessWidget {
         children: [
           WidgetRoundedTextFieldWithTitle(
             controller: emailController,
-            title: 'Địa chỉ E-mail',
+            title: 'Địa chỉ E-mail'.tr,
             hint: 'example@gmail.com',
             isRequired: true,
             validator: (value) {
@@ -124,7 +124,7 @@ class RegisterPage extends StatelessWidget {
           ),
           SizedBox(height: 32),
           WidgetRoundedTextFieldWithTitle(
-            title: 'Mật khẩu',
+            title: 'Mật khẩu'.tr,
             isRequired: true,
             controller: passwordController,
             hint: '********',
@@ -139,7 +139,7 @@ class RegisterPage extends StatelessWidget {
           ),
           SizedBox(height: 32),
           WidgetRoundedTextFieldWithTitle(
-            title: 'Xác nhận Mật khẩu',
+            title: 'Xác nhận Mật khẩu'.tr,
             isRequired: true,
             hint: '********',
             controller: confirmPasswordController,

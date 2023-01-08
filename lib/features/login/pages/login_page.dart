@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: kWhiteColor,
       appBar: widgetCoreAppBar(
-          title: 'Đăng nhập', context: context, hasBackIcon: widget.arguments['email'] != null ? false : true),
+          title: 'Đăng nhập'.tr, context: context, hasBackIcon: widget.arguments['email'] != null ? false : true),
       body: GetBuilder<LoginController>(builder: (logic) {
         return Stack(
           children: [
@@ -60,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(height: 32),
                       WidgetRoundedTextFieldWithTitle(
                         controller: emailController,
-                        title: 'Địa chỉ E-mail',
+                        title: 'Địa chỉ E-mail'.tr,
                         hint: 'example@gmail.com',
                         isRequired: true,
                         validator: (value) {
@@ -75,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(height: 32),
                       WidgetRoundedTextFieldWithTitle(
                         controller: passwordController,
-                        title: 'Mật khẩu',
+                        title: 'Mật khẩu'.tr,
                         isRequired: true,
                         hint: '********',
                         obscureText: true,
@@ -95,18 +95,19 @@ class _LoginPageState extends State<LoginPage> {
                             Navigator.of(context).pushNamed(AppRouter.kForgotPassword);
                           },
                           child: Text(
-                            'Quên mật khẩu',
+                            'Quên mật khẩu'.tr,
                             style: kFontRegularPrimary_14,
                           ),
                         ),
                       ),
                       SizedBox(height: 16),
                       WidgetRoundedButton(
-                        text: 'Đăng nhập',
+                        text: 'Đăng nhập'.tr,
                         onPressed: () async {
                           try {
                             if (_formKey.currentState?.validate() ?? false) {
                               await loginController.login(emailController.text, passwordController.text);
+                              loginController.isLoading = false;
                               Navigator.of(context).pushReplacementNamed(AppRouter.kHome);
                             }
                           } on ServerFailure catch (e) {
@@ -115,13 +116,13 @@ class _LoginPageState extends State<LoginPage> {
                         },
                       ),
                       SizedBox(height: 16),
-                      WidgetRowWithSocial(title: 'Hoặc đăng nhập với'),
+                      WidgetRowWithSocial(title: 'Hoặc đăng nhập với'.tr),
                       SizedBox(height: 32),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Chưa có tài khoản?',
+                            'Chưa có tài khoản?'.tr,
                             style: kFontRegularDefault_14,
                           ),
                           SizedBox(width: 4),
@@ -130,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                               Navigator.of(context).pushNamed(AppRouter.kRegister);
                             },
                             child: Text(
-                              'Đăng ký',
+                              'Đăng ký'.tr,
                               style: kFontRegularBlue_14,
                             ),
                           ),

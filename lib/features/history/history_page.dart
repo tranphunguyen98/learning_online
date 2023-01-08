@@ -26,7 +26,7 @@ class _HistoryPageState extends State<HistoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: widgetCoreAppBar(title: 'Lịch sử các buổi học', context: context),
+      appBar: widgetCoreAppBar(title: 'Lịch sử các buổi học'.tr, context: context),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: GetBuilder<HistoryScheduleLogic>(
@@ -52,7 +52,7 @@ class _HistoryPageState extends State<HistoryPage> {
                     ),
                   );
                 } else {
-                  return Center(child: Text('Lịch sử học rỗng'));
+                  return Center(child: Text('Lịch sử học rỗng'.tr));
                 }
               }
               return Center(

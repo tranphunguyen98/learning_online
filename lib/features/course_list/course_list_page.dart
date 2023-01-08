@@ -29,7 +29,7 @@ class _CourseListPageState extends State<CourseListPage> {
         Padding(
           padding: const EdgeInsets.only(left: 12.0, right: 12.0, top: 12.0),
           child: WidgetSearchTextField(
-            hint: 'Tìm kiếm khóa hoc',
+            hint: 'Tìm kiếm khóa hoc'.tr,
             onChanged: (value) {
               controller.search(value ?? '');
             },

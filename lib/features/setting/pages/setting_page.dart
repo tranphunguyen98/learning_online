@@ -5,6 +5,7 @@ import 'package:learning_online/core/widgets/widget_rounded_button.dart';
 import 'package:learning_online/features/root_controller.dart';
 import 'package:learning_online/features/setting/widgets/widget_setting_button.dart';
 import 'package:learning_online/model/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../utils/router.dart';
@@ -18,80 +19,144 @@ class SettingPage extends StatefulWidget {
 
 class _SettingPageState extends State<SettingPage> {
   late UserModel? userModel;
+  final rootController = Get.find<RootController>();
 
   @override
   void initState() {
     userModel = Get.find<RootController>().user;
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            _widgetHeader(),
-            const SizedBox(height: 32),
-            const WidgetSettingButton(
-              text: 'Xem đánh giá bản thân',
-              leading: Icons.person_outline,
-            ),
-            const SizedBox(height: 16),
-            WidgetSettingButton(
-              text: 'Danh sách giáo viên ưa thích',
-              leading: Icons.favorite_border,
-              onPressed: () {
-                Navigator.pushNamed(context, AppRouter.kTeacherFavorite);
-              },
-            ),
-            const SizedBox(height: 16),
-            // WidgetSettingButton(
-            //   text: 'Dánh sach',
-            //   leading: Icons.menu,
-            // ),
-            // SizedBox(height: 16),
-            WidgetSettingButton(
-              onPressed: () {
-                Navigator.pushNamed(context, AppRouter.kHistory);
-              },
-              text: 'Lịch sử học',
-              leading: Icons.history,
-            ),
-            const SizedBox(height: 16),
-            const WidgetSettingButton(
-              text: 'Cài đặt nâng cao',
-              leading: Icons.settings_outlined,
-            ),
-            const SizedBox(height: 64),
-             WidgetSettingButton(
-              text: 'Đi đến Website',
-              leading: Icons.language,
-              onPressed: () async {
-                const url = "https://lettutor.edu.vn/";
-                if (await canLaunchUrl(Uri.parse(url)))
-                await launchUrl(Uri.parse(url));
-                else
-                // can't launch url, there is some error
-                throw "Could not launch $url";
-              },
-            ),
-            const SizedBox(height: 16),
-            const WidgetSettingButton(
-              text: 'Facebook',
-              leading: Icons.facebook_outlined,
-            ),
-            const SizedBox(height: 64),
-            const WidgetRoundedButton(text: 'Đăng xuất'),
-          ],
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _widgetHeader(),
+          const SizedBox(height: 32),
+          // const WidgetSettingButton(
+          //   text: 'Xem đánh giá bản thân',
+          //   leading: Icons.person_outline,
+          // ),
+          // const SizedBox(height: 16),
+          WidgetSettingButton(
+            text: 'Danh sách giáo viên ưa thích'.tr,
+            leading: Icons.favorite_border,
+            onPressed: () {
+              Navigator.pushNamed(context, AppRouter.kTeacherFavorite);
+            },
+          ),
+          const SizedBox(height: 16),
+          // WidgetSettingButton(
+          //   text: 'Dánh sach',
+          //   leading: Icons.menu,
+          // ),
+          // SizedBox(height: 16),
+          WidgetSettingButton(
+            onPressed: () {
+              Navigator.pushNamed(context, AppRouter.kHistory);
+            },
+            text: 'Lịch sử học'.tr,
+            leading: Icons.history,
+          ),
+          const SizedBox(height: 16),
+          // const WidgetSettingButton(
+          //   text: 'Cài đặt nâng cao',
+          //   leading: Icons.settings_outlined,
+          // ),
+          // const SizedBox(height: 64),
+          //  WidgetSettingButton(
+          //   text: 'Đi đến Website',
+          //   leading: Icons.language,
+          //   onPressed: () async {
+          //     const url = "https://lettutor.edu.vn/";
+          //     if (await canLaunchUrl(Uri.parse(url)))
+          //     await launchUrl(Uri.parse(url));
+          //     else
+          //     // can't launch url, there is some error
+          //     throw "Could not launch $url";
+          //   },
+          // ),
+          // const SizedBox(height: 16),
+          // const WidgetSettingButton(
+          //   text: 'Facebook',
+          //   leading: Icons.facebook_outlined,
+          // ),
+          SizedBox(height: 16),
+          Text('Ngôn ngữ'.tr, style: kFontMediumBlack_14,),
+          Row(
+            children: [
+              Expanded(
+                child: RadioListTile<bool>(
+                  title: Text('Tiếng Việt'.tr),
+                  value: true,
+                  onChanged: (value) {
+                    setState(() async {
+                      rootController.isVietnamese = value ?? false;
+                      Get.updateLocale(Locale('vn'));
+                      final instance = await SharedPreferences.getInstance();
+                      instance.setBool('isEnglish', false);
+
+                    });
+                  },
+                  groupValue: rootController.isVietnamese,
+                ),
+              ),
+              Expanded(
+                child: RadioListTile<bool>(
+                  title: Text('Tiếng Anh'.tr),
+                  value: false,
+                  onChanged: (value) {
+                    setState(() async {
+                      rootController.isVietnamese = value ?? false;
+                      Get.updateLocale(Locale('en'));
+                      final instance = await SharedPreferences.getInstance();
+                      instance.setBool('isEnglish', true);
+                    });
+                  },
+                  groupValue: rootController.isVietnamese,
+                ),
+              )
+            ],
+          ),
+          Text('Chủ đề'.tr, style: kFontMediumBlack_14,),
+          Row(
+            children: [
+              Expanded(
+                child: RadioListTile(
+                  title: Text('Sáng'.tr),
+                  value: true,
+                  onChanged: (value) {},
+                  groupValue: true,
+                ),
+              ),
+              Expanded(
+                child: RadioListTile(
+                  title: Text('Tối'.tr),
+                  value: false,
+                  onChanged: (value) {},
+                  groupValue: true,
+                ),
+              )
+            ],
+          ),
+          Spacer(),
+          WidgetRoundedButton(
+            onPressed: () {
+              Navigator.of(context).pushNamedAndRemoveUntil(AppRouter.kLogin, (route) => false);
+            },
+            text: 'Đăng xuất'.tr,
+          ),
+        ],
       ),
     );
   }
 
   Widget _widgetHeader() {
     return GestureDetector(
-      onTap: () async{
+      onTap: () async {
         await Navigator.pushNamed(context, AppRouter.kUserProfile);
         setState(() {
           userModel = Get.find<RootController>().user;

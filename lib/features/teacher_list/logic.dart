@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 import '../../core/base_api.dart';
@@ -6,17 +7,17 @@ import 'data/teacher_response.dart';
 
 enum ETeacherFilter { Default, Favorite, Rating }
 
-const nationalMap = const {
-  'isVietNamese': 'Gia Sư Việt Nam',
-  'isForeigner': 'Gia Sư Nước Ngoài',
-  'isNative': 'Gia Sư Tiếng Anh Bản Ngữ'
+final nationalMap = {
+  'isVietNamese': 'Gia Sư Việt Nam'.tr,
+  'isForeigner': 'Gia Sư Nước Ngoài'.tr,
+  'isNative': 'Gia Sư Tiếng Anh Bản Ngữ'.tr
 };
 
-const fieldMap = const {
-  'All': 'Tất cả',
-  'english-for-kids': 'Tiếng anh cho trẻ em',
-  'business-english': 'Tiếng anh cho công việc',
-  'conversational-english': 'Giao tiếp',
+final fieldMap = {
+  'All': 'Tất cả'.tr,
+  'english-for-kids': 'Tiếng anh cho trẻ em'.tr,
+  'business-english': 'Tiếng anh cho công việc'.tr,
+  'conversational-english': 'Giao tiếp'.tr,
   'starters': 'STARTERS',
   'movers': 'MOVERS',
   'flyers': 'FLYERS',

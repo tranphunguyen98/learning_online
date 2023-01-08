@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:get/get.dart';
 import 'package:learning_online/core/core.dart';
 import 'package:learning_online/core/widgets/widget_core_dropdown.dart';
 import 'package:learning_online/features/profile/data/user.dart';
@@ -43,7 +44,7 @@ class _WidgetLearningTopicDropdownState extends State<WidgetLearningTopicDropdow
           children: [
             Text('* ', style: TextStyle(color: Colors.red),),
             Text(
-              'Muốn học',
+              'Muốn học'.tr,
               style: kFontRegularDefault_14,
             ),
           ],

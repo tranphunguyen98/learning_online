@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:learning_online/features/history/data/class_review.dart';
 import 'package:learning_online/features/history/data/feedback.dart';
 
@@ -235,7 +236,7 @@ Homework: ${classReview!.homeworkComment ?? ''}
 Overall comment: ${classReview!.overallComment ?? ''}''';
     } else {
 
-      return 'Gia sư chưa có đánh giá';
+      return 'Chưa có đánh giá'.tr;
     }
   }
 

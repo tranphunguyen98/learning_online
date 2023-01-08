@@ -15,7 +15,7 @@ class RootPage extends StatefulWidget {
 class _RootPageState extends State<RootPage> {
   int selectedIndex = 0;
   late Widget currentPage = HomePage();
-  late String title = 'Trang chủ';
+  late String title = 'Trang chủ'.tr;
 
   final controller = Get.put(TeacherListController());
 
@@ -43,18 +43,18 @@ class _RootPageState extends State<RootPage> {
             currentPage = const SchedulePage();
           } else if (selectedIndex == 3) {
             currentPage = TeacherListPage();
-            title = 'Danh sách tutor';
+            title = 'Gia sư'.tr;
           } else if (selectedIndex == 4) {
             currentPage = const SettingPage();
-            title = 'Cài đặt';
+            title = 'Cài đặt'.tr;
           }
         },
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Trang chủ'),
-          BottomNavigationBarItem(icon: Icon(Icons.school), label: 'Khóa học'),
-          BottomNavigationBarItem(icon: Icon(Icons.schedule), label: 'Lịch học'),
-          BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Gia sư'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Cài đặt'),
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Trang chủ'.tr),
+          BottomNavigationBarItem(icon: Icon(Icons.school), label: 'Khóa học'.tr),
+          BottomNavigationBarItem(icon: Icon(Icons.schedule), label: 'Lịch học'.tr),
+          BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Gia sư'.tr),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Cài đặt'.tr),
         ],
       ),
       body: SafeArea(child: currentPage),

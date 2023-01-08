@@ -29,7 +29,7 @@ class _SchedulePageState extends State<SchedulePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 8),
-            Text('Lịch đã đặt', style: kFontSemiboldBlack_22,),
+            Text('Lịch đã đặt'.tr, style: kFontSemiboldBlack_22,),
             const SizedBox(height: 8),
             Expanded(
               child: GetBuilder<ScheduleLogic>(

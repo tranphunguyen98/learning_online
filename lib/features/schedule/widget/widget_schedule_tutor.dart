@@ -55,7 +55,7 @@ class WidgetScheduleTutor extends StatelessWidget {
                     Row(children: [
                       const Icon(Icons.message_outlined, color: kBlueColor, size: 12,),
                       const SizedBox(width: 6),
-                      Text('Nhắn tin', style: kFontRegularBlue_12,)
+                      Text('Nhắn tin'.tr, style: kFontRegularBlue_12,)
                     ],)
                   ],
                 ),

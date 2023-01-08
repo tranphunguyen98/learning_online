@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Gia sư được đề xuất',
+                    'Gia sư được đề xuất'.tr,
                     style: kFontRegularDefault_14,
                   ),
                   const SizedBox(height: 2),

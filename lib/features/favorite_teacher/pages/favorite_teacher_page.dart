@@ -22,7 +22,7 @@ class _FavoriteTeacherPageState extends State<FavoriteTeacherPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: widgetCoreAppBar(title: 'Danh sách giáo viên ưa thích', context: context),
+      appBar: widgetCoreAppBar(title: 'Danh sách giáo viên ưa thích'.tr, context: context),
       body: Column(
         children: [
           const SizedBox(height: 16),

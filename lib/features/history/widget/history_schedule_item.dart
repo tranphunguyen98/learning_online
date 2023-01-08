@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:learning_online/core/core.dart';
 import 'package:learning_online/core/widgets/widget_rating_bar_indicator.dart';
@@ -24,7 +25,7 @@ class HistoryScheduleItem extends StatelessWidget {
     DateTime.fromMillisecondsSinceEpoch(history.scheduleDetailInfo?.startPeriodTimestamp ?? 0);
     final endDay =
     DateTime.fromMillisecondsSinceEpoch(history.scheduleDetailInfo?.endPeriodTimestamp ?? 0);
-    final dateText = '${formatDay.format(startDay)} Tháng ${formatMonth.format(startDay)}';
+    final dateText = '${formatDay.format(startDay)} ${'Tháng'.tr} ${formatMonth.format(startDay)}';
 
     final now = DateTime.now();
     final difference = now.difference(endDay);
@@ -33,21 +34,25 @@ class HistoryScheduleItem extends StatelessWidget {
       final days = difference.inDays;
       final years = days ~/ 365;
       if (years > 0) {
-        agoText = '$years năm trước';
+        agoText = '$years ${'năm trước'.tr}';
       } else {
         final months = days ~/ 30;
         if (months > 0) {
-          agoText = '$months tháng trước';
+          agoText = '$months ${'tháng trước'.tr}';
         } else {
-          agoText = '$days ngày trước';
+          agoText = '$days ${'ngày trước'.tr}';
           ;
         }
       }
     } else {
       if (difference.inHours > 0) {
-        agoText = '${difference.inHours} giờ trước';
+        if(difference.inHours == 1) {
+          agoText = '${difference.inHours} ${'giờ trước'.tr}';
+        } else {
+          agoText = '${difference.inHours}${' giờ trước'.tr}';
+        }
       } else if (difference.inMinutes > 0) {
-        agoText = '${difference.inMinutes} phút trước';
+        agoText = '${difference.inMinutes} ${'phút trước'.tr}';
       } else {
         agoText = '${difference.inSeconds} giây trước';
       }
@@ -87,7 +92,7 @@ class HistoryScheduleItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Thời gian học: ${lessonTimeText}',
+                    '${'Thời gian học'.tr}: ${lessonTimeText}',
                     style: kFontRegularDefault_14.copyWith(fontWeight: FontWeight.w500),
                   ),
                   // ElevatedButton(
@@ -114,10 +119,10 @@ class HistoryScheduleItem extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(top: 8.0, left: 12, right: 12, bottom: 12),
                   child: HistoryExpansionArea(
-                    title: 'Yêu cầu cho buổi học',
+                    title: 'Yêu cầu cho buổi học'.tr,
                     content: (history.studentRequest?.isNotEmpty ?? false)
                         ? history.studentRequest ?? ''
-                        : 'Không có yêu cầu cho buổi học',
+                        : 'Không có yêu cầu cho buổi học'.tr,
                   ),
                 ),
                 Container(
@@ -126,7 +131,7 @@ class HistoryScheduleItem extends StatelessWidget {
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 8.0, left: 12, right: 12, bottom: 12),
-                  child: HistoryExpansionArea(title: 'Đánh giá từ gia sư',
+                  child: HistoryExpansionArea(title: 'Đánh giá từ gia sư'.tr,
                       content: history.classReviewText
                   ),
                 ),
@@ -170,36 +175,4 @@ class HistoryScheduleItem extends StatelessWidget {
     );
   }
 
-  Widget _widgetRowTime() {
-    return Row(
-      children: [
-        Expanded(
-          child: Text(
-            'Buổi 1: 10:00 - 10:25',
-            style: kFontRegularDefault_13,
-          ),
-        ),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
-          decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(2)),
-              border: Border.all(color: Colors.red)),
-          child: Row(
-            children: [
-              const Icon(
-                Icons.cancel,
-                size: 12,
-                color: Colors.red,
-              ),
-              const SizedBox(width: 4),
-              Text(
-                'Hủy',
-                style: kFontRegularDefault_12.copyWith(color: Colors.red),
-              )
-            ],
-          ),
-        )
-      ],
-    );
-  }
 }

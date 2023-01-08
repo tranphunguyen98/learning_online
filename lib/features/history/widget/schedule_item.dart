@@ -37,7 +37,7 @@ class _ScheduleItemState extends State<ScheduleItem> {
 
     final startDay = DateTime.fromMillisecondsSinceEpoch(widget.schedule.dates.first.startDay);
     final endDay = DateTime.fromMillisecondsSinceEpoch(widget.schedule.dates.last.endDay);
-    final dateText = '${formatDay.format(startDay)} Tháng ${formatMonth.format(startDay)}';
+    final dateText = '${formatDay.format(startDay)} ${'Tháng'.tr} ${formatMonth.format(startDay)}';
     final lessonTimeText = '${formatHour.format(startDay)} - ${formatHour.format(endDay)}';
 
     return Container(
@@ -57,8 +57,8 @@ class _ScheduleItemState extends State<ScheduleItem> {
           const SizedBox(height: 6),
           Text(
             widget.schedule.dates.length > 1
-                ? '${widget.schedule.dates.length} buồi học liên tục'
-                : '1 buổi học',
+                ? '${widget.schedule.dates.length} ${'buồi học liên tục'.tr}'
+                : '1 buổi học'.tr,
             style: kFontRegularDefault_12,
           ),
           const SizedBox(height: 16),
@@ -75,7 +75,7 @@ class _ScheduleItemState extends State<ScheduleItem> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Thời gian học: $lessonTimeText',
+                    '${'Thời gian học'.tr}: $lessonTimeText',
                     style: kFontRegularDefault_14.copyWith(fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(height: 8),
@@ -106,7 +106,7 @@ class _ScheduleItemState extends State<ScheduleItem> {
                   backgroundColor: Colors.white.withOpacity(0.2),
                 ),
                 onPressed: () {},
-                child: const Text('Vào buổi học'),
+                child: Text('Vào buổi học'.tr),
               ),
             ),
           ),
@@ -124,7 +124,7 @@ class _ScheduleItemState extends State<ScheduleItem> {
     DateFormat formatDay = DateFormat('dd');
     DateFormat formatMonth = DateFormat('MM yyyy');
 
-    final dateText = '${formatDay.format(startDay)} Tháng ${formatMonth.format(startDay)}';
+    final dateText = '${formatDay.format(startDay)} ${'Tháng'.tr} ${formatMonth.format(startDay)}';
     
     return SizedBox(
       height: 40,
@@ -132,7 +132,7 @@ class _ScheduleItemState extends State<ScheduleItem> {
         children: [
           Expanded(
             child: Text(
-              'Buổi ${index + 1}: $lessonTimeText',
+              '${'Buổi'.tr} ${index + 1}: $lessonTimeText',
               style: kFontRegularDefault_13,
             ),
           ),
@@ -149,7 +149,7 @@ class _ScheduleItemState extends State<ScheduleItem> {
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                WidgetTextHeader(title: 'Hủy buổi học'),
+                                WidgetTextHeader(title: 'Hủy buổi học'.tr),
                                 const SizedBox(height: 16),
                                 CircleAvatar(
                                   radius: 32,
@@ -160,7 +160,7 @@ class _ScheduleItemState extends State<ScheduleItem> {
                                 SizedBox(height: 16),
                                 Text(tutorInfo.name ?? '', style: kFontSemiboldBlack_14, ),
                                 SizedBox(height: 16),
-                                Text('Thời gian học'),
+                                Text('Thời gian học'.tr),
                                 SizedBox(height: 6),
                                 Text(dateText,  style: kFontSemiboldBlack_14, ),
                                 SizedBox(height: 16),
@@ -263,7 +263,7 @@ class _ScheduleItemState extends State<ScheduleItem> {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      'Hủy',
+                      'Hủy'.tr,
                       style: kFontRegularDefault_12.copyWith(color: Colors.red),
                     )
                   ],

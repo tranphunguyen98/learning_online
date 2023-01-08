@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:learning_online/core/core.dart';
 
 class ExpansionArea extends StatefulWidget {
@@ -79,19 +80,19 @@ class _ExpansionAreaState extends State<ExpansionArea> with TickerProviderStateM
             ),
             const SizedBox(width: 4),
             Text(
-              'Yêu cầu cho buổi học',
+              'Yêu cầu cho buổi học'.tr,
               style: kFontRegularDefault_12,
             ),
             const Spacer(),
-            GestureDetector(
-              onTap: () {
-                print('nguyentp ==> ');
-              },
-              child: Text(
-                'Chỉnh sửa yêu cầu',
-                style: kFontRegularBlue_12,
-              ),
-            ),
+            // GestureDetector(
+            //   onTap: () {
+            //     print('nguyentp ==> ');
+            //   },
+            //   child: Text(
+            //     'Chỉnh sửa yêu cầu',
+            //     style: kFontRegularBlue_12,
+            //   ),
+            // ),
           ],
         ),
       ),
@@ -112,7 +113,7 @@ class _ExpansionAreaState extends State<ExpansionArea> with TickerProviderStateM
           child: widget.request.isNotEmpty
               ? Text(widget.request)
               : Text(
-                  'Hiện tại không có yêu cầu cho lớp học này. Xin vui lòng viết ra bất kỳ yêu cầu nào cho giáo viên nếu có.',
+                  'Hiện tại không có yêu cầu cho lớp học này. Xin vui lòng viết ra bất kỳ yêu cầu nào cho giáo viên nếu có.'.tr,
                   style: TextStyle(color: Colors.black45),
                 ),
         ),

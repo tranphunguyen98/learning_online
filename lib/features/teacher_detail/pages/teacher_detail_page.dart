@@ -91,10 +91,10 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
                 const SizedBox(height: 16),
                 _widgetRowFunction(),
                 const SizedBox(height: 8),
-                _widgetTitleChipsColumn('Ngôn ngữ', languageNames),
-                _widgetTitleChipsColumn('Chuyên ngành', teacherModel.fields),
-                _widgetTitleTextColumn('Sở thích', teacherModel.hobby),
-                _widgetTitleTextColumn('Kinh nghiêm', teacherModel.experience),
+                _widgetTitleChipsColumn('Ngôn ngữ'.tr, languageNames),
+                _widgetTitleChipsColumn('Chuyên ngành'.tr, teacherModel.fields),
+                _widgetTitleTextColumn('Sở thích'.tr, teacherModel.hobby),
+                _widgetTitleTextColumn('Kinh nghiêm'.tr, teacherModel.experience),
                 // _widgetTitleTextColumn('Học vấn', teacherModel.education),
                 // _widgetTitleTextColumn('Nghề nghiệp', teacherModel.career),
                 const SizedBox(height: 16),
@@ -116,7 +116,7 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Đánh giá và bình luận (${controller.totalReview})',
+          '${'Đánh giá và bình luận'.tr} (${controller.totalReview})',
           style: kFontRegularPrimary_14,
         ),
         const SizedBox(height: 16),
@@ -189,7 +189,7 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
         StatefulBuilder(builder: (context, _setState) {
           return WidgetIconTextColumn(
             iconData: _isFavorite ? Icons.favorite : Icons.favorite_border,
-            text: 'Yêu thích',
+            text: 'Yêu thích'.tr,
             color: _isFavorite ? kRedColor : kBlueColor,
             onTap: () {
               _setState(() {
@@ -200,14 +200,14 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
         }),
         WidgetIconTextColumn(
           iconData: Icons.message,
-          text: 'Nhắn tin',
+          text: 'Nhắn tin'.tr,
           onTap: () {
             Navigator.pushNamed(context, AppRouter.kMessage);
           },
         ),
         WidgetIconTextColumn(
           iconData: Icons.info,
-          text: 'Báo cáo',
+          text: 'Báo cáo'.tr,
           onTap: _showReportDialog,
         ),
       ],

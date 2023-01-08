@@ -36,7 +36,7 @@ class _TeacherListPageState extends State<TeacherListPage> {
             child: Stack(
               children: [
                 WidgetSearchTextField(
-                  hint: 'Tìm Tutor',
+                  hint: 'Tìm Tutor'.tr,
                   onChanged: (value) {
                     controller.changeKeyword(value);
                   },

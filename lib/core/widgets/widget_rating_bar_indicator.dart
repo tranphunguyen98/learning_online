@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 
 class WidgetRatingBarIndicator extends StatelessWidget {
   final double? star;
@@ -10,7 +11,7 @@ class WidgetRatingBarIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if(star == null) {
-      return Text('Chưa có đánh giá');
+      return Text('Chưa có đánh giá'.tr);
     }
     return RatingBarIndicator(
       rating: star!,
