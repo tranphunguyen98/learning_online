@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:learning_online/core/server_failure.dart';
@@ -70,12 +72,40 @@ class BaseApi {
     }
   }
 
-  Future<Map<String, dynamic>> post(String path, Map<String, dynamic> data) async {
+  Future<Map<String, dynamic>> post(String path, dynamic data) async {
+    // (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+    //     (HttpClient client) {
+    //   client.badCertificateCallback =
+    //       (X509Certificate cert, String host, int port) => true;
+    //   return client;
+    // };
+
     try {
       final user = Get.find<RootController>().user;
       final auth = 'Bearer ${user?.accessToken ?? ''}';
       _dio.options.headers['Authorization'] = auth;
       final response = await _dio.post(path, data: data);
+      final dataReponse = response.data as Map<String, dynamic>;
+      print('nguyentp ==> $dataReponse');
+      if (dataReponse.isEmpty) {
+        throw ServerFailure();
+      } else {
+        return dataReponse;
+      }
+    } on DioError catch (e) {
+      final response = (e.response?.data ?? {}) ;
+      throw ServerFailure(response['message']);
+    } catch (e) {
+      throw ServerFailure();
+    }
+  }
+
+  Future<Map<String, dynamic>> put(String path, Map<String, dynamic> data) async {
+    try {
+      final user = Get.find<RootController>().user;
+      final auth = 'Bearer ${user?.accessToken ?? ''}';
+      _dio.options.headers['Authorization'] = auth;
+      final response = await _dio.put(path, data: data);
       final dataReponse = response.data as Map<String, dynamic>;
       print('nguyentp ==> $dataReponse');
       if (dataReponse.isEmpty) {

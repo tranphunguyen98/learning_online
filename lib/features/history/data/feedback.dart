@@ -28,11 +28,12 @@ class Feedback {
 }
 
   Feedback.fromJson(dynamic json) {
+    final ratingData = json['rating'];
     _id = json['id'];
     _bookingId = json['bookingId'];
     _firstId = json['firstId'];
     _secondId = json['secondId'];
-    _rating = json['rating'];
+    _rating = ratingData is double ? ratingData.toInt() : ratingData;
     _content = json['content'];
     _createdAt = json['createdAt'];
     _updatedAt = json['updatedAt'];

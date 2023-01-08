@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learning_online/features/history/history_schedule_logic.dart';
 import 'package:learning_online/features/history/widget/history_schedule_item.dart';
+import 'package:loadmore/loadmore.dart';
 
 import '../../core/widgets/widget_core_app_bar.dart';
 
@@ -31,19 +32,32 @@ class _HistoryPageState extends State<HistoryPage> {
         child: GetBuilder<HistoryScheduleLogic>(
             init: controller,
             builder: (logic) {
-              if(logic.isLoaded) {
-                if(logic.histories.isNotEmpty) {
+              if (logic.isLoaded) {
+                if (logic.histories.isNotEmpty) {
                   final histories = logic.histories;
-                  return ListView.separated(
-                    itemBuilder: (_, i) => HistoryScheduleItem(history: histories[i],),
-                    separatorBuilder: (_, i) => const SizedBox(height: 16),
-                    itemCount: histories.length,
+                  return LoadMore(
+                    isFinish: controller.isFinish,
+                    textBuilder: (status) {
+                      return '';
+                    },
+                    onLoadMore: () {
+                      return controller.loadMore();
+                    },
+                    child: ListView.separated(
+                      itemBuilder: (_, i) => HistoryScheduleItem(
+                        history: histories[i],
+                      ),
+                      separatorBuilder: (_, i) => const SizedBox(height: 16),
+                      itemCount: histories.length,
+                    ),
                   );
                 } else {
                   return Center(child: Text('Lịch sử học rỗng'));
                 }
               }
-              return Center(child: CircularProgressIndicator(),);
+              return Center(
+                child: CircularProgressIndicator(),
+              );
             }),
       ),
     );

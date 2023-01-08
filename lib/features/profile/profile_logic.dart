@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:get/get.dart';
+import 'package:dio/dio.dart' as dio;
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:learning_online/core/base_api.dart';
 import 'package:learning_online/features/profile/data/user.dart';
@@ -15,6 +19,20 @@ extension DateTimeEx on DateTime {
 class ProfileLogic extends GetxController {
   User? user;
 
+  Future<void> uploadImage(File file) async {
+    String fileName = file.path.split('/').last;
+    dio.FormData formData = dio.FormData.fromMap({
+      "avatar": await dio.MultipartFile.fromFile(file.path, filename: fileName),
+    });
+    final responseData = await BaseApi().post('/user/uploadAvatar', formData);
+    final avatar = responseData['avatar'] ?? '';
+    if(avatar is String && avatar.isNotEmpty) {
+     Get.find<RootController>().user = Get.find<RootController>().user?.copyWith(
+       avatar: avatar
+     );
+    }
+    print('nguyentp ==> ');
+  }
 
   void updateBirthDay(DateTime date) {
     DateFormat _dateFormat = DateFormat('yyyy-MM-dd');
@@ -44,4 +62,33 @@ class ProfileLogic extends GetxController {
     update();
   }
 
+  Future<void> updateUser() async {
+    print('nguyentp ==> ');
+    final responseData = await BaseApi().put('https://sandbox.api.lettutor.com/user/info', {
+      "name": user?.name ?? '',
+      "country": user?.country ?? '',
+      "phone": user?.phone ?? '',
+      "birthday": user?.birthday ?? '',
+      "level": user?.level ?? '',
+      "learnTopics": user?.learnTopics?.map((e) => e.id).toList() ?? [],
+      "studySchedule": user?.studySchedule ?? '',
+      "testPreparations": user?.testPreparations?.map((e) => e.id).toList() ?? [],
+    });
+
+    user = UserData.fromJson(responseData).user;
+
+    final _user = Get.find<RootController>().user;
+
+    Get.find<RootController>().user = _user?.copyWith(
+      dateOfBirth: user?.birthday ?? '',
+      email: user?.email ?? '',
+      id: user?.id ?? '',
+      name: user?.name ?? '',
+      avatar: user?.avatar ?? '',
+      phoneNumber: user?.phone,
+      walletInfo: user?.walletInfo,
+    );
+
+    update();
+  }
 }

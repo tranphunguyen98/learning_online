@@ -5,6 +5,7 @@ import 'package:learning_online/core/widgets/widget_rounded_button.dart';
 import 'package:learning_online/features/root_controller.dart';
 import 'package:learning_online/features/setting/widgets/widget_setting_button.dart';
 import 'package:learning_online/model/user.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../utils/router.dart';
 
@@ -63,9 +64,17 @@ class _SettingPageState extends State<SettingPage> {
               leading: Icons.settings_outlined,
             ),
             const SizedBox(height: 64),
-            const WidgetSettingButton(
+             WidgetSettingButton(
               text: 'Đi đến Website',
               leading: Icons.language,
+              onPressed: () async {
+                const url = "https://lettutor.edu.vn/";
+                if (await canLaunchUrl(Uri.parse(url)))
+                await launchUrl(Uri.parse(url));
+                else
+                // can't launch url, there is some error
+                throw "Could not launch $url";
+              },
             ),
             const SizedBox(height: 16),
             const WidgetSettingButton(
@@ -82,8 +91,11 @@ class _SettingPageState extends State<SettingPage> {
 
   Widget _widgetHeader() {
     return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, AppRouter.kUserProfile);
+      onTap: () async{
+        await Navigator.pushNamed(context, AppRouter.kUserProfile);
+        setState(() {
+          userModel = Get.find<RootController>().user;
+        });
       },
       child: Row(
         children: [

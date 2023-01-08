@@ -10,6 +10,7 @@ import 'package:learning_online/core/styles.dart';
 import 'package:learning_online/core/widgets/widget_core_app_bar.dart';
 import 'package:learning_online/core/widgets/widget_core_date_picker.dart';
 import 'package:learning_online/core/widgets/widget_dropdown_with_title.dart';
+import 'package:learning_online/core/widgets/widget_multi_line_text_field.dart';
 import 'package:learning_online/core/widgets/widget_rounded_button.dart';
 import 'package:learning_online/core/widgets/widget_rounded_text_field_with_title.dart';
 import 'package:learning_online/core/widgets/widget_searchable_dropdown_with_title.dart';
@@ -32,6 +33,7 @@ class _ProfilePageState extends State<ProfilePage> {
   final nameController = TextEditingController();
   final phoneController = TextEditingController();
   final emailController = TextEditingController();
+  final scheduleController = TextEditingController();
   final ProfileLogic logic = Get.put(ProfileLogic());
   XFile? image;
 
@@ -63,6 +65,7 @@ class _ProfilePageState extends State<ProfilePage> {
             nameController.text = _userModel.name ?? '';
             phoneController.text = _userModel.phone ?? '';
             emailController.text = _userModel.email ?? '';
+            scheduleController.text = _userModel.studySchedule ?? '';
 
             final selectedIndex = nations.indexWhere((element) {
               if (_userModel.country?.isEmpty ?? true) {
@@ -108,7 +111,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           SizedBox(height: 8),
                           WidgetRoundedTextFieldWithTitle(
-                            // isDisable: _userModel.isActivated ?? false,
+                            isDisable: _userModel.isActivated ?? false,
                             controller: emailController,
                             title: 'Địa chỉ email',
                             hint: 'Địa chỉ email',
@@ -132,7 +135,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             onDisplay: (value) => value['name'] ?? '',
                             onSelected: (value) {
                               selected = value;
-                              _userModel.copyWith(country: value['code'] ?? '');
+                              _userModel = _userModel.copyWith(country: value['code'] ?? '');
                             },
                           ),
                           const SizedBox(height: 16),
@@ -161,7 +164,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             hint: 'Chọn trình độ',
                             initValue: _userModel.level ?? '',
                             onChanged: (value) {
-                              _userModel.copyWith(level: value);
+                              _userModel = _userModel.copyWith(level: value);
                             },
                             data: levels.keys.toList(),
                             onDisplay: (String value) {
@@ -184,7 +187,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   });
                                 }
                               }
-                              _userModel.copyWith(learnTopics: topics, testPreparations: tests);
+                              _userModel = _userModel.copyWith(learnTopics: topics, testPreparations: tests);
                             },
                           ),
                           if (subjectsErrorText.isNotEmpty)
@@ -197,10 +200,20 @@ class _ProfilePageState extends State<ProfilePage> {
                                 style: TextStyle(color: Colors.red),
                               ),
                             ),
+                          SizedBox(height: 16),
+                          Text(
+                            'Lịch học',
+                            style: kFontRegularDefault_14,
+                          ),
+                          SizedBox(height: 8),
+                          WidgetMultiLineTextField(
+                            controller: scheduleController,
+                            minLines: 3,
+                          ),
                           const SizedBox(height: 32),
                           WidgetRoundedButton(
                             text: 'Lưu',
-                            onPressed: () {
+                            onPressed: () async {
                               if ((_userModel.learnTopics?.isEmpty ?? true) &&
                                   (_userModel.testPreparations?.isEmpty ?? true)) {
                                 setState(() {
@@ -211,6 +224,17 @@ class _ProfilePageState extends State<ProfilePage> {
                                 if (nameController.text.isEmpty) {
                                   message = 'Vui lòng nhập tên';
                                 }
+                                logic.user = logic.user?.copyWith(
+                                  studySchedule: scheduleController.text,
+                                  phone: phoneController.text,
+                                  name: nameController.text,
+                                  email: emailController.text,
+                                  country: _userModel.country,
+                                  level: _userModel.level,
+                                  learnTopics: _userModel.learnTopics,
+                                  testPreparations: _userModel.testPreparations,
+                                );
+                                await logic.updateUser();
                                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                   content: Text(message),
                                   duration: const Duration(milliseconds: 1000),
@@ -268,9 +292,12 @@ class _ProfilePageState extends State<ProfilePage> {
         final ImagePicker _picker = ImagePicker();
         // Pick an image
         final XFile? pickedImage = await _picker.pickImage(source: ImageSource.gallery);
-        setState(() {
-          image = pickedImage;
-        });
+        if(pickedImage != null ){
+          setState(() {
+            image = pickedImage;
+            logic.uploadImage(File(image!.path));
+          });
+        }
       },
       child: Stack(
         children: [
