@@ -25,18 +25,36 @@ class WidgetHomeTeacherItem extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(28)),
-                  child: CachedNetworkImage(
-                    width: 28 * 2,
-                    height: 28 * 2,
-                    imageUrl: teacherModel.avatar,
-                    errorWidget: (_, __, ___) => Container(
-                      color: kPrimaryColor,
-                      child: Icon(Icons.person, size: 32, color: Colors.white,),
+                if (teacherModel.avatar !=
+                    'https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png')
+                  ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(28)),
+                    child: CachedNetworkImage(
+                      width: 28 * 2,
+                      height: 28 * 2,
+                      imageUrl: teacherModel.avatar,
+                      errorWidget: (_, __, ___) => Container(
+                        color: kPrimaryColor,
+                        child: Icon(
+                          Icons.person,
+                          size: 32,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  )
+                else
+                  CircleAvatar(
+                    radius: 28,
+                    backgroundColor: kPrimaryColor,
+                    child: Container(
+                      child: Icon(
+                        Icons.person,
+                        size: 32,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
-                ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Column(

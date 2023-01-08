@@ -6,8 +6,19 @@ import 'package:learning_online/features/home/widgets/widget_home_teacher_item.d
 import 'package:learning_online/features/teacher_list/logic.dart';
 import 'package:learning_online/utils/router.dart';
 
-class FavoriteTeacherPage extends StatelessWidget {
-  TeacherListController controller = Get.find<TeacherListController>();
+class FavoriteTeacherPage extends StatefulWidget {
+  @override
+  State<FavoriteTeacherPage> createState() => _FavoriteTeacherPageState();
+}
+
+class _FavoriteTeacherPageState extends State<FavoriteTeacherPage> {
+  TeacherListController controller = Get.put<TeacherListController>(TeacherListController());
+
+  @override
+  void initState() {
+    controller.search();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,8 +55,11 @@ class FavoriteTeacherPage extends StatelessWidget {
                     itemCount: logic.favoriteTeachers.length,
                     itemBuilder: (context, index) => GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, AppRouter.kTeacherDetail,
-                            arguments: logic.displayedTeachers[index]);
+                        Navigator.pushNamed(
+                          context,
+                          AppRouter.kTeacherDetail,
+                          arguments: logic.displayedTeachers[index].userId,
+                        );
                       },
                       child: WidgetHomeTeacherItem(
                         key: UniqueKey(),

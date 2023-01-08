@@ -5,6 +5,7 @@ import 'package:learning_online/core/widgets/widget_national_group.dart';
 import 'package:learning_online/core/widgets/widget_radio_row_group.dart';
 import 'package:learning_online/core/widgets/widget_search_text_field.dart';
 import 'package:learning_online/utils/router.dart';
+import 'package:loadmore/loadmore.dart';
 
 import '../../home/widgets/widget_home_teacher_item.dart';
 import '../logic.dart';
@@ -75,7 +76,7 @@ class _TeacherListPageState extends State<TeacherListPage> {
               ],
             ),
           ),
-          SizedBox(height: 16),
+          SizedBox(height: 8),
           Container(
             height: 36,
             margin: const EdgeInsets.symmetric(horizontal: 16),
@@ -88,7 +89,7 @@ class _TeacherListPageState extends State<TeacherListPage> {
               },
             ),
           ),
-          SizedBox(height: 16),
+          SizedBox(height: 8),
           Container(
             height: 36,
             margin: const EdgeInsets.symmetric(horizontal: 16),
@@ -136,29 +137,28 @@ class _TeacherListPageState extends State<TeacherListPage> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      ListView.separated(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: logic.displayedTeachers.length,
-                        itemBuilder: (context, index) => GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              AppRouter.kTeacherDetail,
-                              arguments: logic.displayedTeachers[index].userId,
-                            );
-                          },
-                          child: WidgetHomeTeacherItem(
-                            key: UniqueKey(),
-                            teacherModel: logic.displayedTeachers[index],
-                          ),
-                        ),
-                        separatorBuilder: (context, index) => SizedBox(height: 16),
+                child: LoadMore(
+                  isFinish: logic.isFishLoadMore,
+                  textBuilder: (status) => '',
+                  onLoadMore: () {
+                    return logic.search(true);
+                  },
+                  child: ListView.separated(
+                    itemCount: logic.displayedTeachers.length,
+                    itemBuilder: (context, index) => GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          AppRouter.kTeacherDetail,
+                          arguments: logic.displayedTeachers[index].userId,
+                        );
+                      },
+                      child: WidgetHomeTeacherItem(
+                        key: UniqueKey(),
+                        teacherModel: logic.displayedTeachers[index],
                       ),
-                    ],
+                    ),
+                    separatorBuilder: (context, index) => SizedBox(height: 16),
                   ),
                 ),
               ),

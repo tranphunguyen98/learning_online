@@ -32,6 +32,8 @@ class TeacherListController extends GetxController {
   String specialize = '';
   List<String> nationals = [];
   String keyword = '';
+  int currentPage = 1;
+  bool isFishLoadMore = false;
   bool isLoading = false;
 
   List<TeacherModel> _teachers = [];
@@ -39,14 +41,20 @@ class TeacherListController extends GetxController {
   late List<TeacherModel> displayedTeachers;
 
   List<TeacherModel> get favoriteTeachers =>
-      _teachers.where((element) => element.isFavorite).toList() ?? [];
+      _teachers.where((element) => element.isFavorite).toList();
 
   TeacherListController() {
     displayedTeachers = _teachers;
   }
 
-  Future<List<TeacherModel>> search() async {
-    isLoading = true;
+  Future<bool> search([bool isLoadMore = false]) async {
+    if(isLoadMore) {
+      currentPage += 1;
+    } else {
+      currentPage = 1;
+      isFishLoadMore = false;
+      isLoading = true;
+    }
     update();
 
     List<String> specialties = <String>[];
@@ -91,10 +99,11 @@ class TeacherListController extends GetxController {
       }
       print('nguyentp ==> ');
     }
+    print('nguyentp page ==> ${currentPage}');
     try {
       final response = await BaseApi().post('/tutor/search', {
         'search': keyword,
-        'page': '1',
+        'page': '$currentPage',
         'perPage': 12,
         'filters': {
           'date': null,
@@ -134,15 +143,24 @@ class TeacherListController extends GetxController {
           );
         },
       ).toList();
-      _teachers = teachersModel;
+      if(isLoadMore) {
+        if(teachersModel.isEmpty) {
+          isFishLoadMore = true;
+        } else {
+          _teachers.addAll(teachersModel);
+        }
+      } else {
+        _teachers = teachersModel;
+      }
+
       displayedTeachers = _teachers;
       isLoading = false;
       update();
-      return teachersModel;
+      return true;
     } catch (e) {
       isLoading = false;
       update();
-      rethrow;
+      return false;
     }
   }
 
@@ -165,6 +183,7 @@ class TeacherListController extends GetxController {
       _teachers[favoriteIndex] = _teachers[favoriteIndex].copyWith(isFavorite: isFavorite);
       update();
     }
+    search();
   }
 
   void changeFilter(ETeacherFilter filter) {
