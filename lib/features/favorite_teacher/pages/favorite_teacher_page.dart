@@ -16,6 +16,7 @@ class _FavoriteTeacherPageState extends State<FavoriteTeacherPage> {
 
   @override
   void initState() {
+    controller.reset();
     controller.search();
     super.initState();
   }

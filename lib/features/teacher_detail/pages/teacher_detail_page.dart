@@ -12,6 +12,7 @@ import 'package:learning_online/features/teacher_detail/widgets/report_dialog.da
 import 'package:learning_online/features/teacher_detail/widgets/review_tutor_list.dart';
 import 'package:learning_online/features/teacher_detail/widgets/widget_choose_date_bottom_sheet.dart';
 import 'package:learning_online/features/teacher_detail/widgets/widget_schedule.dart';
+import 'package:learning_online/features/teacher_list/logic.dart';
 import 'package:learning_online/model/teacher.dart';
 import 'package:learning_online/utils/data.dart';
 import 'package:learning_online/utils/nation_data.dart';
@@ -195,6 +196,8 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
               _setState(() {
                 _isFavorite = !_isFavorite;
               });
+              Get.find<TeacherListController>()
+                  .updateFavorite(_isFavorite, widget.teacherId);
             },
           );
         }),
@@ -271,13 +274,20 @@ class _TeacherDetailPageState extends State<TeacherDetailPage> {
     );
   }
 
-  void _showReportDialog() {
-    showDialog<void>(
+  void _showReportDialog() async {
+    final result = await showDialog<String>(
       context: _context,
       builder: (BuildContext dialogContext) {
         return ReportDialog(teacherName: teacherModel.name);
       },
     );
+    if(result?.isNotEmpty ??false ) {
+      controller.report(result!, widget.teacherId);
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Báo cáo thành công'),
+        duration: Duration(milliseconds: 1000),
+      ));
+    }
   }
 
   void _showChooseDateBottomSheet(BuildContext context) {

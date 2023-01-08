@@ -9,10 +9,18 @@ import 'package:learning_online/core/widgets/widget_rounded_text_field.dart';
 import '../../../core/server_failure.dart';
 import '../controller/password_controller.dart';
 
-class ForgotPasswordPage extends StatelessWidget {
+class ForgotPasswordPage extends StatefulWidget {
   ForgotPasswordPage({Key? key}) : super(key: key);
+
+  @override
+  State<ForgotPasswordPage> createState() => _ForgotPasswordPageState();
+}
+
+class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   final _formKey = GlobalKey<FormState>();
+
   final forgotPasswordController = Get.put(ForgotPasswordController());
+
   final emailController = TextEditingController();
 
   @override

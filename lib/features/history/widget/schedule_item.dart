@@ -7,6 +7,7 @@ import 'package:learning_online/core/widgets/widget_core_dropdown.dart';
 import 'package:learning_online/core/widgets/widget_dropdown_with_title.dart';
 import 'package:learning_online/core/widgets/widget_multi_line_text_field.dart';
 import 'package:learning_online/core/widgets/widget_radio_row_group.dart';
+import 'package:learning_online/features/home/stream/jitsi.dart';
 import 'package:learning_online/features/schedule/data/history_schedule.dart';
 import 'package:learning_online/features/schedule/schedule_logic.dart';
 import 'package:learning_online/features/schedule/widget/widget_schedule_tutor.dart';
@@ -105,7 +106,12 @@ class _ScheduleItemState extends State<ScheduleItem> {
                   side: const BorderSide(color: kBlueColor),
                   backgroundColor: Colors.white.withOpacity(0.2),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  JitsiMeetHelper.joinMeeting(
+                    widget.schedule.tutorInfo.name ?? '',
+                    widget.schedule.bookingLink,
+                  );
+                },
                 child: Text('Vào buổi học'.tr),
               ),
             ),
@@ -142,7 +148,7 @@ class _ScheduleItemState extends State<ScheduleItem> {
                 if (startDay.difference(DateTime.now()).inMinutes > 120) {
                   showDialog(
                       context: context,
-                      builder: (_) {
+                      builder: (dialogContext) {
                         final tutorInfo = widget.schedule.tutorInfo;
                         return Dialog(
                           child: SingleChildScrollView(
@@ -228,10 +234,10 @@ class _ScheduleItemState extends State<ScheduleItem> {
                                             date.scheduleId,
                                             cancelReason['id'] as int,
                                             controller.text);
-                                        Navigator.pop(context);
+                                        Navigator.pop(dialogContext);
                                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                           content: Text(message),
-                                          duration: Duration(milliseconds: 1000),
+                                          duration: Duration(milliseconds: 2000),
                                         ));
                                       },
                                       child: Text('Xác nhận hủy'),

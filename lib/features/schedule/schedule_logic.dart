@@ -42,11 +42,13 @@ class MySchedule {
   final TutorInfo tutorInfo;
   final String studentRequest;
   final List<MyDate> dates;
+  final String bookingLink;
 
   MySchedule({
     required this.tutorInfo,
     required this.studentRequest,
     required this.dates,
+    required this.bookingLink,
   });
 }
 
@@ -102,6 +104,7 @@ class ScheduleLogic extends GetxController {
       } else {
         schedules.add(
           MySchedule(
+            bookingLink: schedule.studentMeetingLink ?? '',
             tutorInfo: schedule.scheduleDetailInfo!.scheduleInfo!.tutorInfo!,
             studentRequest: schedule.studentRequest ?? '',
             dates: [
@@ -151,6 +154,7 @@ class ScheduleLogic extends GetxController {
       } else {
         schedules.add(
           MySchedule(
+            bookingLink: schedule.studentMeetingLink ?? '',
             tutorInfo: schedule.scheduleDetailInfo!.scheduleInfo!.tutorInfo!,
             studentRequest: schedule.studentRequest ?? '',
             dates: [

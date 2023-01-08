@@ -436,10 +436,10 @@ class _WidgetSheduleState extends State<WidgetSchedule> {
                                                 controller.getCalendar(
                                                     widget.tutorId, startTime.millisecondsSinceEpoch, endTime.millisecondsSinceEpoch);
                                                 controller.getUserInfo();
-                                                Navigator.pop(context);
+                                                Navigator.pop(dialogContext);
                                                 showDialog(
                                                     context: context,
-                                                    builder: (_) {
+                                                    builder: (_context) {
                                                       return AlertDialog(
                                                         title: const Text('Đặt lịch học thành công'),
                                                         content: const Text(
@@ -447,13 +447,14 @@ class _WidgetSheduleState extends State<WidgetSchedule> {
                                                         actions: [
                                                           OutlinedButton(
                                                               onPressed: () {
-                                                                Navigator.pop(context);
+                                                                Navigator.pop(_context);
                                                               },
                                                               child: const Text('OK'))
                                                         ],
                                                       );
                                                     });
                                               } else {
+                                                Navigator.pop(dialogContext);
                                                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                                   content: Text(message),
                                                 ));

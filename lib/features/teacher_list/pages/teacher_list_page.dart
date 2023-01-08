@@ -22,8 +22,14 @@ class _TeacherListPageState extends State<TeacherListPage> {
 
   @override
   void initState() {
+    controller.reset();
     controller.search();
     super.initState();
+  }
+  
+  @override
+  void didUpdateWidget(covariant TeacherListPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
   }
 
   @override

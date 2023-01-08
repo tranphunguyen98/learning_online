@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:learning_online/core/base_api.dart';
+import 'package:learning_online/core/server_failure.dart';
 import 'package:learning_online/features/profile/data/user.dart';
 import 'package:learning_online/features/root_controller.dart';
 import 'package:learning_online/features/teacher_detail/data/booking.dart';
@@ -23,6 +24,22 @@ class TeachDetailLogic extends GetxController {
   List<ReviewTutorModel> reviews = [];
   List<ScheduleOfTutor> bookings = [];
 
+  Future<void> report(String content, String tutorId) async {
+    try {
+      final r = await BaseApi().post('/report', {
+        "tutorId": tutorId,
+        "content": content,
+      });
+
+      print('nguyentp ==> ');
+      // final teachersResponse = TeacherListResponse.fromJson(response);
+
+      // return teachersModel;
+    } catch (e) {
+      print('nguyentp ==> ');
+    }
+
+  }
   Future<void> getTeacher(String id) async {
     final responseData = await BaseApi().get(
       '/tutor/$id',
@@ -62,15 +79,22 @@ class TeachDetailLogic extends GetxController {
   }
 
   Future<String> booking(String id, String note) async {
-    final responseData = await BaseApi().post(
-      '/booking',
-      {
-        'scheduleDetailIds': [id],
-        'note': note
-      },
-    );
+    try {
+      final responseData = await BaseApi().post(
+        '/booking',
+        {
+          'scheduleDetailIds': [id],
+          'note': note
+        },
+      );
 
-    return responseData['message'];
+      return responseData['message'];
+    } catch (e) {
+      if(e is ServerFailure) {
+        return e.message;
+      }
+      return 'Có lỗi xảy ra';
+    }
   }
 
   Future<void> getReview(String id) async {

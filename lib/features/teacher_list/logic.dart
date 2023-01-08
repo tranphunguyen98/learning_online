@@ -48,8 +48,17 @@ class TeacherListController extends GetxController {
     displayedTeachers = _teachers;
   }
 
+  void reset() {
+    keyword = '';
+    currentPage = 1;
+    isFishLoadMore = false;
+    isLoading = false;
+    nationals = [];
+    specialize = '';
+  }
+
   Future<bool> search([bool isLoadMore = false]) async {
-    if(isLoadMore) {
+    if (isLoadMore) {
       currentPage += 1;
     } else {
       currentPage = 1;
@@ -64,34 +73,34 @@ class TeacherListController extends GetxController {
     }
 
     var nationality = <String, dynamic>{};
-    if(nationals.isNotEmpty && nationals.length <= 2) {
-      if(nationals.length == 1) {
-        if(nationals.contains('isForeigner')) {
+    if (nationals.isNotEmpty && nationals.length <= 2) {
+      if (nationals.length == 1) {
+        if (nationals.contains('isForeigner')) {
           print('nguyentp ==> ');
           nationality = {
             'isVietNamese': false,
             'isNative': false,
           };
-        } else if(nationals.contains('isVietNamese')) {
+        } else if (nationals.contains('isVietNamese')) {
           nationality = {
             'isVietNamese': true,
           };
-        } else if(nationals.contains('isNative')) {
+        } else if (nationals.contains('isNative')) {
           nationality = {
             'isNative': true,
           };
         }
       } else {
         print('nguyentp ==> ');
-        if(!nationals.contains('isVietNamese')) {
+        if (!nationals.contains('isVietNamese')) {
           nationality = {
             'isVietNamese': false,
           };
-        } else if(!nationals.contains('isNative')) {
+        } else if (!nationals.contains('isNative')) {
           nationality = {
             'isNative': false,
           };
-        } else if(!nationals.contains('isForeigner')) {
+        } else if (!nationals.contains('isForeigner')) {
           nationality = {
             'isVietNamese': true,
             'isNative': true,
@@ -144,8 +153,8 @@ class TeacherListController extends GetxController {
           );
         },
       ).toList();
-      if(isLoadMore) {
-        if(teachersModel.isEmpty) {
+      if (isLoadMore) {
+        if (teachersModel.isEmpty) {
           isFishLoadMore = true;
         } else {
           _teachers.addAll(teachersModel);
@@ -165,9 +174,10 @@ class TeacherListController extends GetxController {
     }
   }
 
+
   Future<void> updateFavorite(bool isFavorite, String userId) async {
     try {
-       await BaseApi().post('/user/manageFavoriteTutor', {
+      await BaseApi().post('/user/manageFavoriteTutor', {
         'tutorId': userId,
       });
 

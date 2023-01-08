@@ -19,7 +19,7 @@ class WidgetRowWithSocial extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, AppRouter.kHome);
+                // Navigator.pushNamed(context, AppRouter.kHome);
               },
               child: Image.asset(
                 CoreIcons.icFacebook,
@@ -30,7 +30,7 @@ class WidgetRowWithSocial extends StatelessWidget {
             const SizedBox(width: 16),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, AppRouter.kHome);
+                // Navigator.pushNamed(context, AppRouter.kHome);
               },
               child: Image.asset(
                 CoreIcons.icGoogle,

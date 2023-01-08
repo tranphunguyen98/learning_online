@@ -61,23 +61,27 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: CircularProgressIndicator(),
               );
             }
-            _userModel = logic.user!;
-            nameController.text = _userModel.name ?? '';
-            phoneController.text = _userModel.phone ?? '';
-            emailController.text = _userModel.email ?? '';
-            scheduleController.text = _userModel.studySchedule ?? '';
-
+            if(logic.isUpdateBirthDay) {
+              logic.isUpdateBirthDay = false;
+              _userModel = _userModel.copyWith(birthday: logic.user?.birthday);
+            } else {
+              _userModel = logic.user!;
+              nameController.text = _userModel.name ?? '';
+              phoneController.text = _userModel.phone ?? '';
+              emailController.text = _userModel.email ?? '';
+              scheduleController.text = _userModel.studySchedule ?? '';
+            }
+            Map<String, String>? selected;
             final selectedIndex = nations.indexWhere((element) {
               if (_userModel.country?.isEmpty ?? true) {
                 return false;
               }
               return element['code']?.toLowerCase() == _userModel.country?.toLowerCase();
             });
-
-            Map<String, String>? selected;
             if (selectedIndex >= 0) {
               selected = nations[selectedIndex];
             }
+
             return SingleChildScrollView(
               child: Form(
                 key: _formKey,
@@ -234,7 +238,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   learnTopics: _userModel.learnTopics,
                                   testPreparations: _userModel.testPreparations,
                                 );
-                                await logic.updateUser();
+                                await logic.updateUser(logic.user!);
                                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                   content: Text(message),
                                   duration: const Duration(milliseconds: 1000),

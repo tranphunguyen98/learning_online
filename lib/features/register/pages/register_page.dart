@@ -10,13 +10,20 @@ import 'package:learning_online/utils/router.dart';
 import '../../../core/server_failure.dart';
 import '../register_controller.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   RegisterPage({Key? key}) : super(key: key);
 
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
   final registerController = Get.put<RegisterController>(RegisterController());
 
   final passwordController = TextEditingController();
+
   final confirmPasswordController = TextEditingController();
+
   final emailController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
@@ -37,7 +44,9 @@ class RegisterPage extends StatelessWidget {
           style: kFontSemiboldBlack_16,
         ),
       ),
-      body: GetBuilder<RegisterController>(builder: (logic) {
+      body: GetBuilder<RegisterController>(
+        init: registerController,
+          builder: (logic) {
         return Stack(
           children: [
             Padding(
@@ -53,12 +62,14 @@ class RegisterPage extends StatelessWidget {
                           try {
                             final user =
                             await registerController.register(emailController.text, passwordController.text);
+                            _showToast(context, 'Đăng ký thành công');
                             Navigator.of(context).pushReplacementNamed(AppRouter.kLogin, arguments: {
                               'email': user.email,
                             });
                           } on ServerFailure catch (e) {
                             _showToast(context, e.message);
                           }
+                          // registerController.isLoading = false;
                         }
                       },
                     ),

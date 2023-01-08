@@ -18,6 +18,7 @@ extension DateTimeEx on DateTime {
 
 class ProfileLogic extends GetxController {
   User? user;
+  bool isUpdateBirthDay = false;
 
   Future<void> uploadImage(File file) async {
     String fileName = file.path.split('/').last;
@@ -37,6 +38,7 @@ class ProfileLogic extends GetxController {
   void updateBirthDay(DateTime date) {
     DateFormat _dateFormat = DateFormat('yyyy-MM-dd');
     user = user?.copyWith(birthday: _dateFormat.format(date));
+    isUpdateBirthDay = true;
     update();
   }
 
@@ -62,17 +64,17 @@ class ProfileLogic extends GetxController {
     update();
   }
 
-  Future<void> updateUser() async {
+  Future<void> updateUser(User updatedUser) async {
     print('nguyentp ==> ');
     final responseData = await BaseApi().put('https://sandbox.api.lettutor.com/user/info', {
-      "name": user?.name ?? '',
-      "country": user?.country ?? '',
-      "phone": user?.phone ?? '',
-      "birthday": user?.birthday ?? '',
-      "level": user?.level ?? '',
-      "learnTopics": user?.learnTopics?.map((e) => e.id).toList() ?? [],
-      "studySchedule": user?.studySchedule ?? '',
-      "testPreparations": user?.testPreparations?.map((e) => e.id).toList() ?? [],
+      "name": updatedUser?.name ?? '',
+      "country": updatedUser?.country ?? '',
+      "phone": updatedUser?.phone ?? '',
+      "birthday": updatedUser?.birthday ?? '',
+      "level": updatedUser?.level ?? '',
+      "learnTopics": updatedUser?.learnTopics?.map((e) => e.id).toList() ?? [],
+      "studySchedule": updatedUser?.studySchedule ?? '',
+      "testPreparations": updatedUser?.testPreparations?.map((e) => e.id).toList() ?? [],
     });
 
     user = UserData.fromJson(responseData).user;

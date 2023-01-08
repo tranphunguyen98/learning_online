@@ -3,7 +3,7 @@ import 'package:learning_online/core/core.dart';
 
 class WidgetMultiLineTextField extends StatelessWidget {
   final String? hint;
-  final String? validator;
+  final String? Function(String? value)? validator;
   final double? radius;
   final int? minLines;
   final TextEditingController? controller;
@@ -28,6 +28,8 @@ class WidgetMultiLineTextField extends StatelessWidget {
       style: kFontRegularDefault_14,
       minLines: minLines,
       maxLines: minLines,
+      validator: validator,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
         hintText: hint,
         enabledBorder: border,
